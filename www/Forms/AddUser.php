@@ -1,60 +1,70 @@
 <?php
+
 namespace App\Forms;
 
 use App\Forms\Abstract\AForm;
 
-class AddUser extends AForm {
+class AddUser extends AForm
+{
 
     protected $method = "POST";
 
     public function getConfig(): array
     {
         return [
-            "config"=>[
-                "method"=>$this->getMethod(),
-                "action"=>"",
-                "enctype"=>"",
-                "submit"=>"S'inscrire",
-                "cancel"=>"Annuler"
+            "config" => [
+                "method" => $this->getMethod(),
+                "action" => "",
+                "enctype" => "",
+                "submit" => "S'inscrire",
+                "cancel" => "Annuler"
             ],
-            "inputs" =>[
-                "firstname"=>[
-                        "type"=>"text",
-                        "placeholder"=>"Votre prénom",
-                        "min"=>2,
-                        "max"=>60,
-                        "error"=>"Votre prénom doit faire entre 2 et 60 caractères"
-                    ],
-                "lastname"=>[
-                    "type"=>"text",
-                    "placeholder"=>"Votre nom",
-                    "min"=>2,
-                    "max"=>120,
-                    "error"=>"Votre nom doit faire entre 2 et 120 caractères"
+            "inputs" => [
+                "user_firstname" => [
+                    "type" => "text",
+                    "placeholder" => "Votre prénom",
+                    "min" => 2,
+                    "max" => 45,
+                    "error" => "Votre prénom doit faire entre 2 et 45 caractères"
                 ],
-                "email"=>[
-                    "type"=>"email",
-                    "placeholder"=>"Votre email",
-                    "error"=>"Le format de votre email est incorrect"
+                "user_lastname" => [
+                    "type" => "text",
+                    "placeholder" => "Votre nom de famille",
+                    "min" => 5,
+                    "max" => 45,
+                    "error" => "Votre nom de famille doit faire entre 5 et 45 caractères"
                 ],
-                "pwd"=>[
-                    "type"=>"password",
-                    "placeholder"=>"Votre mot de passe",
-                    "error"=>"Votre mot de passe est incorrect"
+                "user_email" => [
+                    "type" => "email",
+                    "min" => 5,
+                    "max" => 255,
+                    "placeholder" => "Votre email",
+                    "error" => "Le format de votre email est incorrect"
                 ],
-                "pwdConfirm"=>[
-                    "type"=>"password",
-                    "placeholder"=>"Confirmation",
-                    "confirm"=>"pwd",
-                    "error"=>"Mot de passe de confirmation incorrect"
+                "user_confirm_email" => [
+                    "type" => "email",
+                    "min" => 5,
+                    "max" => 255,
+                    "placeholder" => "Confirmation de votre email",
+                    "confirm" => "user_email",
+                    "error" => "Vous avez insérer deux emails différents"
                 ],
-                "country"=>[
-                    "type"=>"select",
-                    "options"=>["","FR", "PL"],
-                    "error"=>"Pays incorrect"
-                ]
+                "user_password" => [
+                    "type" => "password",
+                    "min" => 8,
+                    "max" => 45,
+                    "placeholder" => "Votre mot de passe",
+                    "error" => "Mot de passe incorrect"
+                ],
+                "team_confirm_password" => [
+                    "type" => "password",
+                    "min" => 8,
+                    "max" => 45,
+                    "placeholder" => "Confirmation de votre mot de passe",
+                    "confirm" => "team_password",
+                    "error" => "Vous avez insérer deux mots de passe différents"
+                ],
             ]
         ];
     }
-
 }

@@ -30,9 +30,9 @@ class AddUser extends AForm
                 "user_lastname" => [
                     "type" => "text",
                     "placeholder" => "Votre nom de famille",
-                    "min" => 5,
+                    "min" => 2,
                     "max" => 45,
-                    "error" => "Votre nom de famille doit faire entre 5 et 45 caractères"
+                    "error" => "Votre nom de famille doit faire entre 2 et 45 caractères"
                 ],
                 "user_email" => [
                     "type" => "email",
@@ -61,7 +61,7 @@ class AddUser extends AForm
                     "min" => 8,
                     "max" => 45,
                     "placeholder" => "Confirmation de votre mot de passe",
-                    "confirm" => "team_password",
+                    "confirm" => "user_password",
                     "error" => "Vous avez insérer deux mots de passe différents"
                 ],
             ]

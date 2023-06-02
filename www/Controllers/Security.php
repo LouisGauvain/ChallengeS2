@@ -17,7 +17,7 @@ class Security
         $view = new View("Auth/connection", "front");
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
-            $errors = Verificator::form($form->getConfig(), $_POST);
+            $errors = Verificator::formConnection($form->getConfig(), $_POST);
             if (empty($errors)) {
                 $user = new Users();
                 $user->setEmail($_POST['user_email']);
@@ -36,7 +36,7 @@ class Security
         $view = new View("Auth/register", "front");
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
-            $errors = Verificator::form($form->getConfig(), $_POST);
+            $errors = Verificator::formRegister($form->getConfig(), $_POST);
             if (empty($errors)) {
                 $user = new Users();
                 $user->setFirstname($_POST['user_firstname']);

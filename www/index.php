@@ -44,8 +44,8 @@ if(!file_exists("routes.yml")) {
 
 $routes = yaml_parse_file("routes.yml");
 
-//Page 404
 if(empty($routes[$uri])) {
+    header("HTTP/1.0 404 Not Found");
     die("Page 404");
 }
 

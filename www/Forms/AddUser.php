@@ -56,7 +56,7 @@ class AddUser extends AForm
                     "placeholder" => "Votre mot de passe",
                     "error" => "Mot de passe incorrect"
                 ],
-                "team_confirm_password" => [
+                "user_confirm_password" => [
                     "type" => "password",
                     "min" => 8,
                     "max" => 45,

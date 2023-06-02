@@ -1,25 +1,26 @@
 <?php
+
 namespace App\Core;
 
-class Verificator{
+class Verificator
+{
 
     public static function form(array $config, array $data): array
     {
         $listOfErrors = [];
-        if(count($config["inputs"]) != count($data)-1){
+        if (count($config["inputs"]) != count($data) - 1) {
             die("Tentative de Hack");
         }
 
-        foreach ($config["inputs"] as $name=>$input){
+        foreach ($config["inputs"] as $name => $input) {
 
-            if(empty($data[$name])){
+            if (empty($data[$name])) {
                 die("Tentative de Hack");
             }
 
-            if($input["type"]=="email" && !self::checkEmail($data[$name])){
-                $listOfErrors[]=$input["error"];
+            if ($input["type"] == "email" && !self::checkEmail($data[$name])) {
+                $listOfErrors[] = $input["error"];
             }
-
         }
 
         return $listOfErrors;
@@ -29,5 +30,4 @@ class Verificator{
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
-
 }

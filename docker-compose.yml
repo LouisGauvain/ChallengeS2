@@ -19,6 +19,8 @@ services:
       POSTGRES_DB: esgi
       POSTGRES_USER: esgi
       POSTGRES_PASSWORD: Test1234
+    ports:
+      - 5432:5432
 
   adminer2:
     image: adminer

@@ -22,8 +22,12 @@ class Security
                 $user = new Users();
                 $user->setEmail($_POST['user_email']);
                 $user->setPassword($_POST['user_password']);
-                $user->save();
-                echo "Connecter";
+                if($user->login())
+                {
+                    echo "Connexion";
+                } else {
+                    $view->assign('errors', ['user_email' => 'Email ou mot de passe incorrect']);
+                }
             } else {
                 $view->assign('errors', $errors);
             }

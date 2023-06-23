@@ -178,4 +178,26 @@ class Users extends Sql
     {
         $this->date_updated = $date_updated;
     }
+
+    public function login(): bool
+    {
+        $query = $this->pdo->prepare("SELECT * FROM esgi_users WHERE email=:email");
+        $query->execute([
+            'email' => $this->getEmail()
+        ]);
+
+        $user = $query->fetch();
+        if (!$user) {
+            return false;
+        }
+
+        if (!password_verify($_POST['user_password'], $this->getPassword())) {
+            var_dump($this->getPassword());
+            var_dump($user['password']);
+            return false;
+        }
+        
+        return true;
+
+    }
 }

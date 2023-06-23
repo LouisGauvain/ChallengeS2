@@ -8,4 +8,10 @@ class Utils {
         var_dump($variable);
         echo '</pre>';
     }
+
+    public static function var_dump_die($variable) {
+        echo '<pre>';
+        var_dump($variable);
+        echo '</pre>';
+    }
 }

@@ -54,7 +54,7 @@ class AddUser extends AForm
                     "min" => 8,
                     "max" => 45,
                     "placeholder" => "Votre mot de passe",
-                    "error" => "Mot de passe incorrect"
+                    "error" => "Format du mot de passe incorect, il doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial"
                 ],
                 "user_confirm_password" => [
                     "type" => "password",

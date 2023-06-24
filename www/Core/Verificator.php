@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use App\Core\Utils;
+
 class Verificator
 {
 
@@ -13,14 +15,15 @@ class Verificator
         }
         foreach ($config["inputs"] as $name => $input) {
             if (empty($data[$name])) {
-                die("Tentative de Hack");
+                die("Tentative de Hack 2");
             }
 
-            if ($input["type"] == "email" && !self::checkEmail($data[$name])) {
+            if ($input["type"] == "email" && !self::checkEmail($data[$name]) && $name != "user_confirm_email") {
                 $listOfErrors[] = $input["error"];
+                var_dump($input["error"]);
             }
 
-            if ($input["type"] == "password" && !self::checkPassword($data[$name])) {
+            if ($input["type"] == "password" && !self::checkPassword($data[$name]) && $name != "user_confirm_password") {
                 $listOfErrors[] = $input["error"];
             }
 
@@ -32,11 +35,12 @@ class Verificator
                 $listOfErrors[] = $input["error"];
             }
 
-            if ($input["type"] == "email" && !self::checkConfirmEmail($data["user_confirm_email"], $data[$name])) {
+            if ($input["type"] == "email" && !self::checkConfirmEmail($data["user_email"], $data[$name])) {
                 $listOfErrors[] = $input["error"];
+                var_dump($input["error"]);
             }
 
-            if ($input["type"] == "password" && !self::checkConfirmPassword($data["user_confirm_password"], $data[$name])) {
+            if ($input["type"] == "password" && !self::checkConfirmPassword($data["user_password"], $data[$name])) {
                 $listOfErrors[] = $input["error"];
             }
         }

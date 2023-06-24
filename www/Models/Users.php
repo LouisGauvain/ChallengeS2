@@ -198,6 +198,19 @@ class Users extends Sql
         }
         
         return true;
+    }
 
+    public function emailExist($email): bool
+    {
+        $query = $this->pdo->prepare("SELECT * FROM esgi_users WHERE email=:email");
+        $query->execute([
+            'email' => $email
+        ]);
+
+        $user = $query->fetch();
+        if (!$user) {
+            return false;
+        }
+        return true;
     }
 }

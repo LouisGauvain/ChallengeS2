@@ -179,7 +179,7 @@ class Users extends Sql
         $this->date_updated = $date_updated;
     }
 
-    public function login(): bool
+    public function login(): array
     {
         $query = $this->pdo->prepare("SELECT * FROM esgi_users WHERE email=:email");
         $query->execute([
@@ -197,7 +197,7 @@ class Users extends Sql
             return false;
         }
         
-        return true;
+        return $user;
     }
 
     public function emailExist($email): bool

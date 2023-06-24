@@ -25,7 +25,9 @@ class Security
                 $user->setPassword($_POST['user_password']);
                 if($user->login())
                 {
-                    echo "Connexion";
+                    $userInfos = $user->login();
+                    Utils::setSession($userInfos);
+                    Utils::var_dump($_SESSION);
                 } else {
                     $view->assign('errors', ['user_email' => 'Email ou mot de passe incorrect']);
                 }

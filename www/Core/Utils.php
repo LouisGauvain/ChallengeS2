@@ -19,7 +19,7 @@ class Utils
         die();
     }
 
-    public static function setSession($user)
+    public static function setSession($user, $token)
     {
         session_start();
         $_SESSION['user'] = [
@@ -32,6 +32,7 @@ class Utils
             'date_inserted' => $user['date_inserted'],
             'date_updated' => $user['date_updated'],
         ];
+        $_SESSION['token'] = $token;
     }
 
     public static function redirect($url)

@@ -27,7 +27,7 @@ class Security
                 {
                     $userInfos = $user->login();
                     Utils::setSession($userInfos);
-                    Utils::var_dump($_SESSION);
+                    Utils::redirect("dashboard");
                 } else {
                     $view->assign('errors', ['user_email' => 'Email ou mot de passe incorrect']);
                 }

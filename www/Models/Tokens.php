@@ -84,4 +84,12 @@ class Tokens extends Sql
             return false;
         }
     }
+
+    public function updateToken(): void
+    {
+        $token = bin2hex(random_bytes(32));
+        $this->setId($_SESSION['user']['id']);
+        $this->setToken($token);
+        $this->save();
+    }
 }

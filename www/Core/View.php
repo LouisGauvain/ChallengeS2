@@ -1,6 +1,7 @@
 <?php
 namespace App\Core;
 use App\Core\Utils;
+use App\Models\Tokens;
 class View {
 
     private String $view;
@@ -11,6 +12,16 @@ class View {
         $this->setView($view);
 
         session_start();
+
+        if($template == "back" && isset($_SESSION['user'])){
+            $token = new Tokens();
+            $token->setUserId($_SESSION['user']['id']);
+            $token->setToken($_SESSION['token']);
+            if(!$token->checkToken()){
+                session_destroy();
+                Utils::redirect("login");
+            }
+        } else
         if($template == "back" && !isset($_SESSION['user'])){
             Utils::redirect("login");
         }

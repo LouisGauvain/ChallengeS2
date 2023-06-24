@@ -21,6 +21,7 @@ class View {
                 session_destroy();
                 Utils::redirect("login");
             }
+            $token->updateToken();
         } else
         if($template == "back" && !isset($_SESSION['user'])){
             Utils::redirect("login");

@@ -85,6 +85,18 @@ CREATE TABLE "public"."esgi_templates" (
 ) WITH (oids = false);
 
 
+DROP TABLE IF EXISTS "esgi_tokens";
+DROP SEQUENCE IF EXISTS esgi_tokens_id_seq;
+CREATE SEQUENCE esgi_tokens_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
+
+CREATE TABLE "public"."esgi_tokens" (
+    "id" integer DEFAULT nextval('esgi_tokens_id_seq') NOT NULL,
+    "user_id" integer NOT NULL,
+    "token" character varying(255) NOT NULL,
+    CONSTRAINT "esgi_tokens_pkey" PRIMARY KEY ("id")
+) WITH (oids = false);
+
+
 DROP TABLE IF EXISTS "esgi_users";
 DROP SEQUENCE IF EXISTS esgi_users_id_seq;
 CREATE SEQUENCE esgi_users_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
@@ -114,6 +126,8 @@ ALTER TABLE ONLY "public"."esgi_pages" ADD CONSTRAINT "esgi_pages_user_id_fkey" 
 
 ALTER TABLE ONLY "public"."esgi_seo" ADD CONSTRAINT "esgi_seo_page_id_fkey" FOREIGN KEY (page_id) REFERENCES esgi_pages(id) NOT DEFERRABLE;
 
+ALTER TABLE ONLY "public"."esgi_tokens" ADD CONSTRAINT "fk_user_id" FOREIGN KEY (user_id) REFERENCES esgi_users(id) ON DELETE CASCADE NOT DEFERRABLE;
+
 ALTER TABLE ONLY "public"."esgi_users" ADD CONSTRAINT "esgi_users_role_id_fkey" FOREIGN KEY (role_id) REFERENCES esgi_roles(id) NOT DEFERRABLE;
 
--- 2023-06-24 15:13:48.82789+00
+-- 2023-06-24 15:17:38.029736+00

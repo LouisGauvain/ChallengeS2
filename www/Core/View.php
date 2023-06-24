@@ -1,5 +1,6 @@
 <?php
 namespace App\Core;
+use App\Core\Utils;
 class View {
 
     private String $view;
@@ -8,6 +9,12 @@ class View {
 
     public function __construct(String $view, String $template="back"){
         $this->setView($view);
+
+        session_start();
+        if($template == "back" && !isset($_SESSION['user'])){
+            Utils::redirect("login");
+        }
+
         $this->setTemplate($template);
     }
 

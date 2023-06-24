@@ -6,6 +6,7 @@ use App\Core\View;
 use App\Forms\AddUser;
 use App\Forms\ConnectionUser;
 use App\Models\Users;
+use App\Models\Tokens;
 use App\Core\Verificator;
 use App\Core\Utils;
 
@@ -29,7 +30,11 @@ class Security
                 if($user->login())
                 {
                     $userInfos = $user->login();
-                    Utils::setSession($userInfos);
+                    $token = new Tokens();
+                    $token->setUserId($userInfos['id']);
+                    $token->createToken();
+                    
+                    Utils::setSession($userInfos, $token->getToken());
                     Utils::redirect("dashboard");
                 } else {
                     $view->assign('errors', ['user_email' => 'Email ou mot de passe incorrect']);
@@ -39,7 +44,7 @@ class Security
             }
         }
     }
-    
+
     public function register(): void
     {
         $form = new AddUser();

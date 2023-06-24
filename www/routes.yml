@@ -21,3 +21,7 @@
 /register:
   controller: Security
   action: register
+
+/disconnect:
+  controller: Security
+  action: disconnect

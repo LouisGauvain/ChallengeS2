@@ -69,4 +69,11 @@ class Security
     {
         echo "Logout";
     }
+
+    public function disconnect(): void
+    {
+        session_start();
+        session_destroy();
+        Utils::redirect("login");
+    }
 }

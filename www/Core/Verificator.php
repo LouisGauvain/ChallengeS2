@@ -2,8 +2,6 @@
 
 namespace App\Core;
 
-use App\Core\Utils;
-
 class Verificator
 {
 
@@ -20,7 +18,6 @@ class Verificator
 
             if ($input["type"] == "email" && !self::checkEmail($data[$name]) && $name != "user_confirm_email") {
                 $listOfErrors[] = $input["error"];
-                var_dump($input["error"]);
             }
 
             if ($input["type"] == "password" && !self::checkPassword($data[$name]) && $name != "user_confirm_password") {
@@ -37,7 +34,6 @@ class Verificator
 
             if ($input["type"] == "email" && !self::checkConfirmEmail($data["user_email"], $data[$name])) {
                 $listOfErrors[] = $input["error"];
-                var_dump($input["error"]);
             }
 
             if ($input["type"] == "password" && !self::checkConfirmPassword($data["user_password"], $data[$name])) {

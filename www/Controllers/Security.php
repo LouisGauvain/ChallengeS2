@@ -16,6 +16,9 @@ class Security
     {
         $form = new ConnectionUser();
         $view = new View("Auth/connection", "front");
+        if (isset($_SESSION['user']['id'])) {
+            Utils::redirect("dashboard");
+        }
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::formConnection($form->getConfig(), $_POST);
@@ -36,11 +39,14 @@ class Security
             }
         }
     }
-
+    
     public function register(): void
     {
         $form = new AddUser();
         $view = new View("Auth/register", "front");
+        if (isset($_SESSION['user']['id'])) {
+            Utils::redirect("dashboard");
+        }
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::formRegister($form->getConfig(), $_POST);

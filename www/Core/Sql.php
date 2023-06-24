@@ -8,7 +8,7 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 abstract class Sql
-{   
+{
     private static $instance;
     protected $pdo;
     private $table;
@@ -36,6 +36,16 @@ abstract class Sql
             self::$instance = new static();
         }
         return self::$instance;
+    }
+
+    public function query($sql)
+    {
+        return $this->pdo->query($sql);
+    }
+
+    public function prepare($sql)
+    {
+        return $this->pdo->prepare($sql);
     }
 
     public function save(): void

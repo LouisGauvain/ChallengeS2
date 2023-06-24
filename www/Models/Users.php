@@ -181,7 +181,8 @@ class Users extends Sql
 
     public function login(): array
     {
-        $query = $this->pdo->prepare("SELECT * FROM esgi_users WHERE email=:email");
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM esgi_users WHERE email=:email");
         $query->execute([
             'email' => $this->getEmail()
         ]);
@@ -196,13 +197,14 @@ class Users extends Sql
             var_dump($user['password']);
             return false;
         }
-        
+
         return $user;
     }
 
     public function emailExist($email): bool
     {
-        $query = $this->pdo->prepare("SELECT * FROM esgi_users WHERE email=:email");
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM esgi_users WHERE email=:email");
         $query->execute([
             'email' => $email
         ]);

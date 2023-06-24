@@ -4,7 +4,8 @@ namespace App\Models;
 
 use App\Core\Sql;
 
-class Tokens extends Sql{
+class Tokens extends Sql
+{
 
     protected Int $id = -1;
     protected Int $user_id;
@@ -33,7 +34,7 @@ class Tokens extends Sql{
     {
         return $this->user_id;
     }
-    
+
     /**
      * @param Int $user_id
      */
@@ -65,5 +66,22 @@ class Tokens extends Sql{
         $this->save();
 
         return $token;
+    }
+
+    public function checkToken(): bool
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM esgi_tokens WHERE token = :token AND user_id = :user_id");
+        $query->execute([
+            'token' => $this->getToken(),
+            'user_id' => $_SESSION['user']['id']
+        ]);
+        $result = $query->fetch();
+        if($result)
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

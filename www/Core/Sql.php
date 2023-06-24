@@ -8,8 +8,8 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 abstract class Sql
-{
-
+{   
+    private static $instance;
     protected $pdo;
     private $table;
 
@@ -28,6 +28,14 @@ abstract class Sql
         $classExploded = explode("\\", get_called_class());
         $this->table = end($classExploded);
         $this->table = "esgi_" . strtolower($this->table);
+    }
+
+    public static function getInstance(): self
+    {
+        if (is_null(self::$instance)) {
+            self::$instance = new static();
+        }
+        return self::$instance;
     }
 
     public function save(): void

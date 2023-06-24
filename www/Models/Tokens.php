@@ -6,7 +6,7 @@ use App\Core\Sql;
 
 class Tokens extends Sql{
 
-    protected Int $id;
+    protected Int $id = -1;
     protected Int $user_id;
     protected String $token;
 
@@ -58,11 +58,12 @@ class Tokens extends Sql{
         $this->token = $token;
     }
 
-    public function createToken(Int $user_id, String $token): void
+    public function createToken(): string
     {
-        $this->setUserId($user_id);
+        $token = bin2hex(random_bytes(32));
         $this->setToken($token);
         $this->save();
-    }
 
+        return $token;
+    }
 }

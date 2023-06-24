@@ -58,4 +58,11 @@ class Tokens extends Sql{
         $this->token = $token;
     }
 
+    public function createToken(Int $user_id, String $token): void
+    {
+        $this->setUserId($user_id);
+        $this->setToken($token);
+        $this->save();
+    }
+
 }

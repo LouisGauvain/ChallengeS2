@@ -15,6 +15,6 @@ class Main{
     }
 
     public function dashboard(){
-        echo "Mon tableau de bord";
+        $view = new View("Main/dashboard", "back");
     }
 }

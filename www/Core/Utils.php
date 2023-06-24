@@ -33,4 +33,10 @@ class Utils
             'date_updated' => $user['date_updated'],
         ];
     }
+
+    public static function redirect($url)
+    {
+        header("Location: " . $url);
+        exit();
+    }
 }

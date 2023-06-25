@@ -193,8 +193,6 @@ class Users extends Sql
         }
 
         if (!password_verify($_POST['user_password'], $this->getPassword())) {
-            var_dump($this->getPassword());
-            var_dump($user['password']);
             return false;
         }
 

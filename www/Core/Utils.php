@@ -34,6 +34,11 @@ class Utils
         ];
         $_SESSION['token'] = $token;
     }
+    
+    public static function setSessionToken($token)
+    {
+        $_SESSION['token'] = $token;
+    }
 
     public static function redirect($url)
     {

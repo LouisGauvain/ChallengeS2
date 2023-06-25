@@ -57,6 +57,12 @@ CREATE TABLE "public"."esgi_roles" (
     CONSTRAINT "esgi_roles_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
+INSERT INTO "esgi_roles" ("id", "name", "description") VALUES
+(1,	'Admin',	NULL),
+(2,	'Editor',	NULL),
+(3,	'Author',	NULL),
+(4,	'Contributor',	NULL),
+(5,	'Subscriber',	NULL);
 
 DROP TABLE IF EXISTS "esgi_seo";
 DROP SEQUENCE IF EXISTS esgi_seo_id_seq;
@@ -130,4 +136,4 @@ ALTER TABLE ONLY "public"."esgi_tokens" ADD CONSTRAINT "fk_user_id" FOREIGN KEY 
 
 ALTER TABLE ONLY "public"."esgi_users" ADD CONSTRAINT "esgi_users_role_id_fkey" FOREIGN KEY (role_id) REFERENCES esgi_roles(id) NOT DEFERRABLE;
 
--- 2023-06-24 15:17:38.029736+00
+-- 2023-06-25 02:28:37.979766+00

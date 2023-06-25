@@ -77,8 +77,7 @@ class Tokens extends Sql
             'user_id' => $_SESSION['user']['id']
         ]);
         $result = $query->fetch();
-        if($result)
-        {
+        if ($result) {
             return true;
         } else {
             return false;
@@ -87,9 +86,27 @@ class Tokens extends Sql
 
     public function updateToken(): void
     {
-        $token = bin2hex(random_bytes(32));
-        $this->setId($_SESSION['user']['id']);
-        $this->setToken($token);
-        $this->save();
+
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM esgi_tokens WHERE token = :token AND user_id = :user_id");
+        $query->execute([
+            'token' => $this->getToken(),
+            'user_id' => $_SESSION['user']['id']
+        ]);
+        echo "<pre>";
+        var_dump($query);
+        var_dump($this->getToken());
+        var_dump($_SESSION['user']['id']);
+        echo "</pre>";
+        $result = $query->fetch();
+        if (!$result) {
+            $this->createToken();
+        } else {
+            $token = bin2hex(random_bytes(32));
+            $this->setId($result['id']);
+            $this->setToken($token);
+            $this->save();
+
+        }
     }
 }

@@ -62,7 +62,8 @@ INSERT INTO "esgi_roles" ("id", "name", "description") VALUES
 (2,	'Editor',	NULL),
 (3,	'Author',	NULL),
 (4,	'Contributor',	NULL),
-(5,	'Subscriber',	NULL);
+(5,	'Subscriber',	NULL),
+(6,	'None',	NULL);
 
 DROP TABLE IF EXISTS "esgi_seo";
 DROP SEQUENCE IF EXISTS esgi_seo_id_seq;
@@ -113,7 +114,7 @@ CREATE TABLE "public"."esgi_users" (
     "lastname" character varying(255) NOT NULL,
     "email" character varying(255) NOT NULL,
     "password" character varying(255) NOT NULL,
-    "role_id" integer,
+    "role_id" integer DEFAULT '6',
     "verification_token" character varying(255),
     "email_verified" boolean DEFAULT false,
     "date_inserted" timestamptz DEFAULT CURRENT_TIMESTAMP,
@@ -136,4 +137,4 @@ ALTER TABLE ONLY "public"."esgi_tokens" ADD CONSTRAINT "fk_user_id" FOREIGN KEY 
 
 ALTER TABLE ONLY "public"."esgi_users" ADD CONSTRAINT "esgi_users_role_id_fkey" FOREIGN KEY (role_id) REFERENCES esgi_roles(id) NOT DEFERRABLE;
 
--- 2023-06-25 02:28:37.979766+00
+-- 2023-06-25 02:33:49.3518+00

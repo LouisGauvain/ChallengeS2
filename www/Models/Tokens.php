@@ -93,11 +93,6 @@ class Tokens extends Sql
             'token' => $this->getToken(),
             'user_id' => $_SESSION['user']['id']
         ]);
-        echo "<pre>";
-        var_dump($query);
-        var_dump($this->getToken());
-        var_dump($_SESSION['user']['id']);
-        echo "</pre>";
         $result = $query->fetch();
         if (!$result) {
             $this->createToken();

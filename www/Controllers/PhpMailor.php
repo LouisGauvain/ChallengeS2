@@ -44,7 +44,7 @@ class PhpMailor
 
     public function sendMail()
     {
-        $link = $_ENV['APP_URL'] . "/verify/" . $this->token;
+        $link = $_ENV['APP_URL'] . "/verify?token=" . $this->token;
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 0;
         $mail->isSMTP();

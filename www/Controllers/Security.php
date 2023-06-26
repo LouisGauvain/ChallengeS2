@@ -93,4 +93,24 @@ class Security
         session_destroy();
         Utils::redirect("login");
     }
+
+    public function verify(): void
+    {
+        Utils::var_dump($_GET);
+        $users = new Users();
+        $verify = $users->verifyToken($_GET['token']);
+        if ($verify) {
+            foreach ($verify as $key => $value) {
+                Utils::var_dump($key);
+                $methodName = "set" . ucfirst($key);
+                $users->$methodName($value);
+            }
+            $users->setEmailVerified(1);
+            Utils::var_dump_die($users);
+            $users->save();
+            echo "Votre compte est validé";
+        } else {
+            echo "Votre compte n'est pas validé";
+        }
+    }
 }

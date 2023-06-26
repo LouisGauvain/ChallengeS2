@@ -213,4 +213,19 @@ class Users extends Sql
         }
         return true;
     }
+
+    public function verifyToken($token)
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM esgi_users WHERE verification_token=:token");
+        $query->execute([
+            'token' => $token
+        ]);
+
+        $user = $query->fetch();
+        if (!$user) {
+            return false;
+        }
+        return $user;
+    }
 }

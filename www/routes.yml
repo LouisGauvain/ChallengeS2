@@ -25,3 +25,7 @@
 /disconnect:
   controller: Security
   action: disconnect
+
+/verify:
+  controller: Security
+  action: verify

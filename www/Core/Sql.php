@@ -13,7 +13,7 @@ abstract class Sql
     protected $pdo;
     private $table;
 
-    public function __construct()
+    private function __construct()
     {
         //Mettre en place un SINGLETON
         try {

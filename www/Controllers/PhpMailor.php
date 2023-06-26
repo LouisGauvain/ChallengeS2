@@ -4,6 +4,10 @@ namespace App\Controllers;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
+
+$doteEnv = Dotenv::createImmutable(__DIR__ . "/../");
+$doteEnv->load();
 
 include 'PHPMailer/src/Exception.php';
 include 'PHPMailer/src/PHPMailer.php';
@@ -40,6 +44,7 @@ class PhpMailor
 
     public function sendMail()
     {
+        $link = $_ENV['APP_URL'] . "/verify/" . $this->token;
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 0;
         $mail->isSMTP();
@@ -50,11 +55,11 @@ class PhpMailor
         $mail->SMTPSecure = 'ssl';
         $mail->Port       = 465;
         $mail->CharSet = 'UTF-8';
-        $mail->setFrom("tnl@myges.fr", "tnl");
+        $mail->setFrom("tnl@myges.fr", "TNL");
         $mail->addAddress($this->mail, $this->firstname . " " . $this->lastname);
         $mail->isHTML(true);
-        $mail->Subject = "salut";
-        $mail->Body    = $this->token;
+        $mail->Subject = "Bienvenue sur TNL " . $this->firstname . " " . $this->lastname . " !";
+        $mail->Body    = "Pour vérifier votre compte, veuillez cliquer sur le lien suivant : " . "<br>" . "<br>" . "<a href='" . $link . "'>" . $link . "</a>";
         try {
             $mail->send();
         } catch (Exception $e) {

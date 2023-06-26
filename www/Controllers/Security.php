@@ -61,6 +61,8 @@ class Security
                     $errors['user_email'] = "Cet email existe déjà";
                     $view->assign('errors', $errors);
                 } else {
+                    $token = bin2hex(random_bytes(32));
+                    $user->setVericationToken($token);
                     $user->setFirstname($_POST['user_firstname']);
                     $user->setLastname($_POST['user_lastname']);
                     $user->setEmail($_POST['user_email']);
@@ -70,7 +72,7 @@ class Security
                     $phpMailer->setMail($_POST['user_email']);
                     $phpMailer->setFirstname($_POST['user_firstname']);
                     $phpMailer->setLastname($_POST['user_lastname']);
-                    $phpMailer->setToken("abcdededdeededede");
+                    $phpMailer->setToken($token);
                     $phpMailer->sendMail();
                     echo "Insertion en BDD";
                 }

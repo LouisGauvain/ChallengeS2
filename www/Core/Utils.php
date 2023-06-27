@@ -21,7 +21,9 @@ class Utils
 
     public static function setSession($user, $token)
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         $_SESSION['user'] = [
             'id' => $user['id'],
             'firstname' => $user['firstname'],
@@ -34,7 +36,7 @@ class Utils
         ];
         $_SESSION['token'] = $token;
     }
-    
+
     public static function setSessionToken($token)
     {
         $_SESSION['token'] = $token;

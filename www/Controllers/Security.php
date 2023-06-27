@@ -9,6 +9,7 @@ use App\Models\Users;
 use App\Models\Tokens;
 use App\Core\Verificator;
 use App\Core\Utils;
+use App\Controllers\PhpMailor;
 
 class Security
 {
@@ -17,9 +18,6 @@ class Security
     {
         $form = new ConnectionUser();
         $view = new View("Auth/connection", "front");
-        if (isset($_SESSION['user']['id'])) {
-            Utils::redirect("dashboard");
-        }
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::formConnection($form->getConfig(), $_POST);
@@ -27,15 +25,17 @@ class Security
                 $user = new Users();
                 $user->setEmail($_POST['user_email']);
                 $user->setPassword($_POST['user_password']);
-                if($user->login())
-                {
+                if ($user->login()) {
                     $userInfos = $user->login();
                     $token = new Tokens();
                     $token->setUserId($userInfos['id']);
                     $token->createToken();
-                    
                     Utils::setSession($userInfos, $token->getToken());
-                    Utils::redirect("dashboard");
+                    if ($userInfos['email_verified']) {
+                        Utils::redirect("dashboard");
+                    } else {
+                        $view->assign('errors', ['user_email' => 'Email non vérifié']);
+                    }
                 } else {
                     $view->assign('errors', ['user_email' => 'Email ou mot de passe incorrect']);
                 }
@@ -57,17 +57,23 @@ class Security
             $errors = Verificator::formRegister($form->getConfig(), $_POST);
             if (empty($errors)) {
                 $user = new Users();
-                if($user->emailExist($_POST['user_email']))
-                {
+                if ($user->emailExist($_POST['user_email'])) {
                     $errors['user_email'] = "Cet email existe déjà";
                     $view->assign('errors', $errors);
-                }
-                else{
+                } else {
+                    $token = bin2hex(random_bytes(32));
+                    $user->setVericationToken($token);
                     $user->setFirstname($_POST['user_firstname']);
                     $user->setLastname($_POST['user_lastname']);
                     $user->setEmail($_POST['user_email']);
                     $user->setPassword($_POST['user_password']);
                     $user->save();
+                    $phpMailer = new PhpMailor();
+                    $phpMailer->setMail($_POST['user_email']);
+                    $phpMailer->setFirstname($_POST['user_firstname']);
+                    $phpMailer->setLastname($_POST['user_lastname']);
+                    $phpMailer->setToken($token);
+                    $phpMailer->sendMail();
                     echo "Insertion en BDD";
                 }
             } else {
@@ -86,5 +92,24 @@ class Security
         session_start();
         session_destroy();
         Utils::redirect("login");
+    }
+
+    public function verify(): void
+    {
+        $users = new Users();
+        $verify = $users->verifyToken($_GET['token']);
+        if ($verify) {
+            foreach ($verify as $key => $value) {
+                $methodName = "set" . ucfirst($key);
+                if (method_exists($users, $methodName)) {
+                    $users->$methodName($value);
+                }
+            }
+            $users->setEmailVerified(1);
+            $users->save();
+            Utils::redirect("login");
+        } else {
+            Utils::redirect("register");
+        }
     }
 }

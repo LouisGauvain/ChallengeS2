@@ -1,20 +1,31 @@
 <?php
-namespace App\Controllers;
-use App\Core\View;
 
-class Main{
-    public function index(){
+namespace App\Controllers;
+
+use App\Core\View;
+use App\Core\Utils;
+
+class Main
+{
+    public function index()
+    {
 
         $pseudo = "Prof";
         $view = new View("Main/index", "front");
         $view->assign("pseudo", $pseudo);
     }
 
-    public function contact(){
+    public function contact()
+    {
         $view = new View("Main/contact", "front");
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         $view = new View("Main/dashboard", "back");
+
+        if (!isset($_SESSION['user']['id'])) {
+            Utils::redirect("login");
+        }
     }
 }

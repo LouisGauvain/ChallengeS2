@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Ma super page</title>
     <meta name="description" content="Ceci est ma super page">
+    <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
 <body>

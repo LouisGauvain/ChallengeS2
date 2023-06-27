@@ -53,17 +53,22 @@ CREATE TABLE "public"."esgi_roles" (
     "id" integer DEFAULT nextval('esgi_roles_id_seq') NOT NULL,
     "name" character varying(255) NOT NULL,
     "description" text,
+    "create_pages" boolean DEFAULT false NOT NULL,
+    "edit_pages" boolean DEFAULT false NOT NULL,
+    "delete_pages" boolean DEFAULT false NOT NULL,
+    "publish_pages" boolean DEFAULT false NOT NULL,
+    "manage_users" boolean DEFAULT false NOT NULL,
     CONSTRAINT "esgi_roles_nom_key" UNIQUE ("name"),
     CONSTRAINT "esgi_roles_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
-INSERT INTO "esgi_roles" ("id", "name", "description") VALUES
-(1,	'Admin',	NULL),
-(2,	'Editor',	NULL),
-(3,	'Author',	NULL),
-(4,	'Contributor',	NULL),
-(5,	'Subscriber',	NULL),
-(6,	'None',	NULL);
+INSERT INTO "esgi_roles" ("id", "name", "description", "create_pages", "edit_pages", "delete_pages", "publish_pages", "manage_users") VALUES
+(1,	'Admin',	NULL,	't',	't',	't',	't',	't'),
+(2,	'Editor',	NULL,	't',	't',	'f',	'f',	'f'),
+(3,	'Author',	NULL,	't',	't',	'f',	'f',	'f'),
+(4,	'Contributor',	NULL,	't',	't',	'f',	'f',	'f'),
+(5,	'Subscriber',	NULL,	'f',	'f',	'f',	'f',	'f'),
+(6,	'None',	NULL,	'f',	'f',	'f',	'f',	'f');
 
 DROP TABLE IF EXISTS "esgi_seo";
 DROP SEQUENCE IF EXISTS esgi_seo_id_seq;
@@ -114,11 +119,11 @@ CREATE TABLE "public"."esgi_users" (
     "lastname" character varying(255) NOT NULL,
     "email" character varying(255) NOT NULL,
     "password" character varying(255) NOT NULL,
-    "role_id" integer DEFAULT '6',
+    "role_id" integer DEFAULT '6' NOT NULL,
     "verification_token" character varying(255),
     "email_verified" boolean DEFAULT false,
-    "date_inserted" timestamptz DEFAULT CURRENT_TIMESTAMP,
-    "date_updated" timestamptz,
+    "date_inserted" timestamp DEFAULT CURRENT_TIMESTAMP,
+    "date_updated" timestamp,
     CONSTRAINT "esgi_users_email_key" UNIQUE ("email"),
     CONSTRAINT "esgi_users_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
@@ -137,4 +142,4 @@ ALTER TABLE ONLY "public"."esgi_tokens" ADD CONSTRAINT "fk_user_id" FOREIGN KEY 
 
 ALTER TABLE ONLY "public"."esgi_users" ADD CONSTRAINT "esgi_users_role_id_fkey" FOREIGN KEY (role_id) REFERENCES esgi_roles(id) NOT DEFERRABLE;
 
--- 2023-06-25 02:33:49.3518+00
+-- 2023-06-27 08:15:26.237819+00

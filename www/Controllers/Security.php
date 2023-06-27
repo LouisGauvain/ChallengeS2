@@ -18,9 +18,6 @@ class Security
     {
         $form = new ConnectionUser();
         $view = new View("Auth/connection", "front");
-        if (isset($_SESSION['user']['id'])) {
-            Utils::redirect("dashboard");
-        }
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::formConnection($form->getConfig(), $_POST);
@@ -33,9 +30,12 @@ class Security
                     $token = new Tokens();
                     $token->setUserId($userInfos['id']);
                     $token->createToken();
-
                     Utils::setSession($userInfos, $token->getToken());
-                    Utils::redirect("dashboard");
+                    if ($userInfos['email_verified']) {
+                        Utils::redirect("dashboard");
+                    } else {
+                        $view->assign('errors', ['user_email' => 'Email non vérifié']);
+                    }
                 } else {
                     $view->assign('errors', ['user_email' => 'Email ou mot de passe incorrect']);
                 }
@@ -96,21 +96,20 @@ class Security
 
     public function verify(): void
     {
-        Utils::var_dump($_GET);
         $users = new Users();
         $verify = $users->verifyToken($_GET['token']);
         if ($verify) {
             foreach ($verify as $key => $value) {
-                Utils::var_dump($key);
                 $methodName = "set" . ucfirst($key);
-                $users->$methodName($value);
+                if (method_exists($users, $methodName)) {
+                    $users->$methodName($value);
+                }
             }
             $users->setEmailVerified(1);
-            Utils::var_dump_die($users);
             $users->save();
-            echo "Votre compte est validé";
+            Utils::redirect("login");
         } else {
-            echo "Votre compte n'est pas validé";
+            Utils::redirect("register");
         }
     }
 }

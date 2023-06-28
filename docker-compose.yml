@@ -34,7 +34,9 @@ services:
     volumes:
       - ./app:/app
     working_dir: /app
-    command: npm start
+    command: sh -c "npm install && npm start"
+    ports:
+      - 3000:3000
 
 volumes:
   pgdata:

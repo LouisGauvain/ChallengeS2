@@ -68,9 +68,6 @@ foreach ($uriPages as $uriPage) {
         }
         $objet->$action();
     }
-    if (empty($uriP != $uri)) {
-        die("Page 404");
-    }
 }
 
 // if (empty($routes[$uri])) {

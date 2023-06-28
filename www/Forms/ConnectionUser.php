@@ -24,6 +24,7 @@ class ConnectionUser extends AForm
                     "type" => "email",
                     "min" => 5,
                     "max" => 255,
+                    "label" => "",
                     "placeholder" => "Votre email",
                     "error" => "L'email ou le mot de passe est incorrect"
                 ],
@@ -31,6 +32,7 @@ class ConnectionUser extends AForm
                     "type" => "password",
                     "min" => 8,
                     "max" => 45,
+                    "label" => "",
                     "placeholder" => "Votre mot de passe",
                     "error" => "L'email ou le mot de passe est incorrect"
                 ],

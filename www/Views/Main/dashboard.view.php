@@ -20,15 +20,15 @@ if ($user['role_id'] == 1 && isset($users)) {
     $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $totalItems = count($users);
     $totalPages = ceil($totalItems / $itemsPerPage);
-    
+
     // Calculate the index range for the current page
     $startIndex = ($currentPage - 1) * $itemsPerPage;
     $endIndex = $startIndex + $itemsPerPage - 1;
     $endIndex = min($endIndex, $totalItems - 1);
-    
+
     // Get the slice of users for the current page
     $paginatedUsers = array_slice($users, $startIndex, $itemsPerPage);
-    ?>
+?>
     <table>
         <thead>
             <tr>
@@ -89,8 +89,8 @@ if ($user['role_id'] == 1 && isset($users)) {
                     <td><?= $user['date_updated'] ?></td>
                     <td>
                         <?php if ($user['role_id'] != 1) { ?>
-                            <a href="edit.php?id=<?= $user['id'] ?>">Modifier</a> |
-                            <a href="delete.php?id=<?= $user['id'] ?>">Supprimer</a>
+                            <a href="admin/edit.php?id=<?= $user['id'] ?>">Modifier</a> |
+                            <a href="admin/delete.php?id=<?= $user['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</a>
                         <?php } ?>
                     </td>
                 </tr>

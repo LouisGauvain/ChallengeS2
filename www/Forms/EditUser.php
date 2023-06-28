@@ -23,7 +23,6 @@ class EditUser extends AForm
         $this->lastname = $user['lastname'];
         $this->role_id = $user['role_id'];
         $this->email_verified = $user['email_verified'];
-        Utils::var_dump($this->email_verified);
     }
 
     public function getConfig(): array

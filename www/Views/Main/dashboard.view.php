@@ -19,44 +19,44 @@ if ($user['role_id'] == 1 && isset($users)) {
     <table>
     <thead>
         <tr>
-            <th>
-                <a href="?sort=id&order=<?= isset($_GET['sort']) && $_GET['sort'] === 'id' && isset($_GET['order']) && $_GET['order'] === 'asc' ? 'desc' : 'asc' ?>">
-                    Id
+            <th class="<?= getSortClass('id') ?>">
+                <a href="?sort=id&order=<?= getSortOrder('id') ?>">
+                    Id <?= getSortArrow('id') ?>
                 </a>
             </th>
-            <th>
-                <a href="?sort=firstname&order=<?= isset($_GET['sort']) && $_GET['sort'] === 'firstname' && isset($_GET['order']) && $_GET['order'] === 'asc' ? 'desc' : 'asc' ?>">
-                    Firstname
+            <th class="<?= getSortClass('firstname') ?>">
+                <a href="?sort=firstname&order=<?= getSortOrder('firstname') ?>">
+                    Firstname <?= getSortArrow('firstname') ?>
                 </a>
             </th>
-            <th>
-                <a href="?sort=lastname&order=<?= isset($_GET['sort']) && $_GET['sort'] === 'lastname' && isset($_GET['order']) && $_GET['order'] === 'asc' ? 'desc' : 'asc' ?>">
-                    Lastname
+            <th class="<?= getSortClass('lastname') ?>">
+                <a href="?sort=lastname&order=<?= getSortOrder('lastname') ?>">
+                    Lastname <?= getSortArrow('lastname') ?>
                 </a>
             </th>
-            <th>
-                <a href="?sort=email&order=<?= isset($_GET['sort']) && $_GET['sort'] === 'email' && isset($_GET['order']) && $_GET['order'] === 'asc' ? 'desc' : 'asc' ?>">
-                    Email
+            <th class="<?= getSortClass('email') ?>">
+                <a href="?sort=email&order=<?= getSortOrder('email') ?>">
+                    Email <?= getSortArrow('email') ?>
                 </a>
             </th>
-            <th>
-                <a href="?sort=role_id&order=<?= isset($_GET['sort']) && $_GET['sort'] === 'role_id' && isset($_GET['order']) && $_GET['order'] === 'asc' ? 'desc' : 'asc' ?>">
-                    Role
+            <th class="<?= getSortClass('role_id') ?>">
+                <a href="?sort=role_id&order=<?= getSortOrder('role_id') ?>">
+                    Role <?= getSortArrow('role_id') ?>
                 </a>
             </th>
-            <th>
-                <a href="?sort=email_verified&order=<?= isset($_GET['sort']) && $_GET['sort'] === 'email_verified' && isset($_GET['order']) && $_GET['order'] === 'asc' ? 'desc' : 'asc' ?>">
-                    Email verified
+            <th class="<?= getSortClass('email_verified') ?>">
+                <a href="?sort=email_verified&order=<?= getSortOrder('email_verified') ?>">
+                    Email verified <?= getSortArrow('email_verified') ?>
                 </a>
             </th>
-            <th>
-                <a href="?sort=date_inserted&order=<?= isset($_GET['sort']) && $_GET['sort'] === 'date_inserted' && isset($_GET['order']) && $_GET['order'] === 'asc' ? 'desc' : 'asc' ?>">
-                    Date inserted
+            <th class="<?= getSortClass('date_inserted') ?>">
+                <a href="?sort=date_inserted&order=<?= getSortOrder('date_inserted') ?>">
+                    Date inserted <?= getSortArrow('date_inserted') ?>
                 </a>
             </th>
-            <th>
-                <a href="?sort=date_updated&order=<?= isset($_GET['sort']) && $_GET['sort'] === 'date_updated' && isset($_GET['order']) && $_GET['order'] === 'asc' ? 'desc' : 'asc' ?>">
-                    Date updated
+            <th class="<?= getSortClass('date_updated') ?>">
+                <a href="?sort=date_updated&order=<?= getSortOrder('date_updated') ?>">
+                    Date updated <?= getSortArrow('date_updated') ?>
                 </a>
             </th>
             <th>Actions</th>
@@ -89,5 +89,35 @@ if ($user['role_id'] == 1 && isset($users)) {
     </table>
 
 <?php
+}
+?>
+
+<?php
+function getSortClass($column)
+{
+    if (isset($_GET['sort']) && $_GET['sort'] === $column) {
+        return 'sorted';
+    }
+    return '';
+}
+
+function getSortOrder($column)
+{
+    if (isset($_GET['sort']) && $_GET['sort'] === $column && isset($_GET['order'])) {
+        return $_GET['order'] === 'asc' ? 'desc' : 'asc';
+    }
+    return 'asc';
+}
+
+function getSortArrow($column)
+{
+    if (isset($_GET['sort']) && $_GET['sort'] === $column && isset($_GET['order'])) {
+        if ($_GET['order'] === 'asc') {
+            return '&#9650;'; // Upward arrow
+        } else {
+            return '&#9660;'; // Downward arrow
+        }
+    }
+    return '';
 }
 ?>

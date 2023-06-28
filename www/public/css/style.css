@@ -35,12 +35,23 @@ table th, table td {
   text-align: left;
   border-bottom: 1px solid #333;
 }
-table th {
-  background-color: #555;
-  color: #fff;
+table th a {
+  color: #000;
+  font-weight: 800;
+  text-decoration: none;
+}
+table th.sorted a {
+  color: rgb(0, 38, 255);
+  font-weight: 800;
+  text-decoration: none;
 }
 table tr:hover {
   background-color: #e5e5e5;
+}
+table .table-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 a.disabled {

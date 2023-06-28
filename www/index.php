@@ -67,8 +67,8 @@ foreach ($uriPages as $uriPage) {
             die("L'action " . $action . " n'existe pas");
         }
         $objet->$action();
-    } else {
-        header("HTTP/1.0 404 Not Found");
+    }
+    if (empty($uriP != $uri)) {
         die("Page 404");
     }
 }

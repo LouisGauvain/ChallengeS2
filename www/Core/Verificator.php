@@ -96,4 +96,27 @@ class Verificator
     {
         return $password == $confirmPassword;
     }
+
+
+    static public function formEditUser(array $config, array $data): array
+    {
+        $listOfErrors = [];
+
+        foreach ($config["inputs"] as $name => $input) {
+            if (empty($data[$name])) {
+                die("Tentative de Hack 3");
+            }
+            if ($input["type"] == "password" && !self::checkPassword($data[$name])) {
+                $listOfErrors[] = $input["error"];
+                var_dump($input["error"]);
+            }
+
+            if ($input["type"] == "email" && !self::checkEmail($data[$name])) {
+                $listOfErrors[] = $input["error"];
+            }
+
+        }
+
+        return $listOfErrors;
+    }
 }

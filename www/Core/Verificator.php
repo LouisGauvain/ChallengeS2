@@ -103,10 +103,11 @@ class Verificator
         $listOfErrors = [];
 
         foreach ($config["inputs"] as $name => $input) {
-            if (empty($data[$name])) {
+            Utils::var_dump($name);
+            if (empty($data[$name]) && $name != "user_new_password") {
                 die("Tentative de Hack 3");
             }
-            if ($input["type"] == "password" && !self::checkPassword($data[$name])) {
+            if ($input["type"] == "password" && !empty($data[$name]) && !self::checkPassword($data[$name])) {
                 $listOfErrors[] = $input["error"];
                 var_dump($input["error"]);
             }

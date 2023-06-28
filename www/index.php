@@ -48,6 +48,7 @@ $uri = (empty($uri)) ? "/" : $uri;
 
 // $routes = yaml_parse_file("routes.yml");
 
+$found = false;
 $pages = new Pages();
 $uriPages = $pages->getUriPages();
 foreach ($uriPages as $uriPage) {
@@ -67,7 +68,14 @@ foreach ($uriPages as $uriPage) {
             die("L'action " . $action . " n'existe pas");
         }
         $objet->$action();
+        $found = true;  
+
     }
+}
+
+if (!$found) {
+    header("HTTP/1.0 404 Not Found");
+    die("Page 404");
 }
 
 // if (empty($routes[$uri])) {

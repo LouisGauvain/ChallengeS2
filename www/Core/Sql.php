@@ -13,6 +13,8 @@ abstract class Sql
     protected $pdo;
     private $table;
 
+    abstract public function getId(): int;
+
     public function __construct()
     {
         //Mettre en place un SINGLETON

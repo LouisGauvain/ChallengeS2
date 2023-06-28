@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: $table-background;
+    color: $table-color;
+    
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid $table-color;
+    }
+    
+    th {
+      background-color: $table-header-background;
+      color: $table-header-color;
+    }
+    
+    tr:hover {
+      background-color: $table-row-hover;
+    }
+  }

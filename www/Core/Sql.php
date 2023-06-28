@@ -78,4 +78,10 @@ abstract class Sql
         }
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function delete ($id): void
+    {
+        $queryPrepared = $this->pdo->prepare("DELETE FROM " . $this->table . " WHERE id=:id");
+        $queryPrepared->execute(["id" => $id]);
+    }
 }

@@ -16,19 +16,19 @@ foreach ($user as $key => $value) {
 <?php
 if ($user['role_id'] == 1 && isset($users)) {
     // Pagination configuration
-    $itemsPerPage = 1;
+    $itemsPerPage = 20;
     $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $totalItems = count($users);
     $totalPages = ceil($totalItems / $itemsPerPage);
-
+    
     // Calculate the index range for the current page
     $startIndex = ($currentPage - 1) * $itemsPerPage;
     $endIndex = $startIndex + $itemsPerPage - 1;
     $endIndex = min($endIndex, $totalItems - 1);
-
+    
     // Get the slice of users for the current page
     $paginatedUsers = array_slice($users, $startIndex, $itemsPerPage);
-?>
+    ?>
     <table>
         <thead>
             <tr>
@@ -78,7 +78,6 @@ if ($user['role_id'] == 1 && isset($users)) {
         <tbody>
             <?php
             foreach ($paginatedUsers as $user) { ?>
-                ?>
                 <tr>
                     <td><?= $user['id'] ?></td>
                     <td><?= $user['firstname'] ?></td>

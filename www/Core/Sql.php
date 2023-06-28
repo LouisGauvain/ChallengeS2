@@ -84,4 +84,14 @@ abstract class Sql
         $queryPrepared = $this->pdo->prepare("DELETE FROM " . $this->table . " WHERE id=:id");
         $queryPrepared->execute(["id" => $id]);
     }
+
+    public function find($id): void
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE id=:id");
+        $queryPrepared->execute(["id" => $id]);
+        $result = $queryPrepared->fetch(\PDO::FETCH_ASSOC);
+        foreach ($result as $key => $value) {
+            $this->$key = $value;
+        }
+    }
 }

@@ -112,3 +112,20 @@ if (!$found) {
 // }
 
 // $objet->$action();
+
+
+// URL de l'API à appeler
+
+$apiUrl = $_ENV['API_URL'];
+
+// Appel de l'API en utilisant file_get_contents()
+$response = file_get_contents($apiUrl);
+
+// Vérification de la réponse
+if ($response !== false) {
+    // La requête a réussi, vous pouvez traiter la réponse ici
+    echo $response;
+} else {
+    // La requête a échoué
+    echo 'Erreur lors de l\'appel de l\'API';
+}

@@ -69,10 +69,10 @@ abstract class Sql
         $queryPrepared->execute($columns);
     }
 
-    public function findAll($sort = null): array
+    public function findAll($sort = null, $order = null ): array
     {
-        if ($sort) {
-            $query = $this->pdo->query("SELECT * FROM " . $this->table . " ORDER BY " . $sort);
+        if ($sort && $order) {
+            $query = $this->pdo->query("SELECT * FROM " . $this->table . " ORDER BY " . $sort . " " . $order);
             Utils::var_dump($query);
         } else {
             $query = $this->pdo->query("SELECT * FROM " . $this->table);

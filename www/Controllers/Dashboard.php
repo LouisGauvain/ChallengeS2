@@ -11,10 +11,11 @@ class Dashboard
     public function users()
     {
         $user = new Users();
-        
-        if (isset($_GET['sort'])) {
+
+        if (isset($_GET['sort']) && isset($_GET['order'])) {
             $sort = $_GET['sort'];
-            $users = $user->findAll($sort);
+            $order = $_GET['order'];
+            $users = $user->findAll($sort, $order);
         } else {
             $users = $user->findAll();
         }

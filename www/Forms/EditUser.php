@@ -42,7 +42,7 @@ class EditUser extends AForm
                 "min" => 5,
                 "max" => 255,
                 "placeholder" => "Votre email",
-                "error" => "L'email ou le mot de passe est incorrect",
+                "error" => "Le format de votre email est incorrect",
                 "value" => $this->email
             ],
             "user_firstname" => [
@@ -85,7 +85,7 @@ class EditUser extends AForm
                 "min" => 8,
                 "max" => 45,
                 "placeholder" => "Votre mot de passe",
-                "error" => "L'email ou le mot de passe est incorrect"
+                "error" => "Format du mot de passe incorect, il doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
             ],
         ]
     ];

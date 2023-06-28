@@ -10,12 +10,27 @@ table {
       border-bottom: 1px solid $table-color;
     }
     
-    th {
-      background-color: $table-header-background;
+    th a{
       color: $table-header-color;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    th.sorted a{
+      color: $table-header-sorted-color;
+      font-weight: 800;
+      text-decoration: none;
     }
     
     tr:hover {
       background-color: $table-row-hover;
     }
+
+    .table-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+
   }

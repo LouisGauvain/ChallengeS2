@@ -17,15 +17,6 @@ class Pages extends Sql
     protected $date_created;
     protected $date_modified;
 
-    public function __construct()
-    {
-        $this->url_page = '';
-        $this->controller_page = '';
-        $this->action_page = '';
-        $this->date_created = null;
-        $this->date_modified = null;
-    }
-
     public function getId(): int
     {
         return $this->id;
@@ -119,13 +110,12 @@ class Pages extends Sql
     public function getUriPages()
     {
         $db = $this::getInstance();
-        Utils::var_dump($db);
-        $query = $db->prepare("SELECT * FROM esgi_pages");
-        $query->execute();
-        $uri = $query->fetch();
-        if (!$uri) {
+        $query = $db->query("SELECT url_page, controller_page, action_page FROM esgi_pages");
+        $uriq = $query->fetchAll();
+        if (is_null($uriq)) {
             return false;
+        } else {
+            return $uriq;
         }
-        return $uri;
     }
 }

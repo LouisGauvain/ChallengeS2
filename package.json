@@ -1,5 +1,6 @@
 {
     "scripts": {
-        "docker" : "docker-compose up"
+        "docker" : "docker-compose up",
+        "sass" : "sass --watch www/public/css/scss/main.scss:www/public/css/style.css"
     }
 }

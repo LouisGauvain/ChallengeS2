@@ -1,5 +1,7 @@
 -- Adminer 4.8.1 PostgreSQL 15.3 (Debian 15.3-1.pgdg110+1) dump
 
+\connect "esgi";
+
 DROP TABLE IF EXISTS "esgi_comments";
 DROP SEQUENCE IF EXISTS esgi_comments_id_seq;
 CREATE SEQUENCE esgi_comments_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
@@ -52,7 +54,11 @@ INSERT INTO "esgi_pages" ("id", "title", "content", "user_id", "date_created", "
 (5,	'logout',	NULL,	126,	'2023-06-28 09:37:34.418299',	NULL,	'/logout',	'Security',	'logout'),
 (6,	'register',	'',	126,	'2023-06-28 09:38:51.893301',	NULL,	'/register',	'Security',	'register'),
 (7,	'disconnect',	NULL,	126,	'2023-06-28 09:39:12.302641',	NULL,	'/disconnect',	'Security',	'disconnect'),
-(8,	'verify',	NULL,	126,	'2023-06-28 09:39:30.914361',	NULL,	'/verify',	'Security',	'verify');
+(8,	'verify',	NULL,	126,	'2023-06-28 09:39:30.914361',	NULL,	'/verify',	'Security',	'verify'),
+(9,	'page',	NULL,	126,	'2023-06-28 12:39:00.307211',	NULL,	'/page',	'Security',	'page'),
+(12,	'delete_user',	NULL,	127,	'2023-06-28 12:45:14.6325',	NULL,	'/admin/delete_user',	'Admin',	'deleteUser'),
+(11,	'edit_user',	NULL,	127,	'2023-06-28 12:44:33.291857',	NULL,	'/admin/edit_user',	'Admin',	'editUser'),
+(13,	'hadTemplatePage',	NULL,	126,	'2023-06-28 14:24:41.937919',	NULL,	'/hadTemplatePage',	'Security',	'hadTemplatePage');
 
 DROP TABLE IF EXISTS "esgi_roles";
 DROP SEQUENCE IF EXISTS esgi_roles_id_seq;
@@ -102,6 +108,7 @@ CREATE TABLE "public"."esgi_templates" (
     "description" text,
     "color" character varying(7),
     "police" character varying(255),
+    "image" character varying(3000),
     CONSTRAINT "esgi_templates_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
@@ -150,5 +157,3 @@ ALTER TABLE ONLY "public"."esgi_seo" ADD CONSTRAINT "esgi_seo_page_id_fkey" FORE
 ALTER TABLE ONLY "public"."esgi_tokens" ADD CONSTRAINT "fk_user_id" FOREIGN KEY (user_id) REFERENCES esgi_users(id) ON DELETE CASCADE NOT DEFERRABLE;
 
 ALTER TABLE ONLY "public"."esgi_users" ADD CONSTRAINT "esgi_users_role_id_fkey" FOREIGN KEY (role_id) REFERENCES esgi_roles(id) NOT DEFERRABLE;
-
--- 2023-06-28 12:24:40.208575+00

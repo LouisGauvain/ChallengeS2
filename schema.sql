@@ -1,7 +1,5 @@
 -- Adminer 4.8.1 PostgreSQL 15.3 (Debian 15.3-1.pgdg110+1) dump
 
-\connect "esgi";
-
 DROP TABLE IF EXISTS "esgi_comments";
 DROP SEQUENCE IF EXISTS esgi_comments_id_seq;
 CREATE SEQUENCE esgi_comments_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
@@ -41,9 +39,20 @@ CREATE TABLE "public"."esgi_pages" (
     "user_id" integer NOT NULL,
     "date_created" timestamp DEFAULT CURRENT_TIMESTAMP,
     "date_modified" timestamp,
+    "url_page" text,
+    "controller_page" character varying(255) NOT NULL,
+    "action_page" character varying(255) NOT NULL,
     CONSTRAINT "esgi_pages_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
+INSERT INTO "esgi_pages" ("id", "title", "content", "user_id", "date_created", "date_modified", "url_page", "controller_page", "action_page") VALUES
+(2,	'dashboard',	NULL,	126,	'2023-06-28 09:35:28.62323',	NULL,	'/dashboard',	'Main',	'dashboard'),
+(3,	'contact',	NULL,	126,	'2023-06-28 09:36:18.308916',	NULL,	'/contact',	'Main',	'contact'),
+(4,	'login',	NULL,	126,	'2023-06-28 09:36:52.399549',	NULL,	'/login',	'Security',	'login'),
+(5,	'logout',	NULL,	126,	'2023-06-28 09:37:34.418299',	NULL,	'/logout',	'Security',	'logout'),
+(6,	'register',	'',	126,	'2023-06-28 09:38:51.893301',	NULL,	'/register',	'Security',	'register'),
+(7,	'disconnect',	NULL,	126,	'2023-06-28 09:39:12.302641',	NULL,	'/disconnect',	'Security',	'disconnect'),
+(8,	'verify',	NULL,	126,	'2023-06-28 09:39:30.914361',	NULL,	'/verify',	'Security',	'verify');
 
 DROP TABLE IF EXISTS "esgi_roles";
 DROP SEQUENCE IF EXISTS esgi_roles_id_seq;
@@ -142,4 +151,4 @@ ALTER TABLE ONLY "public"."esgi_tokens" ADD CONSTRAINT "fk_user_id" FOREIGN KEY 
 
 ALTER TABLE ONLY "public"."esgi_users" ADD CONSTRAINT "esgi_users_role_id_fkey" FOREIGN KEY (role_id) REFERENCES esgi_roles(id) NOT DEFERRABLE;
 
--- 2023-06-27 08:15:26.237819+00
+-- 2023-06-28 12:24:40.208575+00

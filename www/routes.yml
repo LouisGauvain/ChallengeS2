@@ -1,6 +1,6 @@
-/:
-  controller: Main
-  action: index
+# /:
+#   controller: Main
+#   action: index
 
 /dashboard:
   controller: Main

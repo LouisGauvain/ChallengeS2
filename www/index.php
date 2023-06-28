@@ -4,6 +4,10 @@ namespace App;
 //Contrainte : utilisation des Namespace
 require __DIR__ . '/vendor/autoload.php';
 
+use App\Core\Sql;
+use App\Core\Utils;
+use App\Models\Pages;
+
 spl_autoload_register(function ($class) {
     //Core/View.php
     $class = str_replace("App\\", "", $class);
@@ -44,6 +48,10 @@ if (!file_exists("routes.yml")) {
 }
 
 $routes = yaml_parse_file("routes.yml");
+
+$pages = new Pages();
+Utils::var_dump($uri);
+$pages->getUriPages($uri);
 
 // if(empty($routes[$uri])) {
 //     header("HTTP/1.0 404 Not Found");

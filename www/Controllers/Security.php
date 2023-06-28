@@ -9,7 +9,7 @@ use App\Models\Users;
 use App\Models\Tokens;
 use App\Core\Verificator;
 use App\Core\Utils;
-use App\Controllers\PhpMailor;
+use App\Models\PhpMailor;
 
 class Security
 {

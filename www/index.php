@@ -4,6 +4,9 @@ namespace App;
 //Contrainte : utilisation des Namespace
 require __DIR__ . '/vendor/autoload.php';
 
+use App\Core\Utils;
+use App\Models\Pages;
+
 spl_autoload_register(function ($class) {
     //Core/View.php
     $class = str_replace("App\\", "", $class);
@@ -39,43 +42,73 @@ $uri = (empty($uri)) ? "/" : $uri;
 // $controller = new Security();
 // $controller->login();
 
-if (!file_exists("routes.yml")) {
-    die("Le fichier de routing n'existe pas");
+// if (!file_exists("routes.yml")) {
+//     die("Le fichier de routing n'existe pas");
+// }
+
+// $routes = yaml_parse_file("routes.yml");
+
+$found = false;
+$pages = new Pages();
+$uriPages = $pages->getUriPages();
+foreach ($uriPages as $uriPage) {
+    $uriP = $uriPage['url_page'];
+    $controller = $uriPage["controller_page"];
+    $action = $uriPage["action_page"];
+    if ($uriP == $uri) {
+        if (empty($controller) || empty($action)) {
+            die("Absence de controller ou d'action dans le ficher de routing pour la route " . $uri);
+        }
+        $controller = "\\App\\Controllers\\" . $controller;
+        if (!class_exists($controller)) {
+            die("La class " . $controller . " n'existe pas");
+        }
+        $objet = new $controller();
+        if (!method_exists($objet, $action)) {
+            die("L'action " . $action . " n'existe pas");
+        }
+        $objet->$action();
+        $found = true;  
+
+    }
 }
 
-$routes = yaml_parse_file("routes.yml");
+if (!$found) {
+    header("HTTP/1.0 404 Not Found");
+    die("Page 404");
+}
 
-// if(empty($routes[$uri])) {
+// if (empty($routes[$uri])) {
 //     header("HTTP/1.0 404 Not Found");
 //     die("Page 404");
 // }
 
-if (empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])) {
-    die("Absence de controller ou d'action dans le ficher de routing pour la route " . $uri);
-}
+// if (empty($controller) || empty($action)) {
+//     die("Absence de controller ou d'action dans le ficher de routing pour la route " . $uri);
+// }
 
-$controller = $routes[$uri]["controller"];
-$action = $routes[$uri]["action"];
+// $controller = $routes[$uri]["controller"];
+// $action = $routes[$uri]["action"];
 
 //Vérification de l'existance de la classe
-if (!file_exists("Controllers/" . $controller . ".php")) {
-    die("Le fichier Controllers/" . $controller . ".php n'existe pas");
-}
+// if (!file_exists("Controllers/" . $controller . ".php")) {
+//     die("Le fichier Controllers/" . $controller . ".php n'existe pas");
+// }
 
-include "Controllers/" . $controller . ".php";
+// include "Controllers/" . $controller . ".php";
 
 //Le fichier existe mais est-ce qu'il possède la bonne classe
 //bien penser à ajouter le namespace \App\Controllers\Security
-$controller = "\\App\\Controllers\\" . $controller;
-if (!class_exists($controller)) {
-    die("La class " . $controller . " n'existe pas");
-}
+// $controller = "\\App\\Controllers\\" . $controller;
+// if (!class_exists($controller)) {
+//     die("La class " . $controller . " n'existe pas");
+// }
 
-$objet = new $controller();
+// $objet = new $controller();
 
-//Est-ce que l'objet contient bien la methode
-if (!method_exists($objet, $action)) {
-    die("L'action " . $action . " n'existe pas");
-}
+// //Est-ce que l'objet contient bien la methode
+// if (!method_exists($objet, $action)) {
+//     die("L'action " . $action . " n'existe pas");
+// }
 
-$objet->$action();
+// $objet->$action();

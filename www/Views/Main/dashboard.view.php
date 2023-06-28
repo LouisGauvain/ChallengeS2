@@ -89,8 +89,8 @@ if ($user['role_id'] == 1 && isset($users)) {
                     <td><?= $user['date_updated'] ?></td>
                     <td>
                         <?php if ($user['role_id'] != 1) { ?>
-                            <a href="admin/edit.php?id=<?= $user['id'] ?>">Modifier</a> |
-                            <a href="admin/delete.php?id=<?= $user['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</a>
+                            <a href="admin/edit_user?id=<?= $user['id'] ?>">Modifier</a> |
+                            <a href="admin/delete_user?id=<?= $user['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</a>
                         <?php } ?>
                     </td>
                 </tr>

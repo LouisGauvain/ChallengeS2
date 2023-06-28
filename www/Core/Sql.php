@@ -68,4 +68,10 @@ abstract class Sql
 
         $queryPrepared->execute($columns);
     }
+
+    public function findAll(): array
+    {
+        $query = $this->pdo->query("SELECT * FROM " . $this->table);
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

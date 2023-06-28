@@ -73,7 +73,6 @@ abstract class Sql
     {
         if ($sort && $order) {
             $query = $this->pdo->query("SELECT * FROM " . $this->table . " ORDER BY " . $sort . " " . $order);
-            Utils::var_dump($query);
         } else {
             $query = $this->pdo->query("SELECT * FROM " . $this->table);
         }

@@ -33,42 +33,42 @@ if ($user['role_id'] == 1 && isset($users)) {
         <thead>
             <tr>
                 <th class="<?= getSortClass('id') ?>">
-                    <a href="?sort=id&order=<?= getSortOrder('id') ?>">
+                    <a href="?sort=id&order=<?= getSortOrder('id') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
                         Id <?= getSortArrow('id') ?>
                     </a>
                 </th>
                 <th class="<?= getSortClass('firstname') ?>">
-                    <a href="?sort=firstname&order=<?= getSortOrder('firstname') ?>">
+                    <a href="?sort=firstname&order=<?= getSortOrder('firstname') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
                         Firstname <?= getSortArrow('firstname') ?>
                     </a>
                 </th>
                 <th class="<?= getSortClass('lastname') ?>">
-                    <a href="?sort=lastname&order=<?= getSortOrder('lastname') ?>">
+                    <a href="?sort=lastname&order=<?= getSortOrder('lastname') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
                         Lastname <?= getSortArrow('lastname') ?>
                     </a>
                 </th>
                 <th class="<?= getSortClass('email') ?>">
-                    <a href="?sort=email&order=<?= getSortOrder('email') ?>">
+                    <a href="?sort=email&order=<?= getSortOrder('email') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
                         Email <?= getSortArrow('email') ?>
                     </a>
                 </th>
                 <th class="<?= getSortClass('role_id') ?>">
-                    <a href="?sort=role_id&order=<?= getSortOrder('role_id') ?>">
+                    <a href="?sort=role_id&order=<?= getSortOrder('role_id') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
                         Role <?= getSortArrow('role_id') ?>
                     </a>
                 </th>
                 <th class="<?= getSortClass('email_verified') ?>">
-                    <a href="?sort=email_verified&order=<?= getSortOrder('email_verified') ?>">
+                    <a href="?sort=email_verified&order=<?= getSortOrder('email_verified') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
                         Email verified <?= getSortArrow('email_verified') ?>
                     </a>
                 </th>
                 <th class="<?= getSortClass('date_inserted') ?>">
-                    <a href="?sort=date_inserted&order=<?= getSortOrder('date_inserted') ?>">
+                    <a href="?sort=date_inserted&order=<?= getSortOrder('date_inserted') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
                         Date inserted <?= getSortArrow('date_inserted') ?>
                     </a>
                 </th>
                 <th class="<?= getSortClass('date_updated') ?>">
-                    <a href="?sort=date_updated&order=<?= getSortOrder('date_updated') ?>">
+                    <a href="?sort=date_updated&order=<?= getSortOrder('date_updated') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
                         Date updated <?= getSortArrow('date_updated') ?>
                     </a>
                 </th>
@@ -101,8 +101,17 @@ if ($user['role_id'] == 1 && isset($users)) {
         </tbody>
     </table>
     <div class="pagination">
-        <?php for ($page = 1; $page <= $totalPages; $page++) { ?>
-            <a href="?page=<?= $page ?>" <?= $page === $currentPage ? 'class="active"' : '' ?>>
+        <?php
+        $queryParams = $_GET;
+        unset($queryParams['page']);
+
+        $queryString = http_build_query($queryParams);
+
+        for ($page = 1; $page <= $totalPages; $page++) {
+            $isActive = $page === $currentPage;
+            $pageLink = '?page=' . $page . ($queryString ? '&' . $queryString : '');
+        ?>
+            <a href="<?= $pageLink ?>" <?= $isActive ? 'class="active"' : '' ?>>
                 <?= $page ?>
             </a>
         <?php } ?>
@@ -137,4 +146,15 @@ function getSortArrow($column)
     }
     return '';
 }
+function buildQuery(...$params)
+{
+    $queryParams = $_GET;
+    foreach ($params as $index => $param) {
+        if ($index % 2 === 0 && isset($_GET[$param]) && isset($params[$index + 1])) {
+            $queryParams[$param] = $params[$index + 1];
+        }
+    }
+    return http_build_query($queryParams);
+}
+
 ?>

@@ -5,11 +5,14 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Forms\AddUser;
 use App\Forms\ConnectionUser;
+use App\Forms\ChoiceTemplatePage;
+use App\Forms\AddTemplatePage;
 use App\Models\Users;
 use App\Models\Tokens;
+use App\Models\templates;
+use App\Models\PhpMailor;
 use App\Core\Verificator;
 use App\Core\Utils;
-use App\Models\PhpMailor;
 
 class Security
 {
@@ -110,6 +113,40 @@ class Security
             Utils::redirect("login");
         } else {
             Utils::redirect("register");
+        }
+    }
+
+    public function page(): void
+    {
+        $form = new ChoiceTemplatePage();
+        $view = new View("Main/page", "front");
+        $view->assign('form', $form->getConfig());
+    }
+
+    public function addTemplatePage(): void
+    {
+        $form = new AddTemplatePage();
+        $view = new View("Main/addTemplatePage", "front");
+        $view->assign('form', $form->getConfig());
+        if ($form->isSubmit()) {
+            $errors = Verificator::addImageTemplate($form->getConfig(), $_POST);
+            if (empty($errors)) {
+                $templatePages = new Templates();
+                if ($templatePages->nameTemplatePage($_POST['template_name'])) {
+                    $errors['template_name'] = "Ce template existe déjà";
+                    $view->assign('errors', $errors);
+                } else {
+                    $templatePages->setName($_POST['template_name']);
+                    $templatePages->setdescription($_POST['template_description']);
+                    $destination = $templatePages->addFolderAndFileTemplate();
+                    $templatePages->setImage($destination);
+                    $templatePages->createFolderUploadTemplate();
+                    $templatePages->save();
+                    echo "Insertion en BDD";
+                }
+            } else {
+                $view->assign('errors', $errors);
+            }
         }
     }
 }

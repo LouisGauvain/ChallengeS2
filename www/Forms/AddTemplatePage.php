@@ -34,7 +34,8 @@ class AddTemplatePage extends AForm
                     "min" => "",
                     "max" => "",
                     "label" => "",
-                    "error" => "La description n'as pas pu être ajouté"
+                    "error" => "La description n'as pas pu être ajouté",
+                    "class" => "code-editor"
                 ],
                 "template_image" => [
                     "type" => "file",

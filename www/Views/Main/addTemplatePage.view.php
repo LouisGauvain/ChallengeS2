@@ -3,3 +3,5 @@
 <?php print_r($errors ?? null); ?>
 
 <?php $this->modal("form", $form); ?>
+
+<div id="preview-container"></div>

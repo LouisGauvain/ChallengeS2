@@ -8,12 +8,12 @@ use App\Core\Utils;
 use App\Models\Pages;
 
 spl_autoload_register(function ($class) {
-    //Core/View.php
-    $class = str_replace("App\\", "", $class);
-    $class = str_replace("\\", "/", $class) . ".php";
-    if (file_exists($class)) {
-        include $class;
-    }
+  //Core/View.php
+  $class = str_replace("App\\", "", $class);
+  $class = str_replace("\\", "/", $class) . ".php";
+  if (file_exists($class)) {
+    include $class;
+  }
 });
 
 
@@ -52,30 +52,29 @@ $found = false;
 $pages = new Pages();
 $uriPages = $pages->getUriPages();
 foreach ($uriPages as $uriPage) {
-    $uriP = $uriPage['url_page'];
-    $controller = $uriPage["controller_page"];
-    $action = $uriPage["action_page"];
-    if ($uriP == $uri) {
-        if (empty($controller) || empty($action)) {
-            die("Absence de controller ou d'action dans le ficher de routing pour la route " . $uri);
-        }
-        $controller = "\\App\\Controllers\\" . $controller;
-        if (!class_exists($controller)) {
-            die("La class " . $controller . " n'existe pas");
-        }
-        $objet = new $controller();
-        if (!method_exists($objet, $action)) {
-            die("L'action " . $action . " n'existe pas");
-        }
-        $objet->$action();
-        $found = true;  
-
+  $uriP = $uriPage['url_page'];
+  $controller = $uriPage["controller_page"];
+  $action = $uriPage["action_page"];
+  if ($uriP == $uri) {
+    if (empty($controller) || empty($action)) {
+      die("Absence de controller ou d'action dans le ficher de routing pour la route " . $uri);
     }
+    $controller = "\\App\\Controllers\\" . $controller;
+    if (!class_exists($controller)) {
+      die("La class " . $controller . " n'existe pas");
+    }
+    $objet = new $controller();
+    if (!method_exists($objet, $action)) {
+      die("L'action " . $action . " n'existe pas");
+    }
+    $objet->$action();
+    $found = true;
+  }
 }
 
 if (!$found) {
-    header("HTTP/1.0 404 Not Found");
-    die("Page 404");
+  header("HTTP/1.0 404 Not Found");
+  die("Page 404");
 }
 
 // if (empty($routes[$uri])) {
@@ -113,19 +112,53 @@ if (!$found) {
 
 // $objet->$action();
 
+?>
 
-// URL de l'API à appeler
+<!-- <div id="test"></div>
+<script>
+  url = "<?php /*echo $_ENV['API_URL']*/ ?>"
 
-$apiUrl = $_ENV['API_URL'];
+  json = {
+    type: "table",
+    children: [{
+      type: "tbody",
+      children: Array.from({
+        length: 5
+      }, function(_, i) {
+        return {
+          type: "tr",
+          children: Array.from({
+            length: 5
+          }, function(_, j) {
+            return {
+              type: "td",
+              children: ["Cell " + i + "-" + j, ],
+            };
+          }),
+        };
+      }),
+    }, ],
+  }
 
-// Appel de l'API en utilisant file_get_contents()
-$response = file_get_contents($apiUrl);
+  //test if json is valid
+  if (typeof json !== "object") {
+    throw new Error("Invalid JSON");
+  }
 
-// Vérification de la réponse
-if ($response !== false) {
-    // La requête a réussi, vous pouvez traiter la réponse ici
-    echo $response;
-} else {
-    // La requête a échoué
-    echo 'Erreur lors de l\'appel de l\'API';
-}
+  //call api send json
+  fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(json)
+    })
+    .then(response => response.text())
+    .then(htmlResponse => {
+      document.getElementById("test").innerHTML = htmlResponse;
+    })
+    .catch(error => {
+      console.error('Une erreur s\'est produite:', error);
+    });
+
+</script> -->

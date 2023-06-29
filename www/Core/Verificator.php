@@ -96,4 +96,30 @@ class Verificator
     {
         return $password == $confirmPassword;
     }
+
+    public static function addImageTemplate(array $config, array $data)
+    {
+        $listOfErrors = [];
+        if (count($config["inputs"]) != count($data) - 1 + count($_FILES)) {
+            die("Tentative de Hack");
+        }
+
+        $data["template_image"] = $_FILES;
+        foreach ($config["inputs"] as $name => $input) {
+            if (empty($data[$name])) {
+                die("Tentative de Hack 2");
+            }
+            if (!isset($_POST["template_name"]) || !isset($_POST["template_description"]) || !isset($_FILES) || empty($_FILES)) {
+                $listOfErrors[] = $input["error"];
+            }
+
+            if ($_FILES["template_image"]["type"]) {
+                $type = $_FILES["template_image"]["type"];
+                if ($type != "image/png" && $type != "image/jpeg" && $type != "image/jpg") {
+                    $listOfErrors[] = $input["error"];
+                }
+            }
+        }
+        return $listOfErrors;
+    }
 }

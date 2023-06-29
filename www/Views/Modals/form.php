@@ -1,4 +1,4 @@
-<form method="<?= $config["config"]["method"] ?? "GET" ?>" action="<?= $config["config"]["action"] ?>">
+<form method="<?= $config["config"]["method"] ?? "GET" ?>" action="<?= $config["config"]["action"] ?>" enctype="<?= $config["config"]["enctype"] ?>">
 
     <?php foreach ($config["inputs"] as $name => $input) : ?>
 

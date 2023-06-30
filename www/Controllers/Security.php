@@ -138,9 +138,10 @@ class Security
                 } else {
                     $templatePages->setName($_POST['template_name']);
                     $templatePages->setdescription($_POST['template_description']);
+                    $templatePages->createFolderTemplate();
+                    $templatePages->createFolderUploadTemplate();
                     $destination = $templatePages->addFolderAndFileTemplate();
                     $templatePages->setImage($destination);
-                    $templatePages->createFolderUploadTemplate();
                     $templatePages->save();
                     echo "Insertion en BDD";
                 }

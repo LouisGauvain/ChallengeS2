@@ -88,12 +88,25 @@ class Templates extends Sql
         return true;
     }
 
+    public function createFolderTemplate(): bool
+    {
+        $pathUploads = 'Templates';
+
+        if (!file_exists($pathUploads)) {
+            mkdir($pathUploads, 0777);
+            chmod($pathUploads, 0755);
+        }
+
+        return true;
+    }
+
     public function createFolderUploadTemplate(): bool
     {
         $pathUploads = 'Templates/Uploads/';
 
         if (!file_exists($pathUploads)) {
             mkdir($pathUploads, 0777);
+            chmod($pathUploads, 0755);
         }
 
         return true;
@@ -108,10 +121,12 @@ class Templates extends Sql
 
         if (!file_exists($pathUploadsAnnual)) {
             mkdir($pathUploadsAnnual, 0777);
+            chmod($pathUploadsAnnual, 0755);
         }
 
         if (!file_exists($pathUploadsMonth)) {
             mkdir($pathUploadsMonth, 0777);
+            chmod($pathUploadsMonth, 0755);
         }
 
         $filename = $_POST['template_name'] . '+' . $_FILES['template_image']['name'];

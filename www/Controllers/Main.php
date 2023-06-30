@@ -35,4 +35,9 @@ class Main
             $view->assign("users", $dashboard->users());
         }
     }
+
+    public function components()
+    {
+        $view = new View("Main/components", "front");
+    }
 }

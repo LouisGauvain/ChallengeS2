@@ -26,7 +26,8 @@ class AddTemplatePage extends AForm
                     "min" => 2,
                     "max" => 45,
                     "label" => "",
-                    "error" => "Le nom du template doit faire entre 2 et 45 caractères"
+                    "error" => "Le nom du template doit faire entre 2 et 45 caractères",
+                    "class" => ""
                 ],
                 "template_description" => [
                     "type" => "texte",
@@ -43,7 +44,8 @@ class AddTemplatePage extends AForm
                     "min" => "",
                     "max" => "",
                     "label" => "",
-                    "error" => "L'image n'as pas pu être ajouté"
+                    "error" => "L'image n'as pas pu être ajouté",
+                    "class" => ""
                 ],
             ],
         ];

@@ -2,23 +2,24 @@
 
 namespace App\Controllers;
 
+use App\Core\Utils;
 use App\Models\Pages;
 
-class SitemapController
+class Sitemap
 {
     public function generateSitemap():void
     {
         //recuperer les urls des page
 
         $getUrls = new Pages();
-        $getUrls->getUriPages();
+        $urlsContent = $getUrls->getUriPages();
 
     
+        foreach($urlsContent as $urlContent){
+            $urls[] = $urlContent['url_page'];
+        }
         
-         //$urls = ;
-        
-
-         $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>');
+         $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>');
         
          foreach($urls as $url){
             $xmlUrl = $xml->addChild('url');
@@ -28,13 +29,14 @@ class SitemapController
          //convertir l'objet en chaîne XML
          $xmlString = $xml->asXML();
 
-         //chemin vert le fichier sitempa.xml
-         $filePath = '../sitemap.xml';
-        
-         // enregistrer le contenu dans le fichier
+         //chemin vert le fichier sitempa.xml at th root of the project create if not exist
+        $filePath = $_SERVER['DOCUMENT_ROOT'] . '/sitemap.xml';
+
          file_put_contents($filePath, $xmlString);
 
          echo 'Sitemap generated successfully!';
+
+         //vardump user actuel php
 
          //creer route speciale dans le routeur pour accéder à generateSitemap()
 

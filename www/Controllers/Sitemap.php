@@ -2,15 +2,21 @@
 
 namespace App\Controllers;
 
+use App\Models\Pages;
+
 class SitemapController
 {
-    public function generateSitemap()
+    public function generateSitemap():void
     {
         //recuperer les urls des page
 
-        /**
-         * $urls = array( ici les urls );
-         */
+        $getUrls = new Pages();
+        $getUrls->getUriPages();
+
+    
+        
+         //$urls = ;
+        
 
          $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>');
         
@@ -23,7 +29,7 @@ class SitemapController
          $xmlString = $xml->asXML();
 
          //chemin vert le fichier sitempa.xml
-         $filePath = '';
+         $filePath = '../sitemap.xml';
         
          // enregistrer le contenu dans le fichier
          file_put_contents($filePath, $xmlString);

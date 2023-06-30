@@ -6,6 +6,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use App\Core\Utils;
 use App\Models\Pages;
+use App\Controllers\SitemapController;
 
 spl_autoload_register(function ($class) {
     //Core/View.php
@@ -48,6 +49,12 @@ $uri = (empty($uri)) ? "/" : $uri;
 
 // $routes = yaml_parse_file("routes.yml");
 
+$getUrls = new Pages();
+$get = $getUrls->getUriPages();
+
+Utils::var_dump_die($get);
+
+
 $found = false;
 $pages = new Pages();
 $uriPages = $pages->getUriPages();
@@ -77,6 +84,15 @@ if (!$found) {
     header("HTTP/1.0 404 Not Found");
     die("Page 404");
 }
+
+
+
+
+
+$sitemapController = new SitemapController();
+$sitemapController->generateSitemap();
+
+
 
 // if (empty($routes[$uri])) {
 //     header("HTTP/1.0 404 Not Found");

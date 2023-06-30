@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Ma super page</title>
-    <meta name="description" content="Ceci est ma super page">
+    <title>TNL</title>
+    <meta name="description" content="TNL">
     <link rel="stylesheet" href="/public/css/style.css">
+    <script src="public/js/js_input_code_template.js" defer></script>
 </head>
 
 <body>

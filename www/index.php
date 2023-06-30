@@ -6,6 +6,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use App\Core\Utils;
 use App\Models\Pages;
+use App\Controllers\Sitemap;
 
 spl_autoload_register(function ($class) {
   //Core/View.php
@@ -77,6 +78,12 @@ if (!$found) {
   die("Page 404");
 }
 
+
+$sitemapController = new Sitemap();
+$sitemapController->generateSitemap();
+
+
+
 // if (empty($routes[$uri])) {
 //     header("HTTP/1.0 404 Not Found");
 //     die("Page 404");
@@ -96,7 +103,7 @@ if (!$found) {
 
 // include "Controllers/" . $controller . ".php";
 
-//Le fichier existe mais est-ce qu'il possède la bonne classe
+//Le fichier existe mais est-ce qu'il possède la bonne class    e
 //bien penser à ajouter le namespace \App\Controllers\Security
 // $controller = "\\App\\Controllers\\" . $controller;
 // if (!class_exists($controller)) {

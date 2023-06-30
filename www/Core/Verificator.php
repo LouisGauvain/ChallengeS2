@@ -115,13 +115,12 @@ class Verificator
             if ($input["type"] == "email" && !self::checkEmail($data[$name])) {
                 $listOfErrors[] = $input["error"];
             }
-
         }
 
         return $listOfErrors;
     }
 
-    public static function addImageTemplate(array $config, array $data)
+    public static function addImageTemplate(array $config, array $data): array
     {
         $listOfErrors = [];
         if (count($config["inputs"]) != count($data) - 1 + count($_FILES)) {
@@ -143,6 +142,16 @@ class Verificator
                     $listOfErrors[] = $input["error"];
                 }
             }
+        }
+        return $listOfErrors;
+    }
+
+    public static function choiceTemplatePage(): array
+    {
+        $listOfErrors = [];
+        $on = reset($_POST);
+        if ($on !== "on") {
+            $listOfErrors[] = "Vous devez choisir un template";
         }
         return $listOfErrors;
     }

@@ -121,6 +121,12 @@ class Security
         $form = new ChoiceTemplatePage();
         $view = new View("page/choiceTemplatePage", "front");
         $view->assign('form', $form->getConfig());
+        $errors = Verificator::choiceTemplatePage($form->getConfig(), $_POST);
+        if (empty($errors)) {
+            Utils::redirect("add_Template_Page");
+        } else {
+            $view->assign('errors', $errors);
+        }
     }
 
     public function addTemplatePage(): void

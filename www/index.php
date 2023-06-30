@@ -6,7 +6,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use App\Core\Utils;
 use App\Models\Pages;
-use App\Controllers\SitemapController;
+use App\Controllers\Sitemap;
 
 spl_autoload_register(function ($class) {
     //Core/View.php
@@ -49,12 +49,6 @@ $uri = (empty($uri)) ? "/" : $uri;
 
 // $routes = yaml_parse_file("routes.yml");
 
-$getUrls = new Pages();
-$get = $getUrls->getUriPages();
-
-Utils::var_dump_die($get);
-
-
 $found = false;
 $pages = new Pages();
 $uriPages = $pages->getUriPages();
@@ -86,10 +80,7 @@ if (!$found) {
 }
 
 
-
-
-
-$sitemapController = new SitemapController();
+$sitemapController = new Sitemap();
 $sitemapController->generateSitemap();
 
 
@@ -113,7 +104,7 @@ $sitemapController->generateSitemap();
 
 // include "Controllers/" . $controller . ".php";
 
-//Le fichier existe mais est-ce qu'il possède la bonne classe
+//Le fichier existe mais est-ce qu'il possède la bonne class    e
 //bien penser à ajouter le namespace \App\Controllers\Security
 // $controller = "\\App\\Controllers\\" . $controller;
 // if (!class_exists($controller)) {

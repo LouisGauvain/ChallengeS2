@@ -116,17 +116,17 @@ class Security
         }
     }
 
-    public function page(): void
+    public function choiceTemplatePage(): void
     {
         $form = new ChoiceTemplatePage();
-        $view = new View("Main/page", "front");
+        $view = new View("page/choiceTemplatePage", "front");
         $view->assign('form', $form->getConfig());
     }
 
     public function addTemplatePage(): void
     {
         $form = new AddTemplatePage();
-        $view = new View("Main/addTemplatePage", "front");
+        $view = new View("page/addTemplatePage", "front");
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::addImageTemplate($form->getConfig(), $_POST);

@@ -1,0 +1,23 @@
+nav {
+height: 100vh;
+
+    &.navbar {
+        &.wrapped {
+            button {
+                font-size: $button-wrapped-font-size;
+                width: $button-wrapped-width;
+                padding: calc($button-padding-top-bottom * 1.5) $button-padding-left-right 0;
+
+                &::before{
+                    top: 20%;
+                    left: 50%;
+                    transform: translate(-50%, -20%);
+                }
+            }
+        }
+    }
+
+    .bg-color {
+        background-color: $button-background;
+    }
+}

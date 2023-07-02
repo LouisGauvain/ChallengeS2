@@ -1,0 +1,140 @@
+button {
+    background-color: $button-background;
+    border: none;
+    padding: $button-padding-top-bottom $button-padding-left-right $button-padding-top-bottom calc($button-padding-left-right + $button-icon-size);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: $button-font-size;
+    position: relative;
+    transition: $button-transition;
+    height: $button-height;
+    width: $button-width;
+
+    &:hover {
+        transition: $button-transition;
+        background-color: $button-hover;
+    }
+
+    &.dark {
+        color: $button-dark-color;    
+        &.users {
+            &::before {
+                background-image: url("../image/picto/users_dark.svg");
+            }
+        }
+        &.dashboard {
+            &::before {
+                background-image: url("../image/picto/dashboard_dark.svg");
+            }
+        }
+        &.comments {
+            &::before {
+                background-image: url("../image/picto/comments_dark.svg");
+            }
+        }
+        &.medias {
+            &::before {
+                background-image: url("../image/picto/medias_dark.svg");
+            }
+        }
+        &.pages {
+            &::before {
+                background-image: url("../image/picto/pages_dark.svg");
+            }
+        }
+        &.templates{
+            &::before {
+                background-image: url("../image/picto/templates_dark.svg");
+            }
+        }
+        &.seo {
+            &::before {
+                background-image: url("../image/picto/seo_dark.svg");
+            }
+        }
+        &.home {
+            &::before {
+                background-image: url("../image/picto/home_dark.svg");
+            }
+        }
+        &.settings {
+            &::before {
+                background-image: url("../image/picto/settings_dark.svg");
+            }
+        }
+        &.menu {
+            &::before {
+                background-image: url("../image/picto/menu_dark.svg");
+            }
+        }
+    }
+
+    &.light {
+        color: $button-light-color;
+        &.users {
+            &::before {
+                background-image: url("../image/picto/users_light.svg");
+            }
+        }
+        &.dashboard {
+            &::before {
+                background-image: url("../image/picto/dashboard_light.svg");
+            }
+        }
+        &.comments {
+            &::before {
+                background-image: url("../image/picto/comments_light.svg");
+            }
+        }
+        &.medias {
+            &::before {
+                background-image: url("../image/picto/medias_light.svg");
+            }
+        }
+        &.pages {
+            &::before {
+                background-image: url("../image/picto/pages_light.svg");
+            }
+        }
+        &.templates{
+            &::before {
+                background-image: url("../image/picto/templates_light.svg");
+            }
+        }
+        &.seo {
+            &::before {
+                background-image: url("../image/picto/seo_light.svg");
+            }
+        }
+        &.home {
+            &::before {
+                background-image: url("../image/picto/home_light.svg");
+            }
+        }
+        &.settings {
+            &::before {
+                background-image: url("../image/picto/settings_light.svg");
+            }
+        }
+        &.menu {
+            &::before {
+                background-image: url("../image/picto/menu_light.svg");
+            }
+        }
+    }
+
+    &.light , &.dark {
+        &::before {
+            content: "";
+            background-repeat: no-repeat;
+            background-size: contain;    
+            height: $button-icon-size;
+            width: $button-icon-size;
+            position: absolute;
+            top: 50%;
+            left: $button-padding-left-right;
+            transform: translateY(-50%);
+        }
+    }
+}

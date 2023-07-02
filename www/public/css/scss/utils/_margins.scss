@@ -1,0 +1,42 @@
+//create a for loop that will create a class for each margin size
+@for $i from 0 through 10 {
+    .m-#{$i} {
+        margin: #{$i*10}px;
+    }
+}
+
+//create a for loop that will create a class for each margin size
+@for $i from 0 through 10 {
+    .mt-#{$i} { 
+        margin-top: #{$i*10}px;
+    }
+}
+
+//create a for loop that will create a class for each margin size
+@for $i from 0 through 10 {
+    .mb-#{$i} {
+        margin-bottom: #{$i*10}px;
+    }
+}
+
+//create a for loop that will create a class for each margin size
+@for $i from 0 through 10 {
+    .ml-#{$i} {
+        margin-left: #{$i*10}px;
+    }
+}
+
+//create a for loop that will create a class for each margin size
+@for $i from 0 through 10 {
+    .mr-#{$i} {
+        margin-right: #{$i*10}px;
+    }
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
+.height-100 {
+    height: 100vh;
+}

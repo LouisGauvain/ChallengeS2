@@ -2,7 +2,11 @@
 @import "base/typography";
 
 @import "utils/variables";
+@import "utils/margins";
 
 @import "layout/table";
+@import "layout/flex";
 
 @import "component/ahref";
+@import "component/button";
+@import "component/navbar";

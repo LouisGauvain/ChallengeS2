@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
-<body>
-    <h1>Template de back</h1>
-
-    <?php include $this->view; ?>
-
-    <a href="disconnect?controller=security&task=logout">Déconnexion</a>
-
+<body class="backend">
+        <?php include __DIR__ . '/Components/navbar.view.php'; ?>
+        <h1>Template de back</h1>
+        
+        <?php include $this->view; ?>   
+        
+        <a href="disconnect?controller=security&task=logout">Déconnexion</a>
+        
 </body>
 
 </html>

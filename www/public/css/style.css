@@ -323,6 +323,10 @@ nav.flex {
   display: flex;
 }
 
+body.backend {
+  padding-left: 150px;
+}
+
 a.disabled {
   pointer-events: none;
   cursor: default;

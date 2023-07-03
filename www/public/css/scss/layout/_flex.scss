@@ -7,11 +7,11 @@ div {
         justify-content: space-around;
         align-items: center;
         align-content: center;
-        gap: 20px;
+        gap: pxToRem(20);
 
         &.column {
             flex-direction: column;
-            gap: 20px;
+            gap: pxToRem(20);
         }
 
         &.align-start {

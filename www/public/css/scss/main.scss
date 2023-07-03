@@ -1,8 +1,9 @@
-@import "base/reset";
-@import "base/typography";
-
+@import "utils/functions";
 @import "utils/variables";
 @import "utils/margins";
+
+@import "base/reset";
+@import "base/typography";
 
 @import "layout/table";
 @import "layout/flex";

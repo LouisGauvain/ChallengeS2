@@ -1,4 +1,6 @@
-//table variables
+$baseFontSize: 16px;
+  
+  //table variables
 $table-color: #333;
 $table-background: #f2f2f2;
 $table-header-color: #000;
@@ -10,14 +12,14 @@ $table-row-hover: #e5e5e5;
 $button-background: #7E86AF;
 $button-dark-color: #000000;
 $button-light-color: #FFFFFF;
-$button-font-size : 28px;
-$button-width: 300px;
-$button-height: 100px;
+$button-font-size : pxToRem(28);
+$button-width: pxToRem(300);
+$button-height: pxToRem(100);
 $button-hover: #5A5C68;
-$button-padding-top-bottom: 34px;
-$button-padding-left-right: 17px;
-$button-icon-size: 45px;
+$button-padding-top-bottom: pxToRem(34);
+$button-padding-left-right: pxToRem(17);
+$button-icon-size: pxToRem(45);
 $button-transition: background 0.3s ease-in-out;
 
-$button-wrapped-font-size: 14px;
-$button-wrapped-width: 150px;
+$button-wrapped-font-size: pxToRem(14);
+$button-wrapped-width: pxToRem(150);

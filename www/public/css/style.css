@@ -313,6 +313,9 @@ div.flex.justify-end {
 div.flex.no-gap {
   gap: 0;
 }
+div.flex.no-wrap {
+  flex-wrap: nowrap;
+}
 
 nav.navbar {
   position: fixed;
@@ -325,6 +328,9 @@ nav.flex {
 
 body.backend {
   padding-left: 9.375rem;
+}
+body.backend.large {
+  padding-left: 18.75rem;
 }
 
 a.disabled {

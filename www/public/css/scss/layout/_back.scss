@@ -1,3 +1,7 @@
 body.backend {
     padding-left: $button-wrapped-width;
+
+    &.large {
+        padding-left: $button-width;
+    }
 }

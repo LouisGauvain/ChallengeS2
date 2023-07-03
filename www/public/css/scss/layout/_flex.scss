@@ -37,6 +37,10 @@ div {
         &.no-gap {
             gap: 0;
         }
+
+        &.no-wrap {
+            flex-wrap: nowrap;
+        }
     }
 
 }

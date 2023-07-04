@@ -19,8 +19,6 @@
 
     menu.addEventListener('click', () => {
         navbar.classList.toggle('wrapped');
-    });
-    body.addEventListener('click', (e) => {
         body.classList.toggle('large');
     });
 </script>

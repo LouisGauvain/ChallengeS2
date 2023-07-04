@@ -61,8 +61,16 @@
 <div class="flex">
     <input type="text" name="author" id="author" placeholder="Nom auteur">
     <input type="text" name="page" id="page" placeholder="Nom de la page">
-    <input type="url" name="url" id="url" pattern="^\/[a-z0-9]+(?:-[a-z0-9]+)*$">
+    <div class="url-container"> 
+        <input type="url" name="url" id="url" pattern="^\/[a-z0-9]+(?:-[a-z0-9]+)*$">
+    </div>
     <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
     <textarea name="text" id="text" cols="50" rows="20" placeholder="Texte"></textarea>
-    
+    <div class="flex search-container-main">
+        <div class="search-container-input">
+            <input type="search" name="search" id="search">
+        </div>
+        <button>Search</button>
+    </div>
+    <input type="file" name="file" id="file">
 </div>

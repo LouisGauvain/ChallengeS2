@@ -452,4 +452,99 @@ nav .bg-color {
   background-color: #7E86AF;
 }
 
+input,
+textarea {
+  border-radius: 0.625rem;
+  padding: 0.625rem;
+  font-size: 0.875rem;
+}
+input[type=text],
+textarea[type=text] {
+  border: 1px solid black;
+  width: 12.5rem;
+  height: 2.5rem;
+}
+input[type=url],
+textarea[type=url] {
+  padding: 0.625rem 0.625rem 0.625rem 5.3125rem;
+  border: none;
+  width: 18.75rem;
+  height: 2.8125rem;
+}
+input[type=file],
+textarea[type=file] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+textarea {
+  border: 1px solid black;
+}
+
+.url-container {
+  position: relative;
+  border-radius: 0.625rem;
+  border: 1px solid black;
+  overflow: hidden;
+}
+.url-container::before {
+  content: "Slug";
+  position: absolute;
+  height: 100%;
+  width: 4.6875rem;
+  background-color: #D9D9D9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-container-main .search-container-input {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid black;
+  border-radius: 0.625rem;
+}
+.search-container-main .search-container-input::before {
+  content: "Search";
+  position: absolute;
+  height: 100%;
+  width: 4.6875rem;
+  background-color: #D9D9D9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-container-main .search-container-input input[type=search] {
+  padding: 0.625rem 0.625rem 0.625rem 5.3125rem;
+  border: none;
+  width: 18.75rem;
+  height: 3.125rem;
+}
+.search-container-main .search-container-input input[type=submit] {
+  height: 100%;
+  width: 4.6875rem;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.search-container-main .search-container-input input[type=submit]:active {
+  background-color: #BFBFBF;
+}
+.search-container-main button {
+  height: 3.125rem;
+  width: 7.8125rem;
+  font-size: 1rem;
+  padding: 0;
+  border-radius: 0.625rem;
+  background-color: #74E86A;
+  color: white;
+}
+
 /*# sourceMappingURL=style.css.map */

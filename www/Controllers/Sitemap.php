@@ -34,8 +34,6 @@ class Sitemap
 
          file_put_contents($filePath, $xmlString);
 
-         echo 'Sitemap generated successfully!';
-
          //vardump user actuel php
 
          //creer route speciale dans le routeur pour accéder à generateSitemap()

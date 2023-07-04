@@ -61,7 +61,7 @@
 <div class="flex">
     <input type="text" name="author" id="author" placeholder="Nom auteur">
     <input type="text" name="page" id="page" placeholder="Nom de la page">
-    <div class="url-container"> 
+    <div class="url-container">
         <input type="url" name="url" id="url" pattern="^\/[a-z0-9]+(?:-[a-z0-9]+)*$">
     </div>
     <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
@@ -72,5 +72,8 @@
         </div>
         <button>Search</button>
     </div>
-    <input type="file" name="file" id="file">
+    <label class="custom-file-upload">
+        <input type="file" />
+        Ajouter un fichier
+    </label>
 </div>

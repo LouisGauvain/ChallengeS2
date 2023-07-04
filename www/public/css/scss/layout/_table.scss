@@ -5,7 +5,7 @@ table {
     color: $table-color;
     
     th, td {
-      padding: 10px;
+      padding: pxToRem(10);
       text-align: left;
       border-bottom: 1px solid $table-color;
     }

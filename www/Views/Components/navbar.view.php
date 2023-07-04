@@ -1,5 +1,5 @@
 <nav class="navbar flex wrapped" id="menu">
-    <div class="flex column no-gap align-start height-100 justify-start bg-color">
+    <div class="flex column no-gap align-start height-100 justify-start bg-color no-wrap">
         <button class="large home dark">Accueil</button>
         <button class="large dashboard dark">Dashboard</button>
         <button class="large pages dark">Pages</button>
@@ -15,9 +15,10 @@
 <script>
     const menu = document.querySelector('nav .menu');
     const navbar = document.querySelector('.navbar');
+    const body = document.querySelector('body');
 
-    console.log(menu);
     menu.addEventListener('click', () => {
         navbar.classList.toggle('wrapped');
+        body.classList.toggle('large');
     });
 </script>

@@ -76,4 +76,6 @@
         <input type="file" />
         Ajouter un fichier
     </label>
+    <input type="password" name="password" id="password" placeholder="Password">
+    <input type="email" name="email" id="email" placeholder="Email">
 </div>

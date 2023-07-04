@@ -458,8 +458,10 @@ textarea {
   padding: 0.625rem;
   font-size: 0.875rem;
 }
-input[type=text],
-textarea[type=text] {
+input[type=text], input[type=password], input[type=email],
+textarea[type=text],
+textarea[type=password],
+textarea[type=email] {
   border: 1px solid black;
   width: 12.5rem;
   height: 2.5rem;

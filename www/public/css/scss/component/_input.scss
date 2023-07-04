@@ -4,7 +4,7 @@ textarea {
     padding: pxToRem(10);
     font-size: pxToRem(14);
 
-    &[type="text"] {
+    &[type="text"], &[type="password"], &[type="email"] {
         border: 1px solid black;
         width: pxToRem(200);
         height: pxToRem(40);

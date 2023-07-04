@@ -38,6 +38,6 @@ class Main
 
     public function components()
     {
-        $view = new View("Main/components", "front");
+        $view = new View("Main/components", "back");
     }
 }

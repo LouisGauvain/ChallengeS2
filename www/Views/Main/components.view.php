@@ -57,5 +57,3 @@
     </div>
 </div>
 
-<h2 class="mt-2">Navbar</h2>
-<?php include __DIR__ . '/../Components/navbar.view.php'; ?>

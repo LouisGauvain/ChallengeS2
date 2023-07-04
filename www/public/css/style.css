@@ -327,10 +327,10 @@ nav.flex {
 }
 
 body.backend {
-  padding-left: 9.375rem;
+  padding-left: 10.375rem;
 }
 body.backend.large {
-  padding-left: 18.75rem;
+  padding-left: 19.75rem;
 }
 
 a.disabled {

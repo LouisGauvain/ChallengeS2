@@ -21,12 +21,6 @@ class CreatePage extends AForm
         }
         foreach ($templatesPages as $templatesPage) {
             $descriptionTemplate = $templatesPage['description'];
-            $arrayTemplatePages[] = [
-                "type" => "texte",
-                "placeholder" => "Choisissez votre template",
-                "value" => $descriptionTemplate,
-                "error" => "Veuillez choisir un template"
-            ];
         }
         return [
             "config" => [
@@ -36,7 +30,7 @@ class CreatePage extends AForm
                 "submit" => "Validé",
                 "cancel" => "Annuler"
             ],
-            "inputs" => $arrayTemplatePages,
+            "inputs" => $descriptionTemplate,
         ];
     }
 }

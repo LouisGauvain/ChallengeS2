@@ -149,4 +149,20 @@ class Templates extends Sql
             return $templatePages;
         }
     }
+
+    public function getDataUrl()
+    {
+        $SelectOption = str_replace('_', ' ', $_GET['selected_option']);
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM esgi_templates WHERE name = :selectedOption");
+        $query->execute([
+            'selectedOption' => $SelectOption
+        ]);
+        $templatePages = $query->fetchAll();
+        if (empty($templatePages)) {
+            return false;
+        } else {
+            return $templatePages;
+        }
+    }
 }

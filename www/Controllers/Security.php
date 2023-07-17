@@ -123,7 +123,10 @@ class Security
         $view->assign('form', $form->getConfig());
         $errors = Verificator::choiceTemplatePage($form->getConfig(), $_POST);
         if (empty($errors)) {
-            Utils::redirect("add_Template_Page");
+            $keys = array_keys($_POST);
+            $pageAcceuilKey = $keys[0];
+            $redirectURL = "create_page?selected_option=" . urlencode($pageAcceuilKey);
+            Utils::redirect($redirectURL);
         } else {
             $view->assign('errors', $errors);
         }

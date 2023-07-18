@@ -109,19 +109,17 @@ class Verificator
             }
             if ($input["type"] == "password" && !empty($data[$name]) && !self::checkPassword($data[$name])) {
                 $listOfErrors[] = $input["error"];
-                var_dump($input["error"]);
             }
 
             if ($input["type"] == "email" && !self::checkEmail($data[$name])) {
                 $listOfErrors[] = $input["error"];
             }
-
         }
 
         return $listOfErrors;
     }
 
-    public static function addImageTemplate(array $config, array $data)
+    public static function addImageTemplate(array $config, array $data): array
     {
         $listOfErrors = [];
         if (count($config["inputs"]) != count($data) - 1 + count($_FILES)) {
@@ -142,6 +140,31 @@ class Verificator
                 if ($type != "image/png" && $type != "image/jpeg" && $type != "image/jpg") {
                     $listOfErrors[] = $input["error"];
                 }
+            }
+        }
+        return $listOfErrors;
+    }
+
+    public static function choiceTemplatePage(): array
+    {
+        $listOfErrors = [];
+        $on = reset($_POST);
+        if ($on !== "on") {
+            $listOfErrors[] = "Vous devez choisir un template";
+        }
+        return $listOfErrors;
+    }
+
+    public static function addPages(array $config, array $data): array
+    {
+        $listOfErrors = [];
+
+        if (count($config["inputs"]) != count($data) - 1) {
+            die("Tentative de Hack");
+        }
+        foreach ($config["inputs"] as $name => $input) {
+            if (empty($data[$name])) {
+                die("Tentative de Hack 2");
             }
         }
         return $listOfErrors;

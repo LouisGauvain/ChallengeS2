@@ -340,6 +340,10 @@ a.disabled {
   text-decoration: none;
 }
 
+.tox-promotion, .tox-statusbar__path-item, .tox-statusbar__branding {
+  display: none !important;
+}
+
 button {
   background-color: #7E86AF;
   border: none;

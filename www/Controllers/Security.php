@@ -3,16 +3,20 @@
 namespace App\Controllers;
 
 use App\Core\View;
+use App\Core\Verificator;
+use App\Core\Utils;
+
 use App\Forms\AddUser;
 use App\Forms\ConnectionUser;
 use App\Forms\ChoiceTemplatePage;
 use App\Forms\AddTemplatePage;
+use App\Forms\CreatePage;
+
 use App\Models\Users;
 use App\Models\Tokens;
 use App\Models\templates;
 use App\Models\PhpMailor;
-use App\Core\Verificator;
-use App\Core\Utils;
+use App\Models\Pages;
 
 class Security
 {
@@ -154,6 +158,42 @@ class Security
                     $templatePages->save();
                     echo "Insertion en BDD";
                 }
+            } else {
+                $view->assign('errors', $errors);
+            }
+        }
+    }
+
+    public function createPage(): void
+    {
+        $form = new CreatePage();
+        $view = new View("page/createPage", "back");
+        $templatePages = new Templates();
+        $view->assign('form', $form->getConfig());
+        if ($form->isSubmit()) {
+            $errors = Verificator::addPages($form->getConfig(), $_POST);
+            if (empty($errors)) {
+                $Pages = new Pages();
+                $titleSite = $_POST['titleSite'];
+                $texteSite = $_POST['texteSite'];
+                $imageSite = $_POST['imageSite'];
+                $donnees = array(
+                    'titleSite' => $titleSite,
+                    'texteSite' => $texteSite,
+                    'imageSite' => $imageSite,
+                );
+                $jsonPage = json_encode($donnees);
+                $Pages->setTitle($titleSite);
+                $Pages->setContent($jsonPage);
+                $Pages->setUserId($_SESSION['user']['id']);
+                $Pages->setDateCreated(date('Y-m-d H:i:s'));
+                $text = strtolower(trim(strip_tags($titleSite)));
+                $Pages->setUrlPage('/' . $text);
+                $Pages->setControllerPage('Page');
+                $Pages->setActionPage('pageCreate');
+                $Pages->save();
+                echo "Insertion en BDD";
+                Utils::redirect('/' . $text);
             } else {
                 $view->assign('errors', $errors);
             }

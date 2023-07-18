@@ -19,7 +19,7 @@ use App\Core\Utils;
                 <input id="<?= $input["name"] ?? ""; ?>" class="<?= $input["class"] ?? "" ?>" name="<?= $input["name"]; ?>" type="<?= $input["type"] ?>" <?php if (isset($input["checked"]) && $input["checked"] == true) : ?> checked <?php endif; ?>>
                 <label class="<?= $input["class"] ?? "" ?>" for="<?= $input["for"] ?>"><?= $input["label"]; ?></label>
             <?php else : ?>
-                <input class="<?= $input["class"] ?? "" ?>" name="<?= $name; ?>" type="<?= $input["type"] ?>" placeholder="<?= $input["placeholder"] ?>" value="<?= $input["value"] ?? ""; ?>">
+                <input class="<?= $input["class"] ?? "" ?>" name="<?= $name; ?>" type="<?= $input["type"] ?>" placeholder="<?= $input["placeholder"] ?? "" ?>" value="<?= $input["value"] ?? ""; ?>">
             <?php endif; ?>
         <?php endforeach; ?>
     <?php else : ?>

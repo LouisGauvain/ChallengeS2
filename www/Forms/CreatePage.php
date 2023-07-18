@@ -21,6 +21,22 @@ class CreatePage extends AForm
         }
         foreach ($templatesPages as $templatesPage) {
             $descriptionTemplate = $templatesPage['description'];
+            $dom = new \DOMDocument();
+            $dom->loadHTML($descriptionTemplate);
+
+            $inputs = $dom->getElementsByTagName('input');
+            foreach ($inputs as $input) {
+                $name = $input->getAttribute('name');
+                $type = $input->getAttribute('type');
+                $value = $input->getAttribute('value');
+                $placeholder = $input->getAttribute('placeholder');
+                $arrayTemplatePages[$name] = [
+                    "type" => $type,
+                    "value" => $value,
+                    "placeholder" => $placeholder,
+                    "error" => "Veuillez renseigner ce champ"
+                ];
+            }
         }
         return [
             "config" => [
@@ -30,7 +46,7 @@ class CreatePage extends AForm
                 "submit" => "Validé",
                 "cancel" => "Annuler"
             ],
-            "inputs" => $descriptionTemplate,
+            "inputs" => $arrayTemplatePages,
         ];
     }
 }

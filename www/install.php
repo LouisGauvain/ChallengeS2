@@ -106,5 +106,5 @@ echo 'Step 1: Setup database and test connection' . PHP_EOL;
     </script>
     <?php
 } elseif ($step == 3) {
-    // Afficher le formulaire pour l'étape 3
+    echo 'Le site est installé ! Vous pouvez vous connecter à l\'administration avec l\'email et le mot de passe que vous avez renseigné';
 }

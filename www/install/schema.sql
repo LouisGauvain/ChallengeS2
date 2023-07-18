@@ -1,4 +1,6 @@
 -- Adminer 4.8.1 PostgreSQL 15.3 (Debian 15.3-1.pgdg110+1) dump
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
 
 DROP TABLE IF EXISTS "esgi_comments" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_comments_id_seq;

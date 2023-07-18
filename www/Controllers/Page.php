@@ -13,7 +13,7 @@ class Page
     public function createPage(): void
     {
         $form = new CreatePage();
-        $view = new View("page/createPage", "front");
+        $view = new View("page/createPage", "back");
         $templatePages = new Templates();
         $view->assign('form', $form->getConfig());
     }

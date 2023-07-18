@@ -5,8 +5,7 @@
 </head>
 
 <?php
-//if (!(!file_exists('.env') || filesize('.env') === 0)) {
-    if ((!file_exists('.env') || filesize('.env') === 0)) {
+if (!(!file_exists('.env') || filesize('.env') === 0)) {
         echo 'Already installed';
     die();
 }

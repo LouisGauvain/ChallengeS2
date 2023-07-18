@@ -5,9 +5,41 @@
 </head>
 
 <?php
-if (!(!file_exists('.env') || filesize('.env') === 0)) {
+        /* if (!(!file_exists('.env') || filesize('.env') === 0)) {
         echo 'Already installed';
-    die();
+        die();
+} */
+//si le fichier .env existe et qu'il ne contient pas tout les paramètres du fichier .env.example
+$envFilePath = '.env';
+$exampleFilePath = '.env.example';
+
+// Read the contents of the files
+$envContent = file_get_contents($envFilePath);
+$exampleContent = file_get_contents($exampleFilePath);
+
+// Convert the contents into arrays of lines
+$envLines = explode(PHP_EOL, $envContent);
+$exampleLines = explode(PHP_EOL, $exampleContent);
+
+// Remove empty lines
+$envLines = array_filter($envLines);
+$exampleLines = array_filter($exampleLines);
+
+// Extract the keys (lines before the equal sign)
+$envKeys = array_map(function($line) {
+    return substr($line, 0, strpos($line, '='));
+}, $envLines);
+
+$exampleKeys = array_map(function($line) {
+    return substr($line, 0, strpos($line, '='));
+}, $exampleLines);
+
+// Check if the same keys are present
+$missingKeys = array_diff($exampleKeys, $envKeys);
+
+if(empty($missingKeys)) {
+  echo 'Already installed';
+  die();
 }
 
 $step = isset($_POST['step']) ? $_POST['step'] : 1;

@@ -48,4 +48,16 @@ $query->execute([
     'configuration_value' => $tablePrefix
 ]);
 
+//create the .env file
+$env = file_get_contents('../.env.example');
+$env = str_replace('DB_HOST=', "DB_HOST=$db_host", $env);
+$env = str_replace('DB_NAME=', "DB_NAME=$db_name", $env);
+$env = str_replace('DB_USERNAME=', "DB_USERNAME=$db_user", $env);
+$env = str_replace('DB_PASSWORD=', "DB_PASSWORD=$db_pass", $env);
+$env = str_replace('DB_PREFIX=', "DB_PREFIX=$tablePrefix", $env);
+
+$env = str_replace('SITE_NAME=', "SITE_NAME=$siteName", $env);
+
+file_put_contents('../.env', $env);
+
 echo json_encode(['success' => true]);

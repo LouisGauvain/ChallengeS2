@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/public/css/style.css">
     <script src="public/js/js_input_create_template.js" defer></script>
     <script src="public/js/js_input_radio_only_one.js" defer></script>
+    <script src="public/js/js_input_file.js" defer></script>
 </head>
 
 <body>

@@ -77,7 +77,7 @@ class Templates extends Sql
     public function nameTemplatePage($name): bool
     {
         $db = $this::getInstance();
-        $query = $db->prepare("SELECT name FROM esgi_templates WHERE name = :template_name");
+        $query = $db->prepare("SELECT name FROM " . $this->table . " WHERE name = :template_name");
         $query->execute([
             'template_name' => $name
         ]);
@@ -126,7 +126,7 @@ class Templates extends Sql
     public function choiceTemplatePage(): array
     {
         $db = $this::getInstance();
-        $query = $db->query("SELECT * FROM esgi_templates");
+        $query = $db->query("SELECT * FROM ". $this->table);
         $templatePages = $query->fetchAll();
         if (is_null($templatePages)) {
             return false;

@@ -110,7 +110,7 @@ class Pages extends Sql
     public function getUriPages()
     {
         $db = $this::getInstance();
-        $query = $db->query("SELECT url_page, controller_page, action_page FROM esgi_pages");
+        $query = $db->query("SELECT url_page, controller_page, action_page FROM " . $this->table);
         $uriq = $query->fetchAll();
         if (is_null($uriq)) {
             return false;

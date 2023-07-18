@@ -182,7 +182,7 @@ class Users extends Sql
     public function login(): array
     {
         $db = $this::getInstance();
-        $query = $db->prepare("SELECT * FROM esgi_users WHERE email=:email");
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE email=:email");
         $query->execute([
             'email' => $this->getEmail()
         ]);
@@ -202,7 +202,7 @@ class Users extends Sql
     public function emailExist($email): bool
     {
         $db = $this::getInstance();
-        $query = $db->prepare("SELECT * FROM esgi_users WHERE email=:email");
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE email=:email");
         $query->execute([
             'email' => $email
         ]);
@@ -217,7 +217,7 @@ class Users extends Sql
     public function verifyToken($token)
     {
         $db = $this::getInstance();
-        $query = $db->prepare("SELECT * FROM esgi_users WHERE verification_token=:token");
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE verification_token=:token");
         $query->execute([
             'token' => $token
         ]);

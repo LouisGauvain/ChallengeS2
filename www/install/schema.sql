@@ -1,8 +1,8 @@
 -- Adminer 4.8.1 PostgreSQL 15.3 (Debian 15.3-1.pgdg110+1) dump
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
 
-\connect "esgi";
-
-DROP TABLE IF EXISTS "esgi_comments";
+DROP TABLE IF EXISTS "esgi_comments" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_comments_id_seq;
 CREATE SEQUENCE esgi_comments_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
@@ -17,7 +17,7 @@ CREATE TABLE "public"."esgi_comments" (
 ) WITH (oids = false);
 
 
-DROP TABLE IF EXISTS "esgi_menus";
+DROP TABLE IF EXISTS "esgi_menus" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_menus_id_seq;
 CREATE SEQUENCE esgi_menus_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
@@ -30,7 +30,7 @@ CREATE TABLE "public"."esgi_menus" (
 ) WITH (oids = false);
 
 
-DROP TABLE IF EXISTS "esgi_pages";
+DROP TABLE IF EXISTS "esgi_pages" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_pages_id_seq;
 CREATE SEQUENCE esgi_pages_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
@@ -38,7 +38,7 @@ CREATE TABLE "public"."esgi_pages" (
     "id" integer DEFAULT nextval('esgi_pages_id_seq') NOT NULL,
     "title" character varying(255) NOT NULL,
     "content" text,
-    "user_id" integer NOT NULL,
+    "user_id" integer,
     "date_created" timestamp DEFAULT CURRENT_TIMESTAMP,
     "date_modified" timestamp,
     "url_page" text,
@@ -48,19 +48,19 @@ CREATE TABLE "public"."esgi_pages" (
 ) WITH (oids = false);
 
 INSERT INTO "esgi_pages" ("id", "title", "content", "user_id", "date_created", "date_modified", "url_page", "controller_page", "action_page") VALUES
-(2,	'dashboard',	NULL,	126,	'2023-06-28 09:35:28.62323',	NULL,	'/dashboard',	'Main',	'dashboard'),
-(3,	'contact',	NULL,	126,	'2023-06-28 09:36:18.308916',	NULL,	'/contact',	'Main',	'contact'),
-(4,	'login',	NULL,	126,	'2023-06-28 09:36:52.399549',	NULL,	'/login',	'Security',	'login'),
-(5,	'logout',	NULL,	126,	'2023-06-28 09:37:34.418299',	NULL,	'/logout',	'Security',	'logout'),
-(6,	'register',	'',	126,	'2023-06-28 09:38:51.893301',	NULL,	'/register',	'Security',	'register'),
-(7,	'disconnect',	NULL,	126,	'2023-06-28 09:39:12.302641',	NULL,	'/disconnect',	'Security',	'disconnect'),
-(8,	'verify',	NULL,	126,	'2023-06-28 09:39:30.914361',	NULL,	'/verify',	'Security',	'verify'),
-(9,	'page',	NULL,	126,	'2023-06-28 12:39:00.307211',	NULL,	'/page',	'Security',	'page'),
-(12,	'delete_user',	NULL,	127,	'2023-06-28 12:45:14.6325',	NULL,	'/admin/delete_user',	'Admin',	'deleteUser'),
-(11,	'edit_user',	NULL,	127,	'2023-06-28 12:44:33.291857',	NULL,	'/admin/edit_user',	'Admin',	'editUser'),
-(13,	'hadTemplatePage',	NULL,	126,	'2023-06-28 14:24:41.937919',	NULL,	'/hadTemplatePage',	'Security',	'hadTemplatePage');
+(2,	'dashboard',	NULL,	NULL,	'2023-06-28 09:35:28.62323',	NULL,	'/dashboard',	'Main',	'dashboard'),
+(3,	'contact',	NULL,	NULL,	'2023-06-28 09:36:18.308916',	NULL,	'/contact',	'Main',	'contact'),
+(4,	'login',	NULL,	NULL,	'2023-06-28 09:36:52.399549',	NULL,	'/login',	'Security',	'login'),
+(5,	'logout',	NULL,	NULL,	'2023-06-28 09:37:34.418299',	NULL,	'/logout',	'Security',	'logout'),
+(6,	'register',	'',	NULL,	'2023-06-28 09:38:51.893301',	NULL,	'/register',	'Security',	'register'),
+(7,	'disconnect',	NULL,	NULL,	'2023-06-28 09:39:12.302641',	NULL,	'/disconnect',	'Security',	'disconnect'),
+(8,	'verify',	NULL,	NULL,	'2023-06-28 09:39:30.914361',	NULL,	'/verify',	'Security',	'verify'),
+(9,	'page',	NULL,	NULL,	'2023-06-28 12:39:00.307211',	NULL,	'/page',	'Security',	'page'),
+(12,	'delete_user',	NULL,	NULL,	'2023-06-28 12:45:14.6325',	NULL,	'/admin/delete_user',	'Admin',	'deleteUser'),
+(11,	'edit_user',	NULL,	NULL,	'2023-06-28 12:44:33.291857',	NULL,	'/admin/edit_user',	'Admin',	'editUser'),
+(13,	'hadTemplatePage',	NULL,	NULL,	'2023-06-28 14:24:41.937919',	NULL,	'/hadTemplatePage',	'Security',	'hadTemplatePage');
 
-DROP TABLE IF EXISTS "esgi_roles";
+DROP TABLE IF EXISTS "esgi_roles" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_roles_id_seq;
 CREATE SEQUENCE esgi_roles_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
@@ -85,7 +85,7 @@ INSERT INTO "esgi_roles" ("id", "name", "description", "create_pages", "edit_pag
 (5,	'Subscriber',	NULL,	'f',	'f',	'f',	'f',	'f'),
 (6,	'None',	NULL,	'f',	'f',	'f',	'f',	'f');
 
-DROP TABLE IF EXISTS "esgi_seo";
+DROP TABLE IF EXISTS "esgi_seo" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_seo_id_seq;
 CREATE SEQUENCE esgi_seo_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
@@ -98,7 +98,7 @@ CREATE TABLE "public"."esgi_seo" (
 ) WITH (oids = false);
 
 
-DROP TABLE IF EXISTS "esgi_templates";
+DROP TABLE IF EXISTS "esgi_templates" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_templates_id_seq;
 CREATE SEQUENCE esgi_templates_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
@@ -113,7 +113,7 @@ CREATE TABLE "public"."esgi_templates" (
 ) WITH (oids = false);
 
 
-DROP TABLE IF EXISTS "esgi_tokens";
+DROP TABLE IF EXISTS "esgi_tokens" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_tokens_id_seq;
 CREATE SEQUENCE esgi_tokens_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
@@ -125,7 +125,7 @@ CREATE TABLE "public"."esgi_tokens" (
 ) WITH (oids = false);
 
 
-DROP TABLE IF EXISTS "esgi_users";
+DROP TABLE IF EXISTS "esgi_users" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_users_id_seq;
 CREATE SEQUENCE esgi_users_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
@@ -144,6 +144,17 @@ CREATE TABLE "public"."esgi_users" (
     CONSTRAINT "esgi_users_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
+
+DROP TABLE IF EXISTS "esgi_configurations";
+DROP SEQUENCE IF EXISTS esgi_configurations_id_seq;
+CREATE SEQUENCE esgi_configurations_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
+CREATE TABLE "public"."esgi_configurations" (
+    "id" integer DEFAULT nextval('esgi_configurations_id_seq') NOT NULL,
+    "configuration_key" character varying(255) NOT NULL,
+    "configuration_value" text NOT NULL,
+    "created_at" timestamp,
+    "updated_at" timestamp
+) WITH (oids = false);
 
 ALTER TABLE ONLY "public"."esgi_comments" ADD CONSTRAINT "esgi_comments_page_id_fkey" FOREIGN KEY (page_id) REFERENCES esgi_pages(id) NOT DEFERRABLE;
 ALTER TABLE ONLY "public"."esgi_comments" ADD CONSTRAINT "esgi_comments_user_id_fkey" FOREIGN KEY (user_id) REFERENCES esgi_users(id) NOT DEFERRABLE;

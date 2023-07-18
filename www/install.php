@@ -1,3 +1,9 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Installer le site</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
 <?php
 //if (!(!file_exists('.env') || filesize('.env') === 0)) {
     if ((!file_exists('.env') || filesize('.env') === 0)) {
@@ -5,11 +11,10 @@
     die();
 }
 
-
 $step = isset($_POST['step']) ? $_POST['step'] : 1;
 
 if ($step == 1) {
-echo 'Step 1: Setup database and test connection' . PHP_EOL;
+echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
 ?>
 <form action="" method="post">
     <input type="hidden" name="step" value="2">
@@ -54,6 +59,7 @@ echo 'Step 1: Setup database and test connection' . PHP_EOL;
 </script>
 <?php
 } elseif ($step == 2) {
+    echo '<h1>Step 2: Setup site</h1>' . PHP_EOL;
     ?>
     <form action="" method="post">
         <input type="hidden" name="step" value="3">
@@ -107,4 +113,5 @@ echo 'Step 1: Setup database and test connection' . PHP_EOL;
     <?php
 } elseif ($step == 3) {
     echo 'Le site est installé ! Vous pouvez vous connecter à l\'administration avec l\'email et le mot de passe que vous avez renseigné';
+    echo '<a href="/login">Connexion</a>'; 
 }

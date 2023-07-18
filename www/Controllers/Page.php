@@ -7,14 +7,11 @@ use App\Models\templates;
 use App\Forms\CreatePage;
 use App\Core\Verificator;
 use App\Core\Utils;
+use App\Models\Pages;
 
 class Page
 {
-    public function createPage(): void
+    public static function pageCreate(): void
     {
-        $form = new CreatePage();
-        $view = new View("page/createPage", "back");
-        $templatePages = new Templates();
-        $view->assign('form', $form->getConfig());
     }
 }

@@ -71,7 +71,7 @@ class Tokens extends Sql
     public function checkToken(): bool
     {
         $db = $this::getInstance();
-        $query = $db->prepare("SELECT * FROM esgi_tokens WHERE token = :token AND user_id = :user_id");
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE token = :token AND user_id = :user_id");
         $query->execute([
             'token' => $this->getToken(),
             'user_id' => $_SESSION['user']['id']
@@ -88,7 +88,7 @@ class Tokens extends Sql
     {
 
         $db = $this::getInstance();
-        $query = $db->prepare("SELECT * FROM esgi_tokens WHERE token = :token AND user_id = :user_id");
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE token = :token AND user_id = :user_id");
         $query->execute([
             'token' => $this->getToken(),
             'user_id' => $_SESSION['user']['id']

@@ -11,7 +11,7 @@ abstract class Sql
 {
     private static $instance;
     protected $pdo;
-    private $table;
+    protected $table;
 
     abstract public function getId(): int;
 
@@ -23,13 +23,14 @@ abstract class Sql
             $dbName = $_ENV['DB_NAME'];
             $dbUsername = $_ENV['DB_USERNAME'];
             $dbPassword = $_ENV['DB_PASSWORD'];
+            $dbPrefix = $_ENV['DB_PREFIX'];
             $this->pdo = new \PDO("pgsql:host=$dbHost;port=5432;dbname=$dbName", $dbUsername, $dbPassword);
         } catch (\Exception $e) {
             die("Erreur SQL : " . $e->getMessage());
         }
         $classExploded = explode("\\", get_called_class());
         $this->table = end($classExploded);
-        $this->table = "esgi_" . strtolower($this->table);
+        $this->table = $dbPrefix . strtolower($this->table);
     }
 
     public static function getInstance(): self

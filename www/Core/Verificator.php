@@ -109,7 +109,6 @@ class Verificator
             }
             if ($input["type"] == "password" && !empty($data[$name]) && !self::checkPassword($data[$name])) {
                 $listOfErrors[] = $input["error"];
-                var_dump($input["error"]);
             }
 
             if ($input["type"] == "email" && !self::checkEmail($data[$name])) {
@@ -152,6 +151,21 @@ class Verificator
         $on = reset($_POST);
         if ($on !== "on") {
             $listOfErrors[] = "Vous devez choisir un template";
+        }
+        return $listOfErrors;
+    }
+
+    public static function addPages(array $config, array $data): array
+    {
+        $listOfErrors = [];
+
+        if (count($config["inputs"]) != count($data) - 1) {
+            die("Tentative de Hack");
+        }
+        foreach ($config["inputs"] as $name => $input) {
+            if (empty($data[$name])) {
+                die("Tentative de Hack 2");
+            }
         }
         return $listOfErrors;
     }

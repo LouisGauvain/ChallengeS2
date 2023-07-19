@@ -114,6 +114,7 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
         <input type="hidden" name="db_user" value="<?= $_POST['db_user'] ?>">
         <input type="hidden" name="db_pass" value="<?= $_POST['db_pass'] ?>">
     <input type="button" value="Setup site" disabled>
+    <input type="button" value="Force setup site" disabled>
     <input type="submit" value="Next" disabled>
     </form>
     <script>
@@ -125,12 +126,32 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
             });
         });
 
-        const button = document.querySelector('input[type="button"]');
+        const button = document.querySelectorAll('input[type="button"]')[0];
+        const forceButton = document.querySelectorAll('input[type="button"]')[1];
         button.addEventListener('click', () =>{
             //setup le site
             fetch('install/setup.php', {
                 method: 'post',
                 body: new FormData(document.querySelector('form'))
+            }).then(response => response.json()).then(data => {
+                console.log(data);
+                if (data.success) {
+                    document.querySelector('input[type="submit"]').disabled = false;
+                    button.disabled = true;
+                    alert('Site setup');
+                } else {
+                    alert(data.message);
+                    forceButton.disabled = false; 
+
+                }
+            })
+        })
+        forceButton.addEventListener('click', () =>{
+            var formData = new FormData(document.querySelector('form'));
+            formData.append('force', true);
+            fetch('install/setup.php', {
+                method: 'post',
+                body: formData
             }).then(response => response.json()).then(data => {
                 console.log(data);
                 if (data.success) {

@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\View;
-use App\Models\templates;
+use App\Models\Templates;
 use App\Forms\CreatePage;
 use App\Core\Verificator;
 use App\Core\Utils;

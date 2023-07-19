@@ -14,7 +14,7 @@ use App\Forms\CreatePage;
 
 use App\Models\Users;
 use App\Models\Tokens;
-use App\Models\templates;
+use App\Models\Templates;
 use App\Models\PhpMailor;
 use App\Models\Pages;
 
@@ -171,7 +171,6 @@ class Security
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::addPages($form->getConfig(), $_POST);
-            Utils::var_dump_die($_POST);
             if (empty($errors)) {
                 $Pages = new Pages();
                 if ($Pages->namePage($_POST['titleSite'])) {

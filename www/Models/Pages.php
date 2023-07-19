@@ -138,7 +138,7 @@ class Pages extends Sql
         $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE url_page=:url_page");
         $queryPrepared->execute(["url_page" => $url_page]);
         return $queryPrepared->fetch(\PDO::FETCH_ASSOC);
-
+    }
 
     public function createFolderImagePage(): bool
     {

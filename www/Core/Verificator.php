@@ -158,14 +158,17 @@ class Verificator
     public static function addPages(array $config, array $data): array
     {
         $listOfErrors = [];
-
         if (count($config["inputs"]) != count($data) - 1) {
             die("Tentative de Hack");
         }
         foreach ($config["inputs"] as $name => $input) {
-            if (empty($data[$name])) {
-                die("Tentative de Hack 2");
-            }
+            // if (empty($data[$name])) {
+            //     die("Tentative de Hack 2");
+            // }
+            // // reperer s'il y a la mot script dans le contenu
+            // if (preg_match("/<script>/", $data["page_content"])) {
+            //     $listOfErrors[] = $input["error"];
+            // }
         }
         return $listOfErrors;
     }

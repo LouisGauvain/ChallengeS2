@@ -168,10 +168,10 @@ class Security
     {
         $form = new CreatePage();
         $view = new View("page/createPage", "back");
-        $templatePages = new Templates();
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::addPages($form->getConfig(), $_POST);
+            Utils::var_dump_die($_POST);
             if (empty($errors)) {
                 $Pages = new Pages();
                 if ($Pages->namePage($_POST['titleSite'])) {

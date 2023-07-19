@@ -20,7 +20,7 @@ class Security
     public function login(): void
     {
         $form = new ConnectionUser();
-        $view = new View("Auth/connection", "front");
+        $view = new View("Auth/connection", "back");
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::formConnection($form->getConfig(), $_POST);

@@ -55,7 +55,7 @@ class Security
     public function register(): void
     {
         $form = new AddUser();
-        $view = new View("Auth/register", "front");
+        $view = new View("Auth/register", "back");
         if (isset($_SESSION['user']['id'])) {
             Utils::redirect("dashboard");
         }

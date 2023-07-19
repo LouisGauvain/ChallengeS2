@@ -34,9 +34,9 @@ class View
             Utils::redirect("login");
         }
 
+        $this->assign("page_title", "Mon site");
         $this->setTemplate($template);
     }
-
 
     public function assign(String $key, $value): void
     {

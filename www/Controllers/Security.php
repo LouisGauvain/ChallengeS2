@@ -200,7 +200,7 @@ class Security
                     $text = strtolower(trim(strip_tags($titleSite)));
                     $Pages->setUrlPage('/' . $text);
                     $Pages->setControllerPage('Page');
-                    $Pages->setActionPage('pageCreate');
+                    $Pages->setActionPage('index');
                     $Pages->createFolderImagePage();
                     $Pages->createFolderUploadImagePage();
                     $Pages->addFolderAndFileImagePage();

@@ -179,12 +179,19 @@ class Security
                 } else {
                     $titleSite = $_POST['titleSite'];
                     $texteSite = $_POST['texteSite'];
-                    $imageSite = $_POST['imageSite'];
+                    $imageSite = array();
+                    for ($j = 1; isset($_FILES['imageSite+' . $j]); $j++) {
+                        $imageSite[] = $_FILES['imageSite+' . $j];
+                    }
+
                     $donnees = array(
                         'titleSite' => $titleSite,
-                        'texteSite' => $texteSite,
-                        'imageSite' => $imageSite,
+                        'texteSite' => $texteSite
                     );
+
+                    foreach ($imageSite as $key => $file) {
+                        $donnees['imageSite+' . ($key + 1)] = $file;
+                    }
                     $jsonPage = json_encode($donnees);
                     $Pages->setTitle($titleSite);
                     $Pages->setContent($jsonPage);
@@ -193,7 +200,10 @@ class Security
                     $text = strtolower(trim(strip_tags($titleSite)));
                     $Pages->setUrlPage('/' . $text);
                     $Pages->setControllerPage('Page');
-                    $Pages->setActionPage('pageCreate');
+                    $Pages->setActionPage('index');
+                    $Pages->createFolderImagePage();
+                    $Pages->createFolderUploadImagePage();
+                    $Pages->addFolderAndFileImagePage();
                     $Pages->save();
                     echo "Insertion en BDD";
                     Utils::redirect('/' . $text);

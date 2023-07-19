@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { JSDOM } = require('jsdom');
+const { json } = require('express');
 
 const dom = new JSDOM('<!DOCTYPE html><html><body><div id="root"></div></body></html>');
 const document = dom.window.document;
@@ -23,6 +24,9 @@ app.post('/', (req, res) => {
   res.send(document.body.innerHTML);
 });
 
+app.post('/api', (req, res) => {
+  res.json({success: true});
+});
 
 app.listen(port, () => {
   console.log(`Le serveur Express écoute sur le port ${port}`);

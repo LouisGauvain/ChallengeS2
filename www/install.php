@@ -95,10 +95,53 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
 </script>
 <?php
 } elseif ($step == 2) {
-    echo '<h1>Step 2: Setup site</h1>' . PHP_EOL;
     ?>
+    <h1>Step 3: URL setup</h1>
     <form action="" method="post">
         <input type="hidden" name="step" value="3">
+        <input type="text" name="site_url" id="site_url" value="<?= $_SERVER['HTTP_ORIGIN'] ?>" hidden>
+        <!-- API URL  -->
+        <label for="api_url">API URL (Ajouter le port)</label>
+        <input type="text" name="api_url" id="api_url" value="<?= $_SERVER['HTTP_ORIGIN'] ?>">
+        <input type="hidden" name="db_host" value="<?= $_POST['db_host'] ?>">
+        <input type="hidden" name="db_name" value="<?= $_POST['db_name'] ?>">
+        <input type="hidden" name="db_user" value="<?= $_POST['db_user'] ?>">
+        <input type="hidden" name="db_pass" value="<?= $_POST['db_pass'] ?>">
+        
+    <input type="button" name="test_api_url"value="Test api url">
+        <input type="submit" value="Next" disabled>
+    </form>
+
+    <script>
+        const urlApi = document.querySelector('input[name="api_url"]');
+        let url
+        urlApi.addEventListener('input', () => {
+            url = urlApi.value;
+        })
+        const testApi = document.querySelector('input[name="test_api_url"]');
+        testApi.addEventListener('click', () => {
+            fetch( url + "/api" , {
+                method: 'post',
+                body: new FormData(document.querySelector('form'))
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.querySelector('input[type="submit"]').disabled = false;
+                    testApi.disabled = true;
+                    alert('Connexion réussie');
+                } else {
+                    alert(data.message);
+                }
+            })
+        })
+    </script>
+    <?php
+}elseif ($step == 3) {
+    echo '<h1>Step 3: Setup site</h1>' . PHP_EOL;
+    var_dump($_POST);
+    ?>
+    <form action="" method="post">
         <!-- demande le nom du site -->
         <label for="site_name">Site name</label>
         <input type="text" name="site_name" id="site_name" value="My site">
@@ -116,6 +159,9 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
         <input type="hidden" name="db_name" value="<?= $_POST['db_name'] ?>">
         <input type="hidden" name="db_user" value="<?= $_POST['db_user'] ?>">
         <input type="hidden" name="db_pass" value="<?= $_POST['db_pass'] ?>">
+        <input type="hidden" name="api_url" value="<?= $_POST['api_url'] ?>">
+        
+        <input type="hidden" name="site_url" value="<?= $_POST['site_url'] ?>">
     <input type="button" value="Setup site" disabled>
     <input type="button" value="Force setup site" disabled>
     <input type="submit" value="Next" disabled>
@@ -168,7 +214,4 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
         })
     </script>
     <?php
-} elseif ($step == 3) {
-    echo 'Le site est installé ! Vous pouvez vous connecter à l\'administration avec l\'email et le mot de passe que vous avez renseigné';
-    echo '<a href="/login">Connexion</a>'; 
-}
+} 

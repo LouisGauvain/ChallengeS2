@@ -63,6 +63,8 @@ $env = str_replace('DB_NAME=', "DB_NAME=$db_name", $env);
 $env = str_replace('DB_USERNAME=', "DB_USERNAME=$db_user", $env);
 $env = str_replace('DB_PASSWORD=', "DB_PASSWORD=$db_pass", $env);
 $env = str_replace('DB_PREFIX=', "DB_PREFIX=$tablePrefix", $env);
+$env = str_replace('API_URL=', "API_URL={$_POST['api_url']}", $env);
+$env = str_replace('APP_URL=', "APP_URL={$_POST['site_url']}", $env);
 
 $env = str_replace('SITE_NAME=', "SITE_NAME=$siteName", $env);
 

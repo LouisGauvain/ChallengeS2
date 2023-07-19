@@ -11,9 +11,11 @@
 </head>
 
 <body>
-    <?php include $this->view; ?>
-
-    <a href="disconnect?controller=security&task=logout">Déconnexion</a>
+    <div id="root">
+        <?php include $this->view; ?>
+        
+        <a href="disconnect?controller=security&task=logout">Déconnexion</a>
+    </div>
 </body>
 
 </html>

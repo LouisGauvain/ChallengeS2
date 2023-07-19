@@ -16,11 +16,13 @@
 </head>
 
 <body class="backend">
-    <?php include __DIR__ . '/Components/navbar.view.php'; ?>
-    
-    <?php include $this->view; ?>
-
-    <a href="disconnect?controller=security&task=logout">Déconnexion</a>
+    <div id="root">
+        <?php include __DIR__ . '/Components/navbar.view.php'; ?>
+        
+        <?php include $this->view; ?>
+        
+        <a href="disconnect?controller=security&task=logout">Déconnexion</a>
+    </div>
 </body>
 
 </html>

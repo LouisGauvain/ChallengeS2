@@ -22,9 +22,11 @@ class ChoiceTemplatePage extends AForm
             $arrayTemplatePages[] = [
                 "type" => "radio",
                 "placeholder" => "Choisissez votre template",
-                "label" => $nameTemplate . '<br>' . $imagePage,
-                "name" => "templatePage",
+                "for" => "$nameTemplate",
+                "label" => $nameTemplate . "<br><img src='" . $imagePage . "' alt='image du template'>" . "<br>",
+                "name" => "$nameTemplate",
                 "value" => $nameTemplate,
+                "id" => "$nameTemplate",
                 "checked" => false,
                 "error" => "Veuillez choisir un template"
             ];

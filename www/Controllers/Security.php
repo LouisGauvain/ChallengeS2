@@ -3,16 +3,20 @@
 namespace App\Controllers;
 
 use App\Core\View;
+use App\Core\Verificator;
+use App\Core\Utils;
+
 use App\Forms\AddUser;
 use App\Forms\ConnectionUser;
 use App\Forms\ChoiceTemplatePage;
 use App\Forms\AddTemplatePage;
+use App\Forms\CreatePage;
+
 use App\Models\Users;
 use App\Models\Tokens;
 use App\Models\templates;
 use App\Models\PhpMailor;
-use App\Core\Verificator;
-use App\Core\Utils;
+use App\Models\Pages;
 
 class Security
 {
@@ -116,17 +120,26 @@ class Security
         }
     }
 
-    public function page(): void
+    public function choiceTemplatePage(): void
     {
         $form = new ChoiceTemplatePage();
-        $view = new View("Main/page", "front");
+        $view = new View("page/choiceTemplatePage", "back");
         $view->assign('form', $form->getConfig());
+        $errors = Verificator::choiceTemplatePage($form->getConfig(), $_POST);
+        if (empty($errors)) {
+            $keys = array_keys($_POST);
+            $pageAcceuilKey = $keys[0];
+            $redirectURL = "create_page?selected_option=" . urlencode($pageAcceuilKey);
+            Utils::redirect($redirectURL);
+        } else {
+            $view->assign('errors', $errors);
+        }
     }
 
     public function addTemplatePage(): void
     {
         $form = new AddTemplatePage();
-        $view = new View("Main/addTemplatePage", "front");
+        $view = new View("page/addTemplatePage", "back");
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::addImageTemplate($form->getConfig(), $_POST);
@@ -138,11 +151,53 @@ class Security
                 } else {
                     $templatePages->setName($_POST['template_name']);
                     $templatePages->setdescription($_POST['template_description']);
+                    $templatePages->createFolderTemplate();
+                    $templatePages->createFolderUploadTemplate();
                     $destination = $templatePages->addFolderAndFileTemplate();
                     $templatePages->setImage($destination);
-                    $templatePages->createFolderUploadTemplate();
                     $templatePages->save();
                     echo "Insertion en BDD";
+                }
+            } else {
+                $view->assign('errors', $errors);
+            }
+        }
+    }
+
+    public function createPage(): void
+    {
+        $form = new CreatePage();
+        $view = new View("page/createPage", "back");
+        $templatePages = new Templates();
+        $view->assign('form', $form->getConfig());
+        if ($form->isSubmit()) {
+            $errors = Verificator::addPages($form->getConfig(), $_POST);
+            if (empty($errors)) {
+                $Pages = new Pages();
+                if ($Pages->namePage($_POST['titleSite'])) {
+                    $errors['titleSite'] = "Ce nom de site existe déjà";
+                    $view->assign('errors', $errors);
+                } else {
+                    $titleSite = $_POST['titleSite'];
+                    $texteSite = $_POST['texteSite'];
+                    $imageSite = $_POST['imageSite'];
+                    $donnees = array(
+                        'titleSite' => $titleSite,
+                        'texteSite' => $texteSite,
+                        'imageSite' => $imageSite,
+                    );
+                    $jsonPage = json_encode($donnees);
+                    $Pages->setTitle($titleSite);
+                    $Pages->setContent($jsonPage);
+                    $Pages->setUserId($_SESSION['user']['id']);
+                    $Pages->setDateCreated(date('Y-m-d H:i:s'));
+                    $text = strtolower(trim(strip_tags($titleSite)));
+                    $Pages->setUrlPage('/' . $text);
+                    $Pages->setControllerPage('Page');
+                    $Pages->setActionPage('pageCreate');
+                    $Pages->save();
+                    echo "Insertion en BDD";
+                    Utils::redirect('/' . $text);
                 }
             } else {
                 $view->assign('errors', $errors);

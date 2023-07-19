@@ -179,7 +179,7 @@ class Users extends Sql
         $this->date_updated = $date_updated;
     }
 
-    public function login(): array
+    public function login(): array | bool
     {
         $db = $this::getInstance();
         $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE email=:email");

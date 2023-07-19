@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Ma super page</title>
+    <title><?= $this->data['page_title'] ?></title>
     <meta name="description" content="Ceci est ma super page">
     <link rel="stylesheet" href="/public/css/style.css">
     <script src="public/js/js_input_create_template.js" defer></script>
@@ -20,7 +20,6 @@
     <?php include $this->view; ?>
 
     <a href="disconnect?controller=security&task=logout">Déconnexion</a>
-
 </body>
 
 </html>

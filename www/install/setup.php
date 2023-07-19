@@ -18,6 +18,14 @@ try{
     die();
 }
 
+$query = $pdo->prepare("SELECT * FROM information_schema.tables WHERE table_schema = 'public'");
+$query->execute();
+$table = $query->fetch();
+if ($table && !isset($_POST['force'])) {
+    echo json_encode(['success' => false, 'message' => 'Database is not empty']);
+    die();
+}
+
 $sql = file_get_contents('schema.sql');
 $sql = str_replace('esgi_', $tablePrefix, $sql);
 

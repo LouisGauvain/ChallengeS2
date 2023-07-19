@@ -44,6 +44,11 @@ class Utils
 
     public static function redirect($url)
     {
+        //if already at the right url, don't redirect
+        if (trim($_SERVER['REQUEST_URI'], '/') === $url) {
+            return;
+        }
+            
         header("Location: " . $url);
         exit();
     }

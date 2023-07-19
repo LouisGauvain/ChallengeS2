@@ -4,6 +4,7 @@ namespace App\Core;
 
 use App\Core\Utils;
 use App\Models\Tokens;
+use App\Models\Configurations;
 
 class View
 {
@@ -34,9 +35,10 @@ class View
             Utils::redirect("login");
         }
 
+        $conf = new Configurations();
+        $this->assign("page_title", $conf->siteName());
         $this->setTemplate($template);
     }
-
 
     public function assign(String $key, $value): void
     {

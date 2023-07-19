@@ -5,10 +5,43 @@
 </head>
 
 <?php
-//if (!(!file_exists('.env') || filesize('.env') === 0)) {
-    if ((!file_exists('.env') || filesize('.env') === 0)) {
+        /* if (!(!file_exists('.env') || filesize('.env') === 0)) {
         echo 'Already installed';
-    die();
+        die();
+} */
+//si le fichier .env existe et qu'il ne contient pas tout les paramètres du fichier .env.example
+$envFilePath = '.env';
+$exampleFilePath = '.env.example';
+
+// Read the contents of the files
+if (file_exists($envFilePath)){
+$envContent = file_get_contents($envFilePath);
+$exampleContent = file_get_contents($exampleFilePath);
+
+// Convert the contents into arrays of lines
+$envLines = explode(PHP_EOL, $envContent);
+$exampleLines = explode(PHP_EOL, $exampleContent);
+
+// Remove empty lines
+$envLines = array_filter($envLines);
+$exampleLines = array_filter($exampleLines);
+
+// Extract the keys (lines before the equal sign)
+$envKeys = array_map(function($line) {
+    return substr($line, 0, strpos($line, '='));
+}, $envLines);
+
+$exampleKeys = array_map(function($line) {
+    return substr($line, 0, strpos($line, '='));
+}, $exampleLines);
+
+// Check if the same keys are present
+$missingKeys = array_diff($exampleKeys, $envKeys);
+
+if(empty($missingKeys)) {
+  echo 'Already installed';
+  die();
+}
 }
 
 $step = isset($_POST['step']) ? $_POST['step'] : 1;
@@ -31,10 +64,12 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
 </form>
 <script>
     const inputs = document.querySelectorAll('input');
+    const submit = document.querySelector('input[type="submit"]');
     inputs.forEach(input => {
         input.addEventListener('input', () => {
             const empty = Array.from(inputs).some(input => input.value === '');
             document.querySelector('input[type="button"]').disabled = empty;
+            submit.disabled = true;
         });
     });
 
@@ -56,6 +91,7 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
             }
         })
     })
+
 </script>
 <?php
 } elseif ($step == 2) {
@@ -81,6 +117,7 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
         <input type="hidden" name="db_user" value="<?= $_POST['db_user'] ?>">
         <input type="hidden" name="db_pass" value="<?= $_POST['db_pass'] ?>">
     <input type="button" value="Setup site" disabled>
+    <input type="button" value="Force setup site" disabled>
     <input type="submit" value="Next" disabled>
     </form>
     <script>
@@ -92,12 +129,32 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
             });
         });
 
-        const button = document.querySelector('input[type="button"]');
+        const button = document.querySelectorAll('input[type="button"]')[0];
+        const forceButton = document.querySelectorAll('input[type="button"]')[1];
         button.addEventListener('click', () =>{
             //setup le site
             fetch('install/setup.php', {
                 method: 'post',
                 body: new FormData(document.querySelector('form'))
+            }).then(response => response.json()).then(data => {
+                console.log(data);
+                if (data.success) {
+                    document.querySelector('input[type="submit"]').disabled = false;
+                    button.disabled = true;
+                    alert('Site setup');
+                } else {
+                    alert(data.message);
+                    forceButton.disabled = false; 
+
+                }
+            })
+        })
+        forceButton.addEventListener('click', () =>{
+            var formData = new FormData(document.querySelector('form'));
+            formData.append('force', true);
+            fetch('install/setup.php', {
+                method: 'post',
+                body: formData
             }).then(response => response.json()).then(data => {
                 console.log(data);
                 if (data.success) {

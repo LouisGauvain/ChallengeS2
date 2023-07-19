@@ -42,7 +42,7 @@ class CreatePage extends AForm
             "config" => [
                 "method" => $this->getMethod(),
                 "action" => "",
-                "enctype" => "",
+                "enctype" => "multipart/form-data",
                 "submit" => "Validé",
                 "cancel" => "Annuler"
             ],

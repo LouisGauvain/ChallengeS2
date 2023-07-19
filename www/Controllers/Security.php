@@ -174,26 +174,31 @@ class Security
             $errors = Verificator::addPages($form->getConfig(), $_POST);
             if (empty($errors)) {
                 $Pages = new Pages();
-                $titleSite = $_POST['titleSite'];
-                $texteSite = $_POST['texteSite'];
-                $imageSite = $_POST['imageSite'];
-                $donnees = array(
-                    'titleSite' => $titleSite,
-                    'texteSite' => $texteSite,
-                    'imageSite' => $imageSite,
-                );
-                $jsonPage = json_encode($donnees);
-                $Pages->setTitle($titleSite);
-                $Pages->setContent($jsonPage);
-                $Pages->setUserId($_SESSION['user']['id']);
-                $Pages->setDateCreated(date('Y-m-d H:i:s'));
-                $text = strtolower(trim(strip_tags($titleSite)));
-                $Pages->setUrlPage('/' . $text);
-                $Pages->setControllerPage('Page');
-                $Pages->setActionPage('pageCreate');
-                $Pages->save();
-                echo "Insertion en BDD";
-                Utils::redirect('/' . $text);
+                if ($Pages->namePage($_POST['titleSite'])) {
+                    $errors['titleSite'] = "Ce nom de site existe déjà";
+                    $view->assign('errors', $errors);
+                } else {
+                    $titleSite = $_POST['titleSite'];
+                    $texteSite = $_POST['texteSite'];
+                    $imageSite = $_POST['imageSite'];
+                    $donnees = array(
+                        'titleSite' => $titleSite,
+                        'texteSite' => $texteSite,
+                        'imageSite' => $imageSite,
+                    );
+                    $jsonPage = json_encode($donnees);
+                    $Pages->setTitle($titleSite);
+                    $Pages->setContent($jsonPage);
+                    $Pages->setUserId($_SESSION['user']['id']);
+                    $Pages->setDateCreated(date('Y-m-d H:i:s'));
+                    $text = strtolower(trim(strip_tags($titleSite)));
+                    $Pages->setUrlPage('/' . $text);
+                    $Pages->setControllerPage('Page');
+                    $Pages->setActionPage('pageCreate');
+                    $Pages->save();
+                    echo "Insertion en BDD";
+                    Utils::redirect('/' . $text);
+                }
             } else {
                 $view->assign('errors', $errors);
             }

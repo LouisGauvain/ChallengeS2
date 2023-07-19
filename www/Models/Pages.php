@@ -118,4 +118,18 @@ class Pages extends Sql
             return $uriq;
         }
     }
+
+    public function namePage($title): bool
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT title FROM " . $this->table . " WHERE title = :titleSite");
+        $query->execute([
+            'titleSite' => $title
+        ]);
+        $result = $query->fetch();
+        if (!$result) {
+            return false;
+        }
+        return true;
+    }
 }

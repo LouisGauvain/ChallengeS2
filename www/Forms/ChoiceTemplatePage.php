@@ -4,7 +4,7 @@ namespace App\Forms;
 
 use App\Core\Utils;
 use App\Forms\Abstract\AForm;
-use App\Models\templates;
+use App\Models\Templates;
 
 class ChoiceTemplatePage extends AForm
 {

@@ -103,7 +103,6 @@ class Verificator
         $listOfErrors = [];
 
         foreach ($config["inputs"] as $name => $input) {
-            Utils::var_dump($name);
             if (empty($data[$name]) && $name != "user_new_password") {
                 die("Tentative de Hack 3");
             }
@@ -160,11 +159,31 @@ class Verificator
         $listOfErrors = [];
 
         if (count($config["inputs"]) != count($data) - 1) {
-            die("Tentative de Hack");
+            $texteError = "Veuillez remplir tous les champs";
+            if (!in_array($texteError, $listOfErrors)) {
+                $listOfErrors[] = $texteError;
+            }
         }
+
         foreach ($config["inputs"] as $name => $input) {
             if (empty($data[$name])) {
-                die("Tentative de Hack 2");
+                $texteError = "Veuillez remplir tous les champs";
+                if (!in_array($texteError, $listOfErrors)) {
+                    $listOfErrors[] = $texteError;
+                }
+            }
+            // Repérer s'il y a le mot "script" dans le contenu
+            if (preg_match("/<script>/i", $data[$name])) {
+                $texteError = "Il est interdit d'insérer du script";
+                if (!in_array($texteError, $listOfErrors)) {
+                    $listOfErrors[] = $texteError;
+                }
+            }
+            if (preg_match("/<\/script>/i", $data[$name])) {
+                $texteError = "Il est interdit d'insérer du script";
+                if (!in_array($texteError, $listOfErrors)) {
+                    $listOfErrors[] = $texteError;
+                }
             }
         }
         return $listOfErrors;

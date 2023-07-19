@@ -4,7 +4,7 @@ namespace App\Forms;
 
 use App\Core\Utils;
 use App\Forms\Abstract\AForm;
-use App\Models\templates;
+use App\Models\Templates;
 
 class CreatePage extends AForm
 {
@@ -34,7 +34,7 @@ class CreatePage extends AForm
                     "type" => $type,
                     "value" => $value,
                     "placeholder" => $placeholder,
-                    "error" => "Veuillez renseigner ce champ"
+                    "error" => "Veuillez renseigner les champs manquant"
                 ];
             }
         }

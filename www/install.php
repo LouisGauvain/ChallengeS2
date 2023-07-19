@@ -64,10 +64,12 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
 </form>
 <script>
     const inputs = document.querySelectorAll('input');
+    const submit = document.querySelector('input[type="submit"]');
     inputs.forEach(input => {
         input.addEventListener('input', () => {
             const empty = Array.from(inputs).some(input => input.value === '');
             document.querySelector('input[type="button"]').disabled = empty;
+            submit.disabled = true;
         });
     });
 
@@ -89,6 +91,7 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
             }
         })
     })
+
 </script>
 <?php
 } elseif ($step == 2) {

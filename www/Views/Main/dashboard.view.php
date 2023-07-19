@@ -29,76 +29,78 @@ if ($user['role_id'] == 1 && isset($users)) {
     // Get the slice of users for the current page
     $paginatedUsers = array_slice($users, $startIndex, $itemsPerPage);
 ?>
-    <table>
-        <thead>
-            <tr>
-                <th class="<?= getSortClass('id') ?>">
-                    <a href="?sort=id&order=<?= getSortOrder('id') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
-                        Id <?= getSortArrow('id') ?>
-                    </a>
-                </th>
-                <th class="<?= getSortClass('firstname') ?>">
-                    <a href="?sort=firstname&order=<?= getSortOrder('firstname') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
-                        Firstname <?= getSortArrow('firstname') ?>
-                    </a>
-                </th>
-                <th class="<?= getSortClass('lastname') ?>">
-                    <a href="?sort=lastname&order=<?= getSortOrder('lastname') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
-                        Lastname <?= getSortArrow('lastname') ?>
-                    </a>
-                </th>
-                <th class="<?= getSortClass('email') ?>">
-                    <a href="?sort=email&order=<?= getSortOrder('email') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
-                        Email <?= getSortArrow('email') ?>
-                    </a>
-                </th>
-                <th class="<?= getSortClass('role_id') ?>">
-                    <a href="?sort=role_id&order=<?= getSortOrder('role_id') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
-                        Role <?= getSortArrow('role_id') ?>
-                    </a>
-                </th>
-                <th class="<?= getSortClass('email_verified') ?>">
-                    <a href="?sort=email_verified&order=<?= getSortOrder('email_verified') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
-                        Email verified <?= getSortArrow('email_verified') ?>
-                    </a>
-                </th>
-                <th class="<?= getSortClass('date_inserted') ?>">
-                    <a href="?sort=date_inserted&order=<?= getSortOrder('date_inserted') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
-                        Date inserted <?= getSortArrow('date_inserted') ?>
-                    </a>
-                </th>
-                <th class="<?= getSortClass('date_updated') ?>">
-                    <a href="?sort=date_updated&order=<?= getSortOrder('date_updated') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
-                        Date updated <?= getSortArrow('date_updated') ?>
-                    </a>
-                </th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            foreach ($paginatedUsers as $user) { ?>
+    <div class="container">
+        <table class="table">
+            <thead class="thead-dark">
                 <tr>
-                    <td><?= $user['id'] ?></td>
-                    <td><?= $user['firstname'] ?></td>
-                    <td><?= $user['lastname'] ?></td>
-                    <td><?= $user['email'] ?></td>
-                    <td><?= $user['role_id'] ?></td>
-                    <td><?= $user['email_verified'] ?></td>
-                    <td><?= $user['date_inserted'] ?></td>
-                    <td><?= $user['date_updated'] ?></td>
-                    <td>
-                        <?php if ($user['role_id'] != 1) { ?>
-                            <a href="admin/edit_user?id=<?= $user['id'] ?>">Modifier</a> |
-                            <a href="admin/delete_user?id=<?= $user['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</a>
-                        <?php } ?>
-                    </td>
+                    <th class="<?= getSortClass('id') ?>">
+                        <a href="?sort=id&order=<?= getSortOrder('id') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
+                            Id <?= getSortArrow('id') ?>
+                        </a>
+                    </th>
+                    <th class="<?= getSortClass('firstname') ?>">
+                        <a href="?sort=firstname&order=<?= getSortOrder('firstname') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
+                            Firstname <?= getSortArrow('firstname') ?>
+                        </a>
+                    </th>
+                    <th class="<?= getSortClass('lastname') ?>">
+                        <a href="?sort=lastname&order=<?= getSortOrder('lastname') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
+                            Lastname <?= getSortArrow('lastname') ?>
+                        </a>
+                    </th>
+                    <th class="<?= getSortClass('email') ?>">
+                        <a href="?sort=email&order=<?= getSortOrder('email') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
+                            Email <?= getSortArrow('email') ?>
+                        </a>
+                    </th>
+                    <th class="<?= getSortClass('role_id') ?>">
+                        <a href="?sort=role_id&order=<?= getSortOrder('role_id') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
+                            Role <?= getSortArrow('role_id') ?>
+                        </a>
+                    </th>
+                    <th class="<?= getSortClass('email_verified') ?>">
+                        <a href="?sort=email_verified&order=<?= getSortOrder('email_verified') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
+                            Email verified <?= getSortArrow('email_verified') ?>
+                        </a>
+                    </th>
+                    <th class="<?= getSortClass('date_inserted') ?>">
+                        <a href="?sort=date_inserted&order=<?= getSortOrder('date_inserted') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
+                            Date inserted <?= getSortArrow('date_inserted') ?>
+                        </a>
+                    </th>
+                    <th class="<?= getSortClass('date_updated') ?>">
+                        <a href="?sort=date_updated&order=<?= getSortOrder('date_updated') ?>&page=<?= isset($_GET['page']) ? $_GET['page'] : 1 ?>">
+                            Date updated <?= getSortArrow('date_updated') ?>
+                        </a>
+                    </th>
+                    <th>Actions</th>
                 </tr>
-            <?php
-            }
-            ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($paginatedUsers as $user) { ?>
+                    <tr>
+                        <td><?= $user['id'] ?></td>
+                        <td><?= $user['firstname'] ?></td>
+                        <td><?= $user['lastname'] ?></td>
+                        <td><?= $user['email'] ?></td>
+                        <td><?= $user['role_id'] ?></td>
+                        <td><?= $user['email_verified'] ?></td>
+                        <td><?= $user['date_inserted'] ?></td>
+                        <td><?= $user['date_updated'] ?></td>
+                        <td>
+                            <?php if ($user['role_id'] != 1) { ?>
+                                <a href="admin/edit_user?id=<?= $user['id'] ?>">Modifier</a> |
+                                <a href="admin/delete_user?id=<?= $user['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</a>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
     <div class="pagination">
         <?php
         $queryParams = $_GET;

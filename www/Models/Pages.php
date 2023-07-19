@@ -132,4 +132,44 @@ class Pages extends Sql
         }
         return true;
     }
+
+    public function createFolderImagePage(): bool
+    {
+        $pathUploads = 'ImagePage';
+
+        if (!file_exists($pathUploads)) {
+            mkdir($pathUploads, 0777);
+            chmod($pathUploads, 0755);
+        }
+
+        return true;
+    }
+
+    public function createFolderUploadImagePage(): bool
+    {
+        $pathUploads = 'ImagePage/Uploads/';
+
+        if (!file_exists($pathUploads)) {
+            mkdir($pathUploads, 0777);
+            chmod($pathUploads, 0755);
+        }
+
+        return true;
+    }
+
+    public function addFolderAndFileImagePage(): string
+    {
+        $pathImagePageName = 'ImagePage/Uploads/' . $_POST['titleSite'] . '/';
+
+        if (!file_exists($pathImagePageName)) {
+            mkdir($pathImagePageName, 0777);
+            chmod($pathImagePageName, 0755);
+        }
+        for ($j = 1; isset($_FILES['imageSite+' . $j]); $j++) {
+            $filename = $_POST['titleSite'] . '+' . $_FILES['imageSite+' . $j]['name'];
+            $destination = $pathImagePageName . $filename;
+            move_uploaded_file($_FILES['imageSite+' . $j]['tmp_name'], $destination);
+        }
+        return $destination;
+    }
 }

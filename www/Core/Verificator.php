@@ -158,29 +158,46 @@ class Verificator
     {
         $listOfErrors = [];
 
-        if (count($config["inputs"]) != count($data) - 1) {
-            $texteError = "Veuillez remplir tous les champs";
+        if (count($config["inputs"]) != count($data) - 1 + count($_FILES)) {
+            $texteError = "Veuillez remplir tous les champs 1";
             if (!in_array($texteError, $listOfErrors)) {
                 $listOfErrors[] = $texteError;
             }
         }
 
+        if (!empty($_FILES)) {
+            for ($i = 1; isset($_FILES['imageSite+' . $i]); $i++) {
+                $file[] = 'imageSite+' . $i;
+            }
+            foreach ($file as $key => $value) {
+                if ($_FILES[$value]['type'] != "image/png" && $_FILES[$value]['type'] != "image/jpeg" && $_FILES[$value]['type'] != "image/jpg") {
+                    $texteError = "Veuillez insérer une image";
+                    if (!in_array($texteError, $listOfErrors)) {
+                        $listOfErrors[] = $texteError;
+                    }
+                }
+            }
+        }
+
+        for ($j = 1; isset($_FILES['imageSite+' . $j]); $j++) {
+            $data["imageSite+" . $j] = $_FILES['imageSite+' . $j];
+        }
         foreach ($config["inputs"] as $name => $input) {
             if (empty($data[$name])) {
-                $texteError = "Veuillez remplir tous les champs";
+                $texteError = "Veuillez remplir tous les champs 2";
                 if (!in_array($texteError, $listOfErrors)) {
                     $listOfErrors[] = $texteError;
                 }
             }
             // Repérer s'il y a le mot "script" dans le contenu
-            if (preg_match("/<script>/i", $data[$name])) {
-                $texteError = "Il est interdit d'insérer du script";
+            if (preg_match("/<script>/i", $_POST['titleSite'] || $_POST['texteSite'])) {
+                $texteError = "Il est interdit d'insérer du script 1";
                 if (!in_array($texteError, $listOfErrors)) {
                     $listOfErrors[] = $texteError;
                 }
             }
-            if (preg_match("/<\/script>/i", $data[$name])) {
-                $texteError = "Il est interdit d'insérer du script";
+            if (preg_match("/<\/script>/i", $_POST['titleSite'] || $_POST['texteSite'])) {
+                $texteError = "Il est interdit d'insérer du script 2";
                 if (!in_array($texteError, $listOfErrors)) {
                     $listOfErrors[] = $texteError;
                 }

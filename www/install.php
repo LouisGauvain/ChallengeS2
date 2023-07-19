@@ -14,6 +14,7 @@ $envFilePath = '.env';
 $exampleFilePath = '.env.example';
 
 // Read the contents of the files
+if (file_exists($envFilePath)){
 $envContent = file_get_contents($envFilePath);
 $exampleContent = file_get_contents($exampleFilePath);
 
@@ -40,6 +41,7 @@ $missingKeys = array_diff($exampleKeys, $envKeys);
 if(empty($missingKeys)) {
   echo 'Already installed';
   die();
+}
 }
 
 $step = isset($_POST['step']) ? $_POST['step'] : 1;

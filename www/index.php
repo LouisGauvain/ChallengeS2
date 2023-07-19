@@ -21,7 +21,10 @@ $envFilePath = '.env';
 $exampleFilePath = '.env.example';
 
 // Read the contents of the files
-$envContent = file_get_contents($envFilePath);
+  if (!file_exists($envFilePath)) {
+    Utils::redirect("install.php");
+  }
+  $envContent = file_get_contents($envFilePath);
 $exampleContent = file_get_contents($exampleFilePath);
 
 // Convert the contents into arrays of lines

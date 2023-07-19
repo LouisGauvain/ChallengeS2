@@ -132,6 +132,13 @@ class Pages extends Sql
         }
         return true;
     }
+    
+    public function findByUri($url_page)
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE url_page=:url_page");
+        $queryPrepared->execute(["url_page" => $url_page]);
+        return $queryPrepared->fetch(\PDO::FETCH_ASSOC);
+
 
     public function createFolderImagePage(): bool
     {
@@ -171,5 +178,6 @@ class Pages extends Sql
             move_uploaded_file($_FILES['imageSite+' . $j]['tmp_name'], $destination);
         }
         return $destination;
+
     }
 }

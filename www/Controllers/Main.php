@@ -5,15 +5,16 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Core\Utils;
 use App\Controllers\Dashboard;
+use App\Models\Pages;
 
 class Main
 {
     public function index()
     {
-
-        $pseudo = "Prof";
         $view = new View("Main/index", "front");
-        $view->assign("pseudo", $pseudo);
+
+        $pages = new Pages();
+        $view->assign("pages", $pages->getAllPages());  
     }
 
     public function contact()

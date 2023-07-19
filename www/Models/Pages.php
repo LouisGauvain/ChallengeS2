@@ -180,4 +180,15 @@ class Pages extends Sql
         return $destination;
 
     }
+
+    public function getAllPages(){
+        $db = $this::getInstance();
+        $query = $db->query("SELECT * FROM " . $this->table . " WHERE controller_page = 'Page' AND action_page = 'index'");
+        $pages = $query->fetchAll();
+        if (is_null($pages)) {
+            return false;
+        } else {
+            return $pages;
+        }
+    }
 }

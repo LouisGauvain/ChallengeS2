@@ -165,4 +165,19 @@ class Templates extends Sql
             return $templatePages;
         }
     }
+
+    public function getByName($name)
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT description FROM " . $this->table . " WHERE name = :name");
+        $query->execute([
+            'name' => $name
+        ]);
+        $templatePages = $query->fetch();
+        if (empty($templatePages)) {
+            return false;
+        } else {
+            return $templatePages;
+        }
+    }
 }

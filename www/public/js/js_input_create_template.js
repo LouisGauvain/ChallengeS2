@@ -2,7 +2,8 @@
 const pageURL = window.location.href;
 const path = pageURL.substring(pageURL.lastIndexOf("/") + 1);
 
-if (path === "add_Template_Page") {
+if (path === "add_template_Page") {
+    console.log(previewContainer);
     const previewContainer = document.getElementById("preview-container");
     const codeEditor = document.getElementsByClassName("code-editor")[0];
 

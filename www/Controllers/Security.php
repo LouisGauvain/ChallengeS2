@@ -24,7 +24,7 @@ class Security
     public function login(): void
     {
         $form = new ConnectionUser();
-        $view = new View("Auth/connection", "back");
+        $view = new View("Auth/connection", "front");
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::formConnection($form->getConfig(), $_POST);
@@ -55,7 +55,7 @@ class Security
     public function register(): void
     {
         $form = new AddUser();
-        $view = new View("Auth/register", "back");
+        $view = new View("Auth/register", "front");
         if (isset($_SESSION['user']['id'])) {
             Utils::redirect("dashboard");
         }

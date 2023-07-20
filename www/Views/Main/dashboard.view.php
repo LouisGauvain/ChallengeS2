@@ -1,35 +1,41 @@
-<?php
+<?php $user = $_SESSION['user']; ?>
+<div class="container">
+    <h3>Welcome <?= $user['firstname'] ?> <?= $user['lastname'] ?> ! </h3>
+    <h4> un récapitulatif de vos informations : </h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><?= $user['id'] ?></td>
+                <td><?= $user['firstname'] ?></td>
+                <td><?= $user['lastname'] ?></td>
+                <td><?= $user['email'] ?></td>
+            </tr>
+    </table>
+    <?php
+    if ($user['role_id'] == 1 && isset($users)) {
+        // Pagination configuration
+        $itemsPerPage = 20;
+        $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $totalItems = count($users);
+        $totalPages = ceil($totalItems / $itemsPerPage);
 
-$user = $_SESSION['user'];
+        // Calculate the index range for the current page
+        $startIndex = ($currentPage - 1) * $itemsPerPage;
+        $endIndex = $startIndex + $itemsPerPage - 1;
+        $endIndex = min($endIndex, $totalItems - 1);
 
-?>
-
-Welcome <?= $user['firstname'] ?> <?= $user['lastname'] ?> !
-
-Voici un récapitulatif de vos informations :
-<?php
-foreach ($user as $key => $value) {
-    echo $key . " : " . $value . "<br>";
-}
-?>
-
-<?php
-if ($user['role_id'] == 1 && isset($users)) {
-    // Pagination configuration
-    $itemsPerPage = 20;
-    $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
-    $totalItems = count($users);
-    $totalPages = ceil($totalItems / $itemsPerPage);
-
-    // Calculate the index range for the current page
-    $startIndex = ($currentPage - 1) * $itemsPerPage;
-    $endIndex = $startIndex + $itemsPerPage - 1;
-    $endIndex = min($endIndex, $totalItems - 1);
-
-    // Get the slice of users for the current page
-    $paginatedUsers = array_slice($users, $startIndex, $itemsPerPage);
-?>
-    <div class="container">
+        // Get the slice of users for the current page
+        $paginatedUsers = array_slice($users, $startIndex, $itemsPerPage);
+    ?>
+        <h4>La liste des users</h4>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -100,62 +106,62 @@ if ($user['role_id'] == 1 && isset($users)) {
                 ?>
             </tbody>
         </table>
-    </div>
-    <div class="pagination">
-        <?php
-        $queryParams = $_GET;
-        unset($queryParams['page']);
+        <div class="pagination">
+            <?php
+            $queryParams = $_GET;
+            unset($queryParams['page']);
 
-        $queryString = http_build_query($queryParams);
+            $queryString = http_build_query($queryParams);
 
-        for ($page = 1; $page <= $totalPages; $page++) {
-            $isActive = $page === $currentPage;
-            $pageLink = '?page=' . $page . ($queryString ? '&' . $queryString : '');
-        ?>
-            <a href="<?= $pageLink ?>" <?= $isActive ? 'class="active"' : '' ?>>
-                <?= $page ?>
-            </a>
-        <?php } ?>
-    </div>
+            for ($page = 1; $page <= $totalPages; $page++) {
+                $isActive = $page === $currentPage;
+                $pageLink = '?page=' . $page . ($queryString ? '&' . $queryString : '');
+            ?>
+                <a href="<?= $pageLink ?>" <?= $isActive ? 'class="active"' : '' ?>>
+                    <?= $page ?>
+                </a>
+            <?php } ?>
+        </div>
+</div>
 <?php
-}
-
-function getSortClass($column)
-{
-    if (isset($_GET['sort']) && $_GET['sort'] === $column) {
-        return 'sorted';
     }
-    return '';
-}
 
-function getSortOrder($column)
-{
-    if (isset($_GET['sort']) && $_GET['sort'] === $column && isset($_GET['order'])) {
-        return $_GET['order'] === 'asc' ? 'desc' : 'asc';
-    }
-    return 'asc';
-}
-
-function getSortArrow($column)
-{
-    if (isset($_GET['sort']) && $_GET['sort'] === $column && isset($_GET['order'])) {
-        if ($_GET['order'] === 'asc') {
-            return '&#9650;'; // Upward arrow
-        } else {
-            return '&#9660;'; // Downward arrow
+    function getSortClass($column)
+    {
+        if (isset($_GET['sort']) && $_GET['sort'] === $column) {
+            return 'sorted';
         }
+        return '';
     }
-    return '';
-}
-function buildQuery(...$params)
-{
-    $queryParams = $_GET;
-    foreach ($params as $index => $param) {
-        if ($index % 2 === 0 && isset($_GET[$param]) && isset($params[$index + 1])) {
-            $queryParams[$param] = $params[$index + 1];
+
+    function getSortOrder($column)
+    {
+        if (isset($_GET['sort']) && $_GET['sort'] === $column && isset($_GET['order'])) {
+            return $_GET['order'] === 'asc' ? 'desc' : 'asc';
         }
+        return 'asc';
     }
-    return http_build_query($queryParams);
-}
+
+    function getSortArrow($column)
+    {
+        if (isset($_GET['sort']) && $_GET['sort'] === $column && isset($_GET['order'])) {
+            if ($_GET['order'] === 'asc') {
+                return '&#9650;'; // Upward arrow
+            } else {
+                return '&#9660;'; // Downward arrow
+            }
+        }
+        return '';
+    }
+    function buildQuery(...$params)
+    {
+        $queryParams = $_GET;
+        foreach ($params as $index => $param) {
+            if ($index % 2 === 0 && isset($_GET[$param]) && isset($params[$index + 1])) {
+                $queryParams[$param] = $params[$index + 1];
+            }
+        }
+        return http_build_query($queryParams);
+    }
 
 ?>

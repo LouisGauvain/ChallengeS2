@@ -27,7 +27,7 @@ fileInputs.forEach((input) => {
     const label = document.createElement('label');
     label.setAttribute('for', input.id);
     // ajoute le label avant l'input avec une image par défaut
-    form.insertBefore(label, input);    
+    form.insertBefore(label, input);
     const image = document.createElement('img');
     image.src = "public/image/image_en_attente.svg";
     image.width = 100;

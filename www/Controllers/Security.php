@@ -123,7 +123,7 @@ class Security
     public function choiceTemplatePage(): void
     {
         $form = new ChoiceTemplatePage();
-        $view = new View("page/choiceTemplatePage", "back");
+        $view = new View("Page/choiceTemplatePage", "back");
         $view->assign('form', $form->getConfig());
         $errors = Verificator::choiceTemplatePage($form->getConfig(), $_POST);
         if (empty($errors)) {
@@ -139,7 +139,7 @@ class Security
     public function addTemplatePage(): void
     {
         $form = new AddTemplatePage();
-        $view = new View("page/addTemplatePage", "back");
+        $view = new View("Page/addTemplatePage", "back");
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::addImageTemplate($form->getConfig(), $_POST);

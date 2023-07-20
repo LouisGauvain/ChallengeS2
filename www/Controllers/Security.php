@@ -167,7 +167,7 @@ class Security
     public function createPage(): void
     {
         $form = new CreatePage();
-        $view = new View("page/createPage", "back");
+        $view = new View("Page/createPage", "back");
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::addPages($form->getConfig(), $_POST);

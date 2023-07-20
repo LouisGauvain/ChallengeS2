@@ -1,6 +1,4 @@
 body.backend {
-    padding-left: $button-wrapped-width  + pxToRem(16);
-
     &.large {
         padding-left: $button-width + pxToRem(16);
     }

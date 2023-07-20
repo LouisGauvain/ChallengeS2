@@ -326,9 +326,6 @@ nav.flex {
   display: flex;
 }
 
-body.backend {
-  padding-left: 10.375rem;
-}
 body.backend.large {
   padding-left: 19.75rem;
 }
@@ -551,6 +548,36 @@ textarea {
   border-radius: 0.625rem;
   background-color: #74E86A;
   color: white;
+}
+
+header {
+  background-color: lightgrey;
+  padding: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header.a {
+  margin-left: 10px;
+}
+
+.sidebar {
+  background-color: lightgrey;
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
+
+.content {
+  margin-left: 250px;
+}
+
+.info_user {
+  padding-left: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */

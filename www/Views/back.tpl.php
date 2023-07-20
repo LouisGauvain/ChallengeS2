@@ -50,7 +50,9 @@
 
 <body class="backend">
     <div id="root">
-        <div class="sidebar">
+    <?php
+            if (!empty($_SESSION['user'])) {
+            ?><div class="sidebar">
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="/dashboard">Dashboard</a>
@@ -65,7 +67,9 @@
                     <a class="nav-link" href="/logout">Logout</a>
                 </li>
             </ul>
-        </div>
+        </div> <?php
+            }
+            ?>
         <div class="content">
             <?php
             if (!empty($_SESSION['user'])) {

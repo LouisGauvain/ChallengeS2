@@ -8,6 +8,7 @@
     <script src="public/js/js_input_create_template.js" defer></script>
     <script src="public/js/js_input_radio_only_one.js" defer></script>
     <script src="public/js/js_input_file.js" defer></script>
+    <script src="/public/js/htmlToJson.js"></script>r
     <!-- <script src="public/js/js_input_texte.js" defer></script> -->
     <!-- <script src="tinymce/js/tinymce/tinymce.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
@@ -49,7 +50,7 @@
 </head>
 
 <body class="backend">
-    <div id="root">
+    <div>
     <?php
             if (!empty($_SESSION['user'])) {
             ?><div class="sidebar">

@@ -7,6 +7,10 @@ use App\Core\Utils;
 use App\Controllers\Dashboard;
 use App\Models\Pages;
 
+use Dotenv\Dotenv;
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
 class Main
 {
     public function index()
@@ -40,5 +44,13 @@ class Main
     public function components()
     {
         $view = new View("Main/components", "back");
+    }
+
+    public function htmlToJson()
+    {
+        $view = new View("Main/htmlToJson", "back");
+
+        $view->assign("url", $_ENV['API_URL']);
+        $view->assign("html", '<html><body><div class="test-class"><a href="Test">Link</a><a href="Test">Link</a><a href="Test">Link</a><a href="Test">Link</a><a href="Test">Link</a></div></body>');
     }
 }

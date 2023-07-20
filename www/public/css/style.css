@@ -330,6 +330,15 @@ body.backend.large {
   padding-left: 19.75rem;
 }
 
+.info_user {
+  padding-left: 20px;
+}
+
+.container {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
 a.disabled {
   pointer-events: none;
   cursor: default;
@@ -574,10 +583,6 @@ header.a {
 
 .content {
   margin-left: 250px;
-}
-
-.info_user {
-  padding-left: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -3,3 +3,10 @@ body.backend {
         padding-left: $button-width + pxToRem(16);
     }
 }
+.info_user{
+    padding-left: 20px;
+}
+.container{
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}

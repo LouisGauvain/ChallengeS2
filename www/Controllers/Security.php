@@ -195,6 +195,7 @@ class Security
                     $jsonPage = json_encode($donnees);
                     $Pages->setTitle($titleSite);
                     $Pages->setContent($jsonPage);
+                    die();
                     $Pages->setUserId($_SESSION['user']['id']);
                     $Pages->setDateCreated(date('Y-m-d H:i:s'));
                     $text = strtolower(trim(strip_tags($titleSite)));

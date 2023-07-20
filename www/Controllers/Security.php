@@ -213,4 +213,15 @@ class Security
             }
         }
     }
+
+    public function Page()
+    {
+        $view = new View("Page/index", "front");
+
+        $pages = new Pages();
+        $page = $pages->findByUri($_SERVER["REQUEST_URI"]);
+
+        $view->assign("url", $_ENV['API_URL']);
+        $view->assign("page", $page);
+    }
 }

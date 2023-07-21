@@ -83,7 +83,56 @@ foreach ($uriPages as $uriPage) {
 
 if (!$found) {
   header("HTTP/1.0 404 Not Found");
-  die("Page 404");
+  die('"<!DOCTYPE html>
+  <html lang="en">
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erreur 404 - Page non trouvée</title>
+    <!-- Inclure les styles Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f8f9fa;
+      }
+  
+      .error-container {
+        text-align: center;
+      }
+  
+      .error-code {
+        font-size: 10rem;
+      }
+  
+      .error-message {
+        font-size: 2rem;
+        margin-bottom: 30px;
+      }
+  
+      .error-btn {
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div class="error-container">
+      <div class="error-code">404</div>
+      <div class="error-message">Page non trouvée</div>
+      <p class="error-btn">
+        <a href="/" class="btn btn-primary">Retourner à l\'accueil</a>
+      </p>
+    </div>
+  </body>
+  
+  </html>
+  ');
 }
 
 

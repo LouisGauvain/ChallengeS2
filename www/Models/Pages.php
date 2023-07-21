@@ -155,6 +155,7 @@ class Pages extends Sql
         if (!$result) {
             return false;
         }
+        return $result;
     }
 
     public function createFolderImagePage(): bool

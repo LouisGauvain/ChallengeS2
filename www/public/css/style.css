@@ -596,4 +596,15 @@ header.a {
   width: 30vw;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+#root img {
+  width: 700px;
+  margin: auto;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -143,7 +143,7 @@ class Pages extends Sql
         }
         return true;
     }
-    
+
     public function findByUri($url_page)
     {
         $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE url_page=:url_page");
@@ -169,7 +169,6 @@ class Pages extends Sql
 
         if (!file_exists($pathUploads)) {
             mkdir($pathUploads, 0777);
-            chmod($pathUploads, 0755);
         }
 
         return true;
@@ -177,22 +176,20 @@ class Pages extends Sql
 
     public function addFolderAndFileImagePage(): string
     {
-        $pathImagePageName = 'ImagePage/Uploads/' . $_POST['titleSite'] . '/';
-
+        $pathImagePageName = 'ImagePage/Uploads/' . strip_tags($_POST['titleSite']) . '/';
         if (!file_exists($pathImagePageName)) {
             mkdir($pathImagePageName, 0777);
-            chmod($pathImagePageName, 0755);
         }
         for ($j = 1; isset($_FILES['imageSite+' . $j]); $j++) {
-            $filename = $_POST['titleSite'] . '+' . $_FILES['imageSite+' . $j]['name'];
+            $filename = strip_tags($_POST['titleSite']) . '+' . $_FILES['imageSite+' . $j]['name'];
             $destination = $pathImagePageName . $filename;
             move_uploaded_file($_FILES['imageSite+' . $j]['tmp_name'], $destination);
         }
         return $destination;
-
     }
 
-    public function getAllPages(){
+    public function getAllPages()
+    {
         $db = $this::getInstance();
         $query = $db->query("SELECT * FROM " . $this->table . " WHERE controller_page = 'Page' AND action_page = 'index'");
         $pages = $query->fetchAll();
@@ -202,6 +199,4 @@ class Pages extends Sql
             return $pages;
         }
     }
-
-    
 }

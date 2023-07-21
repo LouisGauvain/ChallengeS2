@@ -18,6 +18,54 @@ use App\Models\Templates;
 use App\Models\PhpMailor;
 use App\Models\Pages;
 
+function extractStructure($element) {
+    $structure = array(
+        "type" => strtolower($element->tagName),
+    );
+
+    // Extract attributes
+    if ($element->hasAttributes()) {
+        $structure["attributes"] = array();
+        foreach ($element->attributes as $attr) {
+            $attrName = strtolower($attr->name);
+
+            if (strpos($attrName, "data-") === 0) {
+                if (!isset($structure["attributes"]["data"])) {
+                    $structure["attributes"]["data"] = array();
+                }
+                $dataAttrName = str_replace("data-", "", $attrName);
+                $structure["attributes"]["data"][$dataAttrName] = $attr->value;
+            } elseif ($attrName === "style") {
+                $style = array();
+                $styleParts = explode(";", $attr->value);
+                foreach ($styleParts as $stylePart) {
+                    $styleAttr = explode(":", $stylePart);
+                    if (count($styleAttr) === 2) {
+                        $style[trim($styleAttr[0])] = trim($styleAttr[1]);
+                    }
+                }
+                $structure["attributes"]["style"] = $style;
+            } else {
+                $structure["attributes"][$attrName] = $attr->value;
+            }
+        }
+    }
+
+    // Extract children
+    if ($element->hasChildNodes()) {
+        $structure["children"] = array();
+        foreach ($element->childNodes as $child) {
+            if ($child->nodeType === XML_TEXT_NODE) {
+                $structure["children"][] = $child->nodeValue;
+            } elseif ($child->nodeType === XML_ELEMENT_NODE) {
+                $structure["children"][] = extractStructure($child);
+            }
+        }
+    }
+
+    return $structure;
+}
+
 class Security
 {
 
@@ -192,19 +240,47 @@ class Security
                     foreach ($imageSite as $key => $file) {
                         $donnees['imageSite+' . ($key + 1)] = $file;
                     }
-                    $jsonPage = json_encode($donnees);
+                    $template = new Templates();
+                    $description = $template->getByName($_GET['selected_option']);
+                    $order = array();
+                    $dom = new \DOMDocument();
+                    $dom->loadHTML($description['description']);
+                    $inputs = $dom->getElementsByTagName('input');
+                    foreach ($inputs as $input) {
+                        $name = $input->getAttribute('name');
+                        $order[] = $name;
+                    }
+                    $order = array_flip($order);
+                    $text = strtolower(trim(strip_tags($titleSite)));
+                    
+                    $html="<body>";
+                    foreach($order as $key => $value) {
+                        if (gettype($donnees[$key]) == 'array') {
+                            $html .= '<img src="ImagePage/Uploads/' . $text . '/' . $text . "+" . $donnees[$key]['name'] . '">';
+                        }
+                        if (gettype($donnees[$key]) == 'string') {
+                            $html .= $donnees[$key];
+                        }
+                    }
+                    $html .= "</body>";
+                    $dom->loadHTML($html);
+                    $body = $dom->getElementsByTagName('body');
+
+                    $structure = extractStructure($body[0]);
+                    $json = var_export(json_encode($structure), true);
+                    $json = substr($json, 1, -1);
+
                     $Pages->setTitle($titleSite);
-                    $Pages->setContent($jsonPage);
-                    die();
+                    $Pages->setContent($json);
                     $Pages->setUserId($_SESSION['user']['id']);
                     $Pages->setDateCreated(date('Y-m-d H:i:s'));
-                    $text = strtolower(trim(strip_tags($titleSite)));
                     $Pages->setUrlPage('/' . $text);
                     $Pages->setControllerPage('Page');
                     $Pages->setActionPage('index');
                     $Pages->createFolderImagePage();
                     $Pages->createFolderUploadImagePage();
                     $Pages->addFolderAndFileImagePage();
+                    $Pages->setUsedTemplate($_GET['selected_option']);
                     $Pages->save();
                     echo "Insertion en BDD";
                     Utils::redirect('/' . $text);
@@ -215,3 +291,58 @@ class Security
         }
     }
 }
+
+
+?>
+<script>
+    function extractStructure(element) {
+    const structure = {
+        type: element.tagName.toLowerCase(),
+    };
+  
+    // Extract attributes
+    if (element.attributes.length > 0) {
+        structure.attributes = {};
+        for (let i = 0; i < element.attributes.length; i++) {
+            const attr = element.attributes[i];
+            const attrName = attr.name.toLowerCase();
+  
+            if (attrName.startsWith("data-")) {
+                if (!structure.attributes.data) {
+                    structure.attributes.data = {};
+                }
+                const dataAttrName = attrName.replace("data-", "");
+                structure.attributes.data[dataAttrName] = attr.value;
+            } else if (attrName === "style") {
+                structure.attributes.style = Object.assign({}, element.style);
+            } else {
+                structure.attributes[attrName] = attr.value;
+            }
+        }
+    }
+  
+    // Extract events
+    const eventNames = Object.keys(element).filter((key) => key.startsWith("on"));
+    if (eventNames.length > 0) {
+        structure.events = {};
+        for (const eventName of eventNames) {
+            structure.events[eventName] = element[eventName].toString();
+        }
+    }
+  
+    // Extract children
+    if (element.childNodes.length > 0) {
+        structure.children = [];
+        for (let i = 0; i < element.childNodes.length; i++) {
+            const child = element.childNodes[i];
+            if (child.nodeType === Node.TEXT_NODE) {
+                structure.children.push(child.nodeValue);
+            } else if (child.nodeType === Node.ELEMENT_NODE) {
+                structure.children.push(extractStructure(child));
+            }
+        }
+    }
+  
+    return structure;
+  }
+</script>

@@ -25,7 +25,7 @@
         }
     </style>
 <body class="frontend">
-    <div id="root">
+    <div>
         <?php
     if (!empty($_SESSION['user'])) {
         ?><header>

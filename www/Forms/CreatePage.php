@@ -13,7 +13,7 @@ class CreatePage extends AForm
 
     public function getConfig(): array
     {
-        $pages = new templates();
+        $pages = new Templates();
         $arrayTemplatePages = [];
         $templatesPages = $pages->getDataUrl();
         if (empty($templatesPages)) {

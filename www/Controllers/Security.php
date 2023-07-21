@@ -81,6 +81,7 @@ class Security
                     $phpMailer->setLastname($_POST['user_lastname']);
                     $phpMailer->setToken($token);
                     $phpMailer->sendMail();
+                    Utils::redirect("login");
                 }
             } else {
                 $view->assign('errors', $errors);

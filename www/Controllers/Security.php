@@ -18,7 +18,8 @@ use App\Models\Templates;
 use App\Models\PhpMailor;
 use App\Models\Pages;
 
-function extractStructure($element) {
+function extractStructure($element)
+{
     $structure = array(
         "type" => strtolower($element->tagName),
     );
@@ -253,9 +254,9 @@ class Security
                     }
                     $order = array_flip($order);
                     $text = strtolower(trim(strip_tags($titleSite)));
-                    
-                    $html="<body>";
-                    foreach($order as $key => $value) {
+
+                    $html = "<body>";
+                    foreach ($order as $key => $value) {
                         if (gettype($donnees[$key]) == 'array') {
                             $html .= '<img src="ImagePage/Uploads/' . $text . '/' . $text . "+" . $donnees[$key]['name'] . '">';
                         }
@@ -294,67 +295,10 @@ class Security
 
     public function Page()
     {
-        $view = new View("Page/page", "back");
+
+        $view = new View("Main/index", "back");
 
         $pages = new Pages();
-        $page = $pages->findByUri($_SERVER["REQUEST_URI"]);
-
-        $view->assign("url", $_ENV['API_URL']);
-        $view->assign("page", $page);
+        $view->assign("pages", $pages->getAllPages());
     }
 }
-
-
-?>
-<script>
-    function extractStructure(element) {
-    const structure = {
-        type: element.tagName.toLowerCase(),
-    };
-  
-    // Extract attributes
-    if (element.attributes.length > 0) {
-        structure.attributes = {};
-        for (let i = 0; i < element.attributes.length; i++) {
-            const attr = element.attributes[i];
-            const attrName = attr.name.toLowerCase();
-  
-            if (attrName.startsWith("data-")) {
-                if (!structure.attributes.data) {
-                    structure.attributes.data = {};
-                }
-                const dataAttrName = attrName.replace("data-", "");
-                structure.attributes.data[dataAttrName] = attr.value;
-            } else if (attrName === "style") {
-                structure.attributes.style = Object.assign({}, element.style);
-            } else {
-                structure.attributes[attrName] = attr.value;
-            }
-        }
-    }
-  
-    // Extract events
-    const eventNames = Object.keys(element).filter((key) => key.startsWith("on"));
-    if (eventNames.length > 0) {
-        structure.events = {};
-        for (const eventName of eventNames) {
-            structure.events[eventName] = element[eventName].toString();
-        }
-    }
-  
-    // Extract children
-    if (element.childNodes.length > 0) {
-        structure.children = [];
-        for (let i = 0; i < element.childNodes.length; i++) {
-            const child = element.childNodes[i];
-            if (child.nodeType === Node.TEXT_NODE) {
-                structure.children.push(child.nodeValue);
-            } else if (child.nodeType === Node.ELEMENT_NODE) {
-                structure.children.push(extractStructure(child));
-            }
-        }
-    }
-  
-    return structure;
-  }
-</script>

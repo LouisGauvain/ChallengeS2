@@ -1,18 +1,10 @@
-<?php print_r($errors ?? null); ?>
-
-<script>
-    fetch("<?= $url ?>", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(<?= $page['content'] ?>)
-        })
-        .then(response => response.text())
-        .then(htmlResponse => {
-            document.getElementById("root").innerHTML = htmlResponse;
-        })
-        .catch(error => {
-            console.error('Une erreur s\'est produite:', error);
-        });
-</script>
+<div class="container">
+    <h1>Liste des Pages</h1>
+    <ul class="list-group">
+        <?php 
+        foreach($pages as $page){
+            echo "<li class='list-group-item'><a href='".$page['url_page']."'>".$page['title']."</a></li>";
+        }
+        ?>
+    </ul>
+</div>

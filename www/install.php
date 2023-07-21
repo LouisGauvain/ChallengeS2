@@ -139,7 +139,6 @@ echo '<h1>Step 1: Setup database and test connection</h1>' . PHP_EOL;
     <?php
 }elseif ($step == 3) {
     echo '<h1>Step 3: Setup site</h1>' . PHP_EOL;
-    var_dump($_POST);
     ?>
     <form action="" method="post">
         <!-- demande le nom du site -->

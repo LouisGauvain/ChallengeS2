@@ -13,7 +13,7 @@ $dotenv->load();
 
 class Main
 {
-    public function index()
+    public function index(): void
     {
         $view = new View("Main/page", "front");
 
@@ -21,12 +21,12 @@ class Main
         $view->assign("pages", $pages->getAllPages());  
     }
 
-    public function contact()
+    public function contact(): void
     {
         $view = new View("Main/contact", "front");
     }
 
-    public function dashboard()
+    public function dashboard(): void
     {
         $view = new View("Main/dashboard", "back");
 
@@ -41,12 +41,12 @@ class Main
         }
     }
 
-    public function components()
+    public function components(): void
     {
         $view = new View("Main/components", "back");
     }
 
-    public function htmlToJson()
+    public function htmlToJson(): void
     {
         $view = new View("Main/htmlToJson", "back");
 

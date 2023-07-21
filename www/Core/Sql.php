@@ -42,12 +42,12 @@ abstract class Sql
         return self::$instance;
     }
 
-    public function query($sql)
+    public function query($sql): \PDOStatement
     {
         return $this->pdo->query($sql);
     }
 
-    public function prepare($sql)
+    public function prepare($sql): \PDOStatement
     {
         return $this->pdo->prepare($sql);
     }

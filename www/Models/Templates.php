@@ -150,7 +150,7 @@ class Templates extends Sql
         }
     }
 
-    public function getDataUrl()
+    public function getDataUrl(): array | bool
     {
         $SelectOption = str_replace('_', ' ', $_GET['selected_option']);
         $db = $this::getInstance();
@@ -166,7 +166,7 @@ class Templates extends Sql
         }
     }
 
-    public function getByName($name)
+    public function getByName($name): array | bool
     {
         $db = $this::getInstance();
         $query = $db->prepare("SELECT description FROM " . $this->table . " WHERE name = :name");

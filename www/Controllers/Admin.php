@@ -12,21 +12,21 @@ use App\Core\Verificator;
 class Admin
 {
 
-    public function deleteUser()
+    public function deleteUser(): void
     {
         $user = new Users();
         $user->delete($_GET['id']);
         Utils::redirect('/dashboard');
     }
     
-    public function deletePage()
+    public function deletePage(): void
     {
         $page = new Pages();
         $page->delete($_GET['id']);
         Utils::redirect('/page');
     }
 
-    public function editUser()
+    public function editUser(): void
     {
         $user = new Users();
         $userInfos = $user->find($_GET['id']);

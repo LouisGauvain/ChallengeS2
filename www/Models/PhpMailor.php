@@ -20,27 +20,27 @@ class PhpMailor
     private $lastname;
     private $token;
 
-    public function setMail($mail)
+    public function setMail($mail): void
     {
         $this->mail = $mail;
     }
 
-    public function setFirstname($firstname)
+    public function setFirstname($firstname): void
     {
         $this->firstname = $firstname;
     }
 
-    public function setLastname($lastname)
+    public function setLastname($lastname): void
     {
         $this->lastname  = $lastname;
     }
 
-    public function setToken($token)
+    public function setToken($token): void
     {
         $this->token = $token;
     }
 
-    public function sendMail()
+    public function sendMail(): void
     {
         $link = $_ENV['APP_URL'] . "/verify?token=" . $this->token;
         $mail = new PHPMailer(true);

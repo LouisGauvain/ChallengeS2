@@ -9,7 +9,7 @@ use App\Models\Pages;
 class Dashboard
 {
 
-    public function users()
+    public function users(): array | bool
     {
         $user = new Users();
 

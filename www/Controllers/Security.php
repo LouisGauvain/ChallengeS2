@@ -18,7 +18,7 @@ use App\Models\Templates;
 use App\Models\PhpMailor;
 use App\Models\Pages;
 
-function extractStructure($element)
+function extractStructure($element): array
 {
     $structure = array(
         "type" => strtolower($element->tagName),
@@ -293,7 +293,7 @@ class Security
         }
     }
 
-    public function Page()
+    public function Page(): void
     {
 
         $view = new View("Main/index", "back");

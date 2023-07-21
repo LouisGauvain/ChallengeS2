@@ -149,7 +149,7 @@ class Users extends Sql
     /**
      * @return mixed
      */
-    public function getDateInserted()
+    public function getDateInserted(): mixed
     {
         return $this->date_inserted;
     }
@@ -165,7 +165,7 @@ class Users extends Sql
     /**
      * @return mixed
      */
-    public function getDateUpdated()
+    public function getDateUpdated(): mixed
     {
         return $this->date_updated;
     }
@@ -214,7 +214,7 @@ class Users extends Sql
         return true;
     }
 
-    public function verifyToken($token)
+    public function verifyToken($token): array | bool
     {
         $db = $this::getInstance();
         $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE verification_token=:token");

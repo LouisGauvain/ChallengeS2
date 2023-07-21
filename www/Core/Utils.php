@@ -4,14 +4,14 @@ namespace App\Core;
 
 class Utils
 {
-    public static function var_dump($variable)
+    public static function var_dump($variable): void
     {
         echo '<pre>';
         var_dump($variable);
         echo '</pre>';
     }
 
-    public static function var_dump_die($variable)
+    public static function var_dump_die($variable): void
     {
         echo '<pre>';
         var_dump($variable);
@@ -19,7 +19,7 @@ class Utils
         die();
     }
 
-    public static function setSession($user, $token)
+    public static function setSession($user, $token): void
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -37,12 +37,12 @@ class Utils
         $_SESSION['token'] = $token;
     }
 
-    public static function setSessionToken($token)
+    public static function setSessionToken($token): void
     {
         $_SESSION['token'] = $token;
     }
 
-    public static function redirect($url)
+    public static function redirect($url): void
     {
         //if already at the right url, don't redirect
         if (trim($_SERVER['REQUEST_URI'], '/') === $url) {

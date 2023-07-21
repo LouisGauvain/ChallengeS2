@@ -144,11 +144,17 @@ class Pages extends Sql
         return true;
     }
 
-    public function findByUri($url_page)
+    public function findByUri($url_page): array | bool
     {
-        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE url_page=:url_page");
-        $queryPrepared->execute(["url_page" => $url_page]);
-        return $queryPrepared->fetch(\PDO::FETCH_ASSOC);
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE url_page = :url_page");
+        $query->execute([
+            'url_page' => $url_page
+        ]);
+        $result = $query->fetch();
+        if (!$result) {
+            return false;
+        }
     }
 
     public function createFolderImagePage(): bool
@@ -187,7 +193,7 @@ class Pages extends Sql
         return $destination;
     }
 
-    public function getAllPages()
+    public function getAllPages(): array | bool
     {
         $db = $this::getInstance();
         $query = $db->query("SELECT * FROM " . $this->table . " WHERE controller_page = 'Page' AND action_page = 'index'");

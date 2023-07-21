@@ -1,7 +1,12 @@
 body.backend {
-    padding-left: $button-wrapped-width  + pxToRem(16);
-
     &.large {
         padding-left: $button-width + pxToRem(16);
+    }
+}
+.info_user{
+    margin-left: 10px;
+    text-align: center;
+    form{
+        margin-bottom: 10px;
     }
 }

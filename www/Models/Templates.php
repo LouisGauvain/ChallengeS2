@@ -141,7 +141,7 @@ class Templates extends Sql
     public function choiceTemplatePage(): array
     {
         $db = $this::getInstance();
-        $query = $db->query("SELECT * FROM ". $this->table);
+        $query = $db->query("SELECT * FROM " . $this->table);
         $templatePages = $query->fetchAll();
         if (is_null($templatePages)) {
             return false;

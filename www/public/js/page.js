@@ -72,7 +72,7 @@ if (uri === "/create_page") {
             tinymce.init({
                 selector: idFinal,
             });
-        }, 1000);
+        }, 2000);
     });
 }
 

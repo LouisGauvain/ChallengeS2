@@ -3,7 +3,9 @@
     <h2>Vos Pages</h2>
     <div>
         <a href="choice_template_page" class="btn btn-primary">Ajouter une page</a>
-        <a href="add_template_page" class="btn btn-primary">Ajouter un template</a>
+        <?php if ($user['role_id'] == 1) { ?>
+            <a href="add_template_page" class="btn btn-primary">Ajouter un template</a>
+        <?php } ?>
     </div>
     <table class="table">
         <thead>

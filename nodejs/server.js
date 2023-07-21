@@ -22,16 +22,9 @@ app.post('/', (req, res) => {
   const element = generateStructure(structure);
   root.innerHTML = "";
   root.appendChild(element);
-  res.send(document.body.innerHTML);
+  res.send(root.innerHTML);
 });
 
-app.post('/getJson', (req, res) => {
-  const dom = new JSDOM(req.body.html);
-  const parsed = dom.window.document;
-  const body = parsed.querySelector('body');
-
-  const structure = extractStructure(body);
-})
 
 app.post('/api', (req, res) => {
   res.json({success: true});

@@ -3,6 +3,11 @@ table {
     border-collapse: collapse;
     background-color: $table-background;
     color: $table-color;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #043a5e;
+    border-radius: 10px;
+    overflow: hidden;
     
     th, td {
       padding: pxToRem(10);

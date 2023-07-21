@@ -261,6 +261,11 @@ table {
   border-collapse: collapse;
   background-color: #f2f2f2;
   color: #333;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #043a5e;
+  border-radius: 10px;
+  overflow: hidden;
 }
 table th, table td {
   padding: 0.625rem;

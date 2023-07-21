@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Utils;
 use App\Models\Users;
+use App\Models\Pages;
 use App\Core\View;
 use App\Forms\EditUser;
 use App\Core\Verificator;
@@ -16,6 +17,13 @@ class Admin
         $user = new Users();
         $user->delete($_GET['id']);
         Utils::redirect('/dashboard');
+    }
+    
+    public function deletePage()
+    {
+        $page = new Pages();
+        $page->delete($_GET['id']);
+        Utils::redirect('/page');
     }
 
     public function editUser()

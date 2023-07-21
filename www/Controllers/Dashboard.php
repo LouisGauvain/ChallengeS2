@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Utils;
 use App\Models\Users;
+use App\Models\Pages;
 
 class Dashboard
 {

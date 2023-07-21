@@ -232,6 +232,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background: rgb(175, 175, 175) !important;
+}
+
 html {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -559,7 +563,7 @@ textarea {
 }
 
 header {
-  background-color: lightgrey;
+  background-color: rgb(24, 182, 143);
   padding: 10px;
   margin-bottom: 20px;
   display: flex;
@@ -571,13 +575,20 @@ header.a {
 }
 
 .sidebar {
-  background-color: lightgrey;
+  background-color: rgb(24, 182, 143);
   width: 250px;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   padding: 20px;
+}
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .content {

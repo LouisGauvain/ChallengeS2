@@ -1,9 +1,17 @@
 .sidebar {
-    background-color: lightgrey;
+    background-color: rgb(24, 182, 143);
     width: 250px;
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
     padding: 20px;
+
+    a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
 }

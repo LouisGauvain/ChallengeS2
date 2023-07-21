@@ -157,7 +157,6 @@ class Pages extends Sql
 
         if (!file_exists($pathUploads)) {
             mkdir($pathUploads, 0777);
-            chmod($pathUploads, 0755);
         }
 
         return true;

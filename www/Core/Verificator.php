@@ -171,7 +171,7 @@ class Verificator
                 $file[] = 'imageSite+' . $i;
             }
             foreach ($file as $key => $value) {
-                if ($_FILES[$value]['type'] != "image/png" && $_FILES[$value]['type'] != "image/jpeg" && $_FILES[$value]['type'] != "image/jpg") {
+                if (empty($_FILES[$value]['name'])) {
                     $texteError = "Veuillez insérer une image";
                     if (!in_array($texteError, $listOfErrors)) {
                         $listOfErrors[] = $texteError;

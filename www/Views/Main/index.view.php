@@ -2,8 +2,8 @@
 <div class="container">
     <h2>Vos Pages</h2>
     <div>
-        <a href="admin/add_page" class="btn btn-primary">Ajouter une page</a>
-        <a href="admin/add_page" class="btn btn-primary">Ajouter un template</a>
+        <a href="choice_template_page" class="btn btn-primary">Ajouter une page</a>
+        <a href="add_template_page" class="btn btn-primary">Ajouter un template</a>
     </div>
     <table class="table">
         <thead>
@@ -21,17 +21,16 @@
                 echo "<td><a href='" . $page['url_page'] . "'>" . $page['title'] . "</a></td>";
                 echo "<td>" . $page['url_page'] . "</td>";
                 echo "<td>" . $page['used_template'] . "</td>";
-                ?>
+            ?>
                 <td>
                     <?php if ($user['role_id'] == 1) { ?>
                         <a href="<?= $page['url_page'] ?>">Voir</a> |
                         <a href="admin/delete_page?id=<?= $page['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet page ?')">Supprimer</a>
                     <?php } ?>
                 </td>
-                <?php
-                echo "</tr>";    
-
-             }
+            <?php
+                echo "</tr>";
+            }
             ?>
         </tbody>
     </table>

@@ -253,7 +253,7 @@ class Security
                         $order[] = $name;
                     }
                     $order = array_flip($order);
-                    $text = strtolower(trim(strip_tags($titleSite)));
+                    $text = trim(strip_tags($titleSite));
 
                     $html = "<body>";
                     foreach ($order as $key => $value) {

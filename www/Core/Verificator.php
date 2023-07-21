@@ -148,7 +148,8 @@ class Verificator
     {
         $listOfErrors = [];
         $on = reset($_POST);
-        if ($on !== "on") {
+        var_dump($on);
+        if ($on != "on") {
             $listOfErrors[] = "Vous devez choisir un template";
         }
         return $listOfErrors;

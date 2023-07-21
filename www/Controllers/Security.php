@@ -81,7 +81,6 @@ class Security
                     $phpMailer->setLastname($_POST['user_lastname']);
                     $phpMailer->setToken($token);
                     $phpMailer->sendMail();
-                    echo "Insertion en BDD";
                 }
             } else {
                 $view->assign('errors', $errors);
@@ -125,14 +124,16 @@ class Security
         $form = new ChoiceTemplatePage();
         $view = new View("Page/choiceTemplatePage", "back");
         $view->assign('form', $form->getConfig());
-        $errors = Verificator::choiceTemplatePage($form->getConfig(), $_POST);
-        if (empty($errors)) {
-            $keys = array_keys($_POST);
-            $pageAcceuilKey = $keys[0];
-            $redirectURL = "create_page?selected_option=" . urlencode($pageAcceuilKey);
-            Utils::redirect($redirectURL);
-        } else {
-            $view->assign('errors', $errors);
+        if ($form->isSubmit()) {
+            $errors = Verificator::choiceTemplatePage($form->getConfig(), $_POST);
+            if (empty($errors)) {
+                $keys = array_keys($_POST);
+                $pageAcceuilKey = $keys[0];
+                $redirectURL = "create_page?selected_option=" . urlencode($pageAcceuilKey);
+                Utils::redirect($redirectURL);
+            } else {
+                $view->assign('errors', $errors);
+            }
         }
     }
 
@@ -156,7 +157,6 @@ class Security
                     $destination = $templatePages->addFolderAndFileTemplate();
                     $templatePages->setImage($destination);
                     $templatePages->save();
-                    echo "Insertion en BDD";
                 }
             } else {
                 $view->assign('errors', $errors);
@@ -205,12 +205,22 @@ class Security
                     $Pages->createFolderUploadImagePage();
                     $Pages->addFolderAndFileImagePage();
                     $Pages->save();
-                    echo "Insertion en BDD";
                     Utils::redirect('/' . $text);
                 }
             } else {
                 $view->assign('errors', $errors);
             }
         }
+    }
+
+    public function Page()
+    {
+        $view = new View("Page/page", "back");
+
+        $pages = new Pages();
+        $page = $pages->findByUri($_SERVER["REQUEST_URI"]);
+
+        $view->assign("url", $_ENV['API_URL']);
+        $view->assign("page", $page);
     }
 }

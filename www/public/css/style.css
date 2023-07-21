@@ -569,6 +569,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  -webkit-box-shadow: 5px 5px 24px 2px #000000;
+  box-shadow: 5px 5px 24px 2px #000000;
 }
 header.a {
   margin-left: 10px;
@@ -582,6 +584,8 @@ header.a {
   top: 0;
   left: 0;
   padding: 20px;
+  -webkit-box-shadow: 5px 5px 24px 2px #000000;
+  box-shadow: 5px 5px 24px 2px #000000;
 }
 .sidebar a {
   color: white;

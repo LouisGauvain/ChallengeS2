@@ -4,7 +4,8 @@ header {
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;-webkit-box-shadow: 5px 5px 24px 2px #000000; 
+    box-shadow: 5px 5px 24px 2px #000000;
     &.a {
         margin-left: 10px;
     }

@@ -25,6 +25,7 @@ abstract class Sql
             $dbPassword = $_ENV['DB_PASSWORD'];
             $dbPrefix = $_ENV['DB_PREFIX'];
             $this->pdo = new \PDO("pgsql:host=$dbHost;port=5432;dbname=$dbName", $dbUsername, $dbPassword);
+            $this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         } catch (\Exception $e) {
             die("Erreur SQL : " . $e->getMessage());
         }

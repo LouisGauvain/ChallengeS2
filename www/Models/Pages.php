@@ -16,6 +16,7 @@ class Pages extends Sql
     protected string $action_page;
     protected $date_created;
     protected $date_modified;
+    protected $used_template;
 
     public function getId(): int
     {
@@ -107,6 +108,16 @@ class Pages extends Sql
         $this->date_modified = $date_modified;
     }
 
+    public function getUsedTemplate()
+    {
+        return $this->used_template;
+    }
+
+    public function setUsedTemplate($used_template): void
+    {
+        $this->used_template = $used_template;
+    }
+
     public function getUriPages()
     {
         $db = $this::getInstance();
@@ -191,4 +202,6 @@ class Pages extends Sql
             return $pages;
         }
     }
+
+    
 }

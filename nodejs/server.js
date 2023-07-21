@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const { JSDOM } = require('jsdom');
-const { json } = require('express');
 
 const dom = new JSDOM('<!DOCTYPE html><html><body><div id="root"></div></body></html>');
 const document = dom.window.document;
@@ -10,7 +9,9 @@ global.document = document;
 const app = express();
 const port = 3000;
 
+
 const generateStructure = require('./dist/core/DomRenderer.js').default;
+const extractStructure = require('./dist/core/DomRenderer.js').default;
 const root = document.getElementById("root");
 
 app.use(cors());
@@ -23,6 +24,14 @@ app.post('/', (req, res) => {
   root.appendChild(element);
   res.send(document.body.innerHTML);
 });
+
+app.post('/getJson', (req, res) => {
+  const dom = new JSDOM(req.body.html);
+  const parsed = dom.window.document;
+  const body = parsed.querySelector('body');
+
+  const structure = extractStructure(body);
+})
 
 app.post('/api', (req, res) => {
   res.json({success: true});

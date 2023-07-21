@@ -78,8 +78,10 @@ if (uri === "/create_page") {
 
 if (uri === "/create_page") {
     // Transforme les input de type file en input caché et ajoute un label avec une image
+    let i = 0;
     fileInputs.forEach((input) => {
-        const image = document.querySelectorAll("img")[0];
+        const image = document.querySelectorAll("img")[i];
+        i++
         input.addEventListener('change', (e) => {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();

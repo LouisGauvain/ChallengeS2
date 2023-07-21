@@ -15,7 +15,7 @@ class Main
 {
     public function index()
     {
-        $view = new View("Main/index", "front");
+        $view = new View("Main/page", "front");
 
         $pages = new Pages();
         $view->assign("pages", $pages->getAllPages());  

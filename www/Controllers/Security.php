@@ -24,7 +24,7 @@ class Security
     public function login(): void
     {
         $form = new ConnectionUser();
-        $view = new View("Auth/connection", "back");
+        $view = new View("Auth/connection", "front");
         $view->assign('form', $form->getConfig());
         if ($form->isSubmit()) {
             $errors = Verificator::formConnection($form->getConfig(), $_POST);
@@ -55,7 +55,7 @@ class Security
     public function register(): void
     {
         $form = new AddUser();
-        $view = new View("Auth/register", "back");
+        $view = new View("Auth/register", "front");
         if (isset($_SESSION['user']['id'])) {
             Utils::redirect("dashboard");
         }
@@ -81,7 +81,6 @@ class Security
                     $phpMailer->setLastname($_POST['user_lastname']);
                     $phpMailer->setToken($token);
                     $phpMailer->sendMail();
-                    echo "Insertion en BDD";
                 }
             } else {
                 $view->assign('errors', $errors);
@@ -125,14 +124,16 @@ class Security
         $form = new ChoiceTemplatePage();
         $view = new View("page/choiceTemplatePage", "back");
         $view->assign('form', $form->getConfig());
-        $errors = Verificator::choiceTemplatePage($form->getConfig(), $_POST);
-        if (empty($errors)) {
-            $keys = array_keys($_POST);
-            $pageAcceuilKey = $keys[0];
-            $redirectURL = "create_page?selected_option=" . urlencode($pageAcceuilKey);
-            Utils::redirect($redirectURL);
-        } else {
-            $view->assign('errors', $errors);
+        if ($form->isSubmit()) {
+            $errors = Verificator::choiceTemplatePage($form->getConfig(), $_POST);
+            if (empty($errors)) {
+                $keys = array_keys($_POST);
+                $pageAcceuilKey = $keys[0];
+                $redirectURL = "create_page?selected_option=" . urlencode($pageAcceuilKey);
+                Utils::redirect($redirectURL);
+            } else {
+                $view->assign('errors', $errors);
+            }
         }
     }
 
@@ -156,7 +157,6 @@ class Security
                     $destination = $templatePages->addFolderAndFileTemplate();
                     $templatePages->setImage($destination);
                     $templatePages->save();
-                    echo "Insertion en BDD";
                 }
             } else {
                 $view->assign('errors', $errors);
@@ -205,7 +205,6 @@ class Security
                     $Pages->createFolderUploadImagePage();
                     $Pages->addFolderAndFileImagePage();
                     $Pages->save();
-                    echo "Insertion en BDD";
                     Utils::redirect('/' . $text);
                 }
             } else {
@@ -216,7 +215,7 @@ class Security
 
     public function Page()
     {
-        $view = new View("Page/index", "front");
+        $view = new View("Page/page", "back");
 
         $pages = new Pages();
         $page = $pages->findByUri($_SERVER["REQUEST_URI"]);

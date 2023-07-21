@@ -332,6 +332,10 @@ body.backend.large {
 
 .info_user {
   margin-left: 10px;
+  text-align: center;
+}
+.info_user form {
+  margin-bottom: 10px;
 }
 
 a.disabled {
@@ -578,6 +582,18 @@ header.a {
 
 .content {
   margin-left: 250px;
+}
+
+.div_input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 20px;
+}
+.div_input img {
+  width: 30vw;
 }
 
 /*# sourceMappingURL=style.css.map */

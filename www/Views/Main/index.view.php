@@ -1,6 +1,10 @@
 <?php $user = $_SESSION['user']; ?>
 <div class="container">
     <h2>Vos Pages</h2>
+    <div>
+        <a href="admin/add_page" class="btn btn-primary">Ajouter une page</a>
+        <a href="admin/add_page" class="btn btn-primary">Ajouter un template</a>
+    </div>
     <table class="table">
         <thead>
             <tr>

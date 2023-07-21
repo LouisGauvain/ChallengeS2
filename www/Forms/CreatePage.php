@@ -34,7 +34,8 @@ class CreatePage extends AForm
                     "type" => $type,
                     "value" => $value,
                     "placeholder" => $placeholder,
-                    "error" => "Veuillez renseigner les champs manquant"
+                    "error" => "Veuillez renseigner les champs manquant",
+                    "name" => $name,
                 ];
             }
         }

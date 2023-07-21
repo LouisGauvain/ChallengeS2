@@ -271,6 +271,7 @@ class Security
                     $json = var_export(json_encode($structure), true);
                     $json = substr($json, 1, -1);
 
+
                     $Pages->setTitle($titleSite);
                     $Pages->setContent($json);
                     $Pages->setUserId($_SESSION['user']['id']);

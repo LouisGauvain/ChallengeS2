@@ -6,7 +6,7 @@ class Utils
 {
     public static function var_dump($variable): void
     {
-        echo '<pre>';
+        echo '<pre style="background-color: #000; color: #fff; padding: 10px; border-radius: 5px; margin: 10px;">';
         var_dump($variable);
         echo '</pre>';
     }

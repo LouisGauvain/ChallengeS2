@@ -1,21 +1,10 @@
 <div id="root"></div>
 
-<?php
+<script type="module">
+    import generateStructure from "/public/js/framework/src/index.js"
 
-?>
-<script>
-    /*fetch("<?= $url ?>", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(<?= $page['content'] ?>)
-        })
-        .then(response => response.text())
-        .then(htmlResponse => {
-            document.getElementById("root").innerHTML = htmlResponse;
-        })
-        .catch(error => {
-            console.error('Une erreur s\'est produite:', error);
-        });*/
+    const element = generateStructure(<?= $page['content'] ?>);
+    console.log(element);
+
+    document.getElementById("root").appendChild(element);
 </script>

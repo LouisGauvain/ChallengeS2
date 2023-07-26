@@ -4,7 +4,7 @@
 
 ?>
 <script>
-    fetch("<?= $url ?>", {
+    /*fetch("<?= $url ?>", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -17,5 +17,5 @@
         })
         .catch(error => {
             console.error('Une erreur s\'est produite:', error);
-        });
+        });*/
 </script>

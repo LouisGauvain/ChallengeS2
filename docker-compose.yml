@@ -29,15 +29,5 @@ services:
     ports:
       - 8080:8080
 
-  nodejs2:
-      build:
-        context: ./nodejs
-        dockerfile: Dockerfile
-      restart: always
-      ports:
-        - 3000:3000
-      volumes:
-        - ./nodejs:/app
-
 volumes:
   pgdata:

@@ -37,6 +37,11 @@ function render(structure, root) {
 
   //wait for everything to be rendered
   addEventListener("load", () => {
+    if(oldElement.firstChild && oldElement.firstChild.nodeType === 3) {
+      root.removeChild(oldElement.firstChild);
+      root.appendChild(newElement);
+      return;
+    }
     if(oldElement.firstChild === null) {
       root.appendChild(newElement);
       return;

@@ -12,7 +12,7 @@ export default function Compteur({ initialValue = 0 }) {
         style: { backgroundColor: "red" },
         onClick: () => compteur--,
       }),
-      "Current compteur: {{compteur}}",
+      "Current compteur: " + compteur,
       Button({
         title: "+",
         style: { backgroundColor: "green" },

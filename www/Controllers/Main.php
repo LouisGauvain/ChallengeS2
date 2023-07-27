@@ -8,6 +8,7 @@ use App\Controllers\Dashboard;
 use App\Models\Pages;
 
 use Dotenv\Dotenv;
+
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
@@ -18,7 +19,7 @@ class Main
         $view = new View("Main/page", "front");
 
         $pages = new Pages();
-        $view->assign("pages", $pages->getAllPages());  
+        $view->assign("pages", $pages->getAllPages());
     }
 
     public function contact(): void
@@ -34,7 +35,7 @@ class Main
             Utils::redirect("login");
         }
 
-        if($_SESSION['user']['role_id'] == 1){
+        if ($_SESSION['user']['role_id'] == 1) {
             $dashboard = new Dashboard();
 
             $view->assign("users", $dashboard->users());
@@ -44,13 +45,5 @@ class Main
     public function components(): void
     {
         $view = new View("Main/components", "back");
-    }
-
-    public function htmlToJson(): void
-    {
-        $view = new View("Main/htmlToJson", "back");
-
-        $view->assign("url", $_ENV['API_URL']);
-        $view->assign("html", '<html><body><div class="test-class"><a href="Test">Link</a><a href="Test">Link</a><a href="Test">Link</a><a href="Test">Link</a><a href="Test">Link</a></div></body>');
     }
 }

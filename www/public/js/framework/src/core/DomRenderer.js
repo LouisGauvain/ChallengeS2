@@ -32,8 +32,22 @@ function generateStructure(structure) {
 }
 
 function render(structure, root) {
-  const element = generateStructure(structure);
-  root.appendChild(element);
+  const oldElement = root
+  const newElement = generateStructure(structure);
+
+  //wait for everything to be rendered
+  addEventListener("load", () => {
+    if(oldElement.firstChild === null) {
+      root.appendChild(newElement);
+      return;
+    }
+    if (oldElement.isEqualNode(newElement)) {
+      return;
+    }
+    root.replaceChild(newElement, oldElement);
+    
+  });
+
 }
 
 export { generateStructure, render };

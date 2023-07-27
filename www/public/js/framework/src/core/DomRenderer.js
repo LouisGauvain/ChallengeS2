@@ -1,4 +1,4 @@
-export default function generateStructure(structure) {
+function generateStructure(structure) {
   const element = document.createElement(structure.type);
   if (structure.attributes) {
     for (let attrName in structure.attributes) {
@@ -30,3 +30,10 @@ export default function generateStructure(structure) {
 
   return element;
 }
+
+function render(structure, root) {
+  const element = generateStructure(structure);
+  root.appendChild(element);
+}
+
+export { generateStructure, render };

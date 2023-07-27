@@ -1,10 +1,7 @@
 <div id="root"></div>
 
 <script type="module">
-    import generateStructure from "/public/js/framework/src/index.js"
+    import { generateStructure, render } from "/public/js/framework/src/index.js"
 
-    const element = generateStructure(<?= $page['content'] ?>);
-    console.log(element);
-
-    document.getElementById("root").appendChild(element);
+    render(<?= $page["content"] ?>, document.getElementById("root"));
 </script>

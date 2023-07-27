@@ -4,6 +4,7 @@ import routes from "./routes.js";
 const root = document.getElementById("root");
 BrowserRouter(routes, root);
 */
-import generateStructure from "./core/DomRenderer.js";
+import {generateStructure, render} from "./core/DomRenderer.js";
+console.log( render);
 
-export default generateStructure;
+export {generateStructure, render};

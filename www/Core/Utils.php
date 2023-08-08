@@ -48,8 +48,17 @@ class Utils
         if (trim($_SERVER['REQUEST_URI'], '/') === $url) {
             return;
         }
-            
+
         header("Location: " . $url);
         exit();
+    }
+
+    public static function isAdmin(): bool
+    {
+        $user = $_SESSION['user'];
+        if ($user['role_id'] == '1') {
+            return true;
+        }
+        return false;
     }
 }

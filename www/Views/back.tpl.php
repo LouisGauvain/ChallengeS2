@@ -17,6 +17,9 @@
 
     <div id="root">
         <?php
+
+        use App\Core\Utils;
+
         if (!empty($_SESSION['user'])) {
         ?><div class="sidebar">
                 <ul class="nav flex-column">
@@ -26,6 +29,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/page">Page</a>
                     </li>
+                    <?php
+                    if (Utils::isAdmin() == true) {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/add_template_page">Templates</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                 </ul>
             </div> <?php
                 }

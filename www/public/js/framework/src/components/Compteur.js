@@ -4,7 +4,6 @@ import { render } from "../core/DomRenderer.js";
 export default function Compteur({ initialValue = 0 }) {
   let compteur = initialValue;
 
-  console.log("Compteur", compteur)
   const decrement = () => {
     compteur--;
     updateCounter();

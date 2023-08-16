@@ -7,18 +7,17 @@
     import { BrowserLink, BrowserRouter } from "/public/js/framework/src/components/BrowserRouter.js"
 
     //render(<?= $page["content"] ?>, document.getElementById("root"));
-    /*render(
-        BrowserLink("Home", "/")
-    , document.getElementById("header"));*/
-    render(BrowserRouter
+     render(BrowserRouter
         ([
-            {title: "Home", link: "/"},
-            {title: "About", link: "/about"},
-            {title: "Contact", link: "/contact"},
-        ],
+            <?php
+            foreach ($allUsersPages as $page) {
+                echo "{title: \"" . $page["title"] . "\", link: \"" . $page["url_page"] . "\"},";
+            }
+            ?>
+            ],
         document.getElementById("header")),
         document.getElementById("header")
-    )
+    ) 
     
     render(Compteur({count: 0}), document.getElementById("root"));
 </script>

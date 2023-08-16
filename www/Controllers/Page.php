@@ -22,9 +22,18 @@ class Page
 
         $pages = new Pages();
         $page = $pages->findByUri($_SERVER["REQUEST_URI"]);
+        $allUsersPages = $pages->getUriPagesByAction();
+        //remove all html tags
+        $allUsersPages = array_map(function ($page) {
+            $page['title'] = strip_tags($page['title']);
+            return $page;
+        }, $allUsersPages);
 
         $view->assign("url", $_ENV['API_URL']);
         $view->assign("page", $page);
+        $view->assign("allUsersPages", $allUsersPages);
+
+        Utils::var_dump($allUsersPages);
     }
 
     public static function pageCreate(): void

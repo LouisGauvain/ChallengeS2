@@ -32,8 +32,6 @@ class Page
         $view->assign("url", $_ENV['API_URL']);
         $view->assign("page", $page);
         $view->assign("allUsersPages", $allUsersPages);
-
-        Utils::var_dump($allUsersPages);
     }
 
     public static function pageCreate(): void

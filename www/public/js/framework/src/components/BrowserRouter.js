@@ -1,9 +1,10 @@
-import DomRenderer from "../core/DomRenderer.js";
+import { generateStructure } from "../core/DomRenderer.js";
 
-export default function BrowserRouter(routes, rootElement, pathname) {
-  rootElement.appendChild(DomRenderer(routes[pathname]()));
+/* function BrowserRouter(routes, rootElement, pathname) {
+  console.log("BrowserRouter", routes, rootElement, pathname);
+  rootElement.appendChild(generateStructure(routes[pathname]()));
 
-  /*const oldPushState = history.pushState;
+  const oldPushState = history.pushState;
   history.pushState = function (data, unused, url) {
     oldPushState.call(history, data, unused, url);
     window.dispatchEvent(new Event("popstate"));
@@ -13,14 +14,28 @@ export default function BrowserRouter(routes, rootElement, pathname) {
     const pathname = location.pathname;
 
     rootElement.replaceChild(
-      DomRenderer(routes[pathname]()),  
+      generateStructure(routes[pathname]()),
       rootElement.childNodes[0]
     );
-  });*/
+  });
+} */
+
+function BrowserRouter(routes, rootElement, pathname) {
+  console.log("BrowserRouter", routes, rootElement, pathname);
+  //create a div and add the browser links
+  let div = {
+    type: "div",
+    children: [],
+  }
+  for (let i = 0; i < routes.length; i++) {
+    const route = routes[i];
+    div.children.push(BrowserLink(route.title, route.link));
+  }
+  return div;
 }
 
-
-export function BrowserLink(title, link) {
+function BrowserLink(title, link) {
+  console.log("BrowserLink", title, link);
   return {
     type: "a",
     attributes: {
@@ -35,3 +50,5 @@ export function BrowserLink(title, link) {
     },
   };
 }
+
+export { BrowserLink, BrowserRouter }

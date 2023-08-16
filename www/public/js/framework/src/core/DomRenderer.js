@@ -36,22 +36,19 @@ function render(structure, root) {
   const newElement = generateStructure(structure);
 
   //wait for everything to be rendered
-  addEventListener("load", () => {
-    if(oldElement.firstChild && oldElement.firstChild.nodeType === 3) {
-      root.removeChild(oldElement.firstChild);
-      root.appendChild(newElement);
-      return;
-    }
-    if(oldElement.firstChild === null) {
-      root.appendChild(newElement);
-      return;
-    }
-    if (oldElement.isEqualNode(newElement)) {
-      return;
-    }
-    root.replaceChild(newElement, oldElement);
-    
-  });
+  if (oldElement.firstChild && oldElement.firstChild.nodeType === 3) {
+    root.removeChild(oldElement.firstChild);
+    root.appendChild(newElement);
+    return;
+  }
+  if (oldElement.firstChild === null) {
+    root.appendChild(newElement);
+    return;
+  }
+  if (oldElement.isEqualNode(newElement)) {
+    return;
+  }
+  root.replaceChild(newElement, oldElement.firstChild);
 
 }
 

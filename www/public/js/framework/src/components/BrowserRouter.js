@@ -1,24 +1,4 @@
-import { generateStructure } from "../core/DomRenderer.js";
-
-/* function BrowserRouter(routes, rootElement, pathname) {
-  console.log("BrowserRouter", routes, rootElement, pathname);
-  rootElement.appendChild(generateStructure(routes[pathname]()));
-
-  const oldPushState = history.pushState;
-  history.pushState = function (data, unused, url) {
-    oldPushState.call(history, data, unused, url);
-    window.dispatchEvent(new Event("popstate"));
-  };
-
-  window.addEventListener("popstate", function () {
-    const pathname = location.pathname;
-
-    rootElement.replaceChild(
-      generateStructure(routes[pathname]()),
-      rootElement.childNodes[0]
-    );
-  });
-} */
+import { generateStructure, render } from "../core/DomRenderer.js";
 
 function BrowserRouter(routes, rootElement, pathname) {
   console.log("BrowserRouter", routes, rootElement, pathname);
@@ -46,6 +26,16 @@ function BrowserLink(title, link) {
       click: function (event) {
         event.preventDefault();
         history.pushState({}, undefined, link);
+        window.dispatchEvent(new Event("popstate"));
+        let div = {
+          type: "div",
+          children: [],
+        }
+        fetch(link, { method: "POST" }).then((response) => { return response.text() }).then((data) => { 
+          const json = JSON.parse(data);
+          div.children.push(json)
+          render(div, document.getElementById("root2"));
+        });
       },
     },
   };

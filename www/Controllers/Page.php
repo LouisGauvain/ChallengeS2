@@ -18,10 +18,18 @@ class Page
 {
     public static function index(): void
     {
-        $view = new View("Page/index", "front");
-
+        
         $pages = new Pages();
         $page = $pages->findByUri($_SERVER["REQUEST_URI"]);
+
+        //if method is post
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            echo $page["content"];
+            return;
+        }
+
+        $view = new View("Page/index", "front");
+
         $allUsersPages = $pages->getUriPagesByAction();
         //remove all html tags
         $allUsersPages = array_map(function ($page) {

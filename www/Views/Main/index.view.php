@@ -1,4 +1,8 @@
-<?php $user = $_SESSION['user']; ?>
+<?php
+
+use App\Core\Utils;
+
+$user = $_SESSION['user']; ?>
 <div class="container">
     <h2>Vos Pages</h2>
     <div>
@@ -13,7 +17,9 @@
                 <th>Titre</th>
                 <th>URL</th>
                 <th>Template</th>
-                <th>Actions</th>
+                <?php
+                Utils::isAdmin() == true ? "<th>Actions</th>" : "";
+                ?>
             </tr>
         </thead>
         <tbody>
@@ -24,12 +30,13 @@
                 echo "<td>" . $page['url_page'] . "</td>";
                 echo "<td>" . $page['used_template'] . "</td>";
             ?>
-                <td>
-                    <?php if ($user['role_id'] == 1) { ?>
+                <?php if (Utils::isAdmin() == true) { ?>
+                    <td>
+
                         <a href="<?= $page['url_page'] ?>">Voir</a> |
                         <a href="admin/delete_page?id=<?= $page['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet page ?')">Supprimer</a>
-                    <?php } ?>
-                </td>
+                    </td>
+                <?php } ?>
             <?php
                 echo "</tr>";
             }

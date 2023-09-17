@@ -23,8 +23,12 @@ export default function Install({ step = 1, errors }) {
                 errors.push(input.querySelector("label").textContent + " ne peut pas être vide")
         });
 
-        console.log("now");
-        render(Install({ step: 1, errors: errors }), document.getElementById("root2"))
+        if (errors = ![])
+            return render(Install({ step: 1, errors: errors }), document.getElementById("root2"))
+
+        
+
+        render(Install({ step: 2 }), document.getElementById("root2"))
     }
 
     let children = []
@@ -37,9 +41,11 @@ export default function Install({ step = 1, errors }) {
                 },
                 children: [
                     ...errors.map(error => {
-                        return { type: "p" , children: [
-                            error
-                        ]};
+                        return {
+                            type: "p", children: [
+                                error
+                            ]
+                        };
                     })
                 ]
             }] : []),

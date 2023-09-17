@@ -36,7 +36,6 @@ function render(structure, root) {
   const newElement = generateStructure(structure);
 
   //wait for everything to be rendered
-  console.log(oldElement);
   if (oldElement.firstChild && oldElement.firstChild.nodeType === 3) {
     root.removeChild(oldElement.firstChild);
     root.appendChild(newElement);

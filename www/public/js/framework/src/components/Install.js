@@ -31,14 +31,16 @@ export default function Install({ step = 1, errors }) {
             body: new FormData(document.querySelector('form'))
         }).then(response => response.json())
             .then(data => {
-                console.log(data)
-                if (data.success) {
-                } else {
-                    alert(data.message);
+                if (!data.success) {
+                    errors.push(data.message)
+                    return render(Install({ step: 1, errors: errors }), document.getElementById("root2"))
+                }
+                else {
+                    return render(Install({ step: 2 }), document.getElementById("root2"))
                 }
             })
 
-        //render(Install({ step: 2 }), document.getElementById("root2"))
+
     }
 
     let children = []

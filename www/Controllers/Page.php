@@ -18,7 +18,7 @@ class Page
 {
     public static function index(): void
     {
-        
+
         $pages = new Pages();
         $page = $pages->findByUri($_SERVER["REQUEST_URI"]);
 

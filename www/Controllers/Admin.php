@@ -11,6 +11,9 @@ use App\Core\Verificator;
 
 class Admin
 {
+    public function install(){
+        $view = new View("Admin/install", "front");
+    }
 
     public function deleteUser(): void
     {

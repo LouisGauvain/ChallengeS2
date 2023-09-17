@@ -1,4 +1,3 @@
-
 import { render } from "../core/DomRenderer.js";
 import Input from "./Input.js"
 import Button from "./Button.js";
@@ -77,26 +76,26 @@ export default function Install({ step = 1, errors, verified }) {
                         label: "Database host",
                         id: "dbHost",
                         name: "dbHost",
-                        ...(storedDatabaseFormData ? {value: storedDatabaseFormData.dbHost} : {})
+                        ...(storedDatabaseFormData ? { value: storedDatabaseFormData.dbHost } : {})
                     }),
                     Input({
                         label: "Database name",
                         id: "dbName",
                         name: "dbName",
-                        ...(storedDatabaseFormData ? {value: storedDatabaseFormData.dbName} : {})
+                        ...(storedDatabaseFormData ? { value: storedDatabaseFormData.dbName } : {})
                     }),
                     Input({
                         label: "Database user",
                         id: "dbUser",
                         name: "dbUser",
-                        ...(storedDatabaseFormData ? {value: storedDatabaseFormData.dbUser} : {})
+                        ...(storedDatabaseFormData ? { value: storedDatabaseFormData.dbUser } : {})
                     }),
                     Input({
                         label: "Database password",
                         id: "dbPassword",
                         name: "dbPassword",
                         type: "password",
-                        ...(storedDatabaseFormData ? {value: storedDatabaseFormData.dbPassword} : {})
+                        ...(storedDatabaseFormData ? { value: storedDatabaseFormData.dbPassword } : {})
                     }),
                     Button({
                         title: "Vérifier la configuration",
@@ -114,6 +113,30 @@ export default function Install({ step = 1, errors, verified }) {
                         ...(verified ? {} : { disabled: true }),
                         onClick: goNextStep
                     })
+                ]
+            }
+        ]
+    } else if (step == 2) {
+        children = [
+            ...(errors ? [{
+                type: "div",
+                attributes: {
+                    class: "errors"
+                },
+                children: [
+                    ...errors.map(error => {
+                        return {
+                            type: "p", children: [
+                                error
+                            ]
+                        };
+                    })
+                ]
+            }] : []),
+            {
+                type: "form",
+                children: [
+                    { Button }
                 ]
             }
         ]

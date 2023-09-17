@@ -1,6 +1,4 @@
-export default function Input({ label = "", placeholder = "", name, id, type, value}) {
-
-    console.log(value);
+export default function Input({ label = "", placeholder = "", name, id, type, value }) {
 
     let a = {
         type: "div",
@@ -22,13 +20,11 @@ export default function Input({ label = "", placeholder = "", name, id, type, va
                     placeholder: placeholder,
                     name: name,
                     id: id,
-                    ...(value ? {value: value} : {})
+                    ...(value ? { value: value } : {})
                 },
             }
         ]
     }
-
-    console.log(a)
 
     return a
 }       

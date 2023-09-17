@@ -1,4 +1,4 @@
-export default function Button({ title, onClick, style }) {
+export default function Button({ title, onClick, style, disabled }) {
   const baseStyle = {
     backgroundColor: "grey",
     borderRadius: "5px",
@@ -7,6 +7,7 @@ export default function Button({ title, onClick, style }) {
     type: "button",
     attributes: {
       style: { ...baseStyle, ...style },
+      ...(disabled ? {disabled} : {})
     },
     events: {
       click: onClick,

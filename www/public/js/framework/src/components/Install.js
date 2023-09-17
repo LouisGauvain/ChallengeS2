@@ -3,7 +3,7 @@ import { render } from "../core/DomRenderer.js";
 import Input from "./Input.js"
 import Button from "./Button.js";
 
-export default function Install({ step = 1, errors }) {
+export default function Install({ step = 1, errors, verified }) {
     //installeur style temporaire
     const installerStyle = {
         backgroundColor: "grey",
@@ -12,7 +12,6 @@ export default function Install({ step = 1, errors }) {
         height: "50vh"
     };
 
-    var feur
     let verifyDatabaseConnetion = (e) => {
         e.preventDefault()
         let inputs = document.querySelectorAll("form .input");
@@ -36,11 +35,15 @@ export default function Install({ step = 1, errors }) {
                     return render(Install({ step: 1, errors: errors }), document.getElementById("root2"))
                 }
                 else {
-                    return render(Install({ step: 2 }), document.getElementById("root2"))
+                    return render(Install({ step: 1, verified: "true" }), document.getElementById("root2"))
                 }
             })
 
+    }
 
+    let goNextStep = (e) => {
+        e.preventDefault()
+        return render(Install({ step: 2 }), document.getElementById("root2"))
     }
 
     let children = []
@@ -86,11 +89,20 @@ export default function Install({ step = 1, errors }) {
                         type: "password"
                     }),
                     Button({
+                        title: "Vérifier la configuration",
+                        style: {
+                            background: "aliceblue"
+                        },
+                        ...(verified ? { disabled: true } : {}),
+                        onClick: verifyDatabaseConnetion
+                    }),
+                    Button({
                         title: "Prochaine étape",
                         style: {
                             background: "aliceblue"
                         },
-                        onClick: verifyDatabaseConnetion
+                        ...(verified ? {} : { disabled: true }),
+                        onClick: goNextStep
                     })
                 ]
             }

@@ -1,11 +1,9 @@
 <?php
 
-//transdorm the $_POST in json
-
-$db_host = $_POST['db_host'];
-$db_name = $_POST['db_name'];
-$db_user = $_POST['db_user'];
-$db_pass = $_POST['db_pass'];
+$db_host = $_REQUEST['dbHost'];
+$db_name = $_REQUEST['dbName'];
+$db_user = $_REQUEST['dbUser'];
+$db_pass = $_REQUEST['dbPassword'];
 
 //test the connexion to the database
 try {

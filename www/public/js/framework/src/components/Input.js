@@ -1,4 +1,4 @@
-export default function Input({ label = "", placeholder = "", name, id }) {
+export default function Input({ label = "", placeholder = "", name, id, type }) {
 
     return {
         type: "div",
@@ -16,6 +16,7 @@ export default function Input({ label = "", placeholder = "", name, id }) {
             {
                 type: "input",
                 attributes: {
+                    type: type,
                     placeholder: placeholder,
                     name: name,
                     id: id

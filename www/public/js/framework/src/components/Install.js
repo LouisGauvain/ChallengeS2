@@ -81,6 +81,7 @@ export default function Install({ step = 1, errors }) {
                         label: "Database password",
                         id: "dbPassword",
                         name: "dbPassword",
+                        type: "password"
                     }),
                     Button({
                         title: "Prochaine étape",

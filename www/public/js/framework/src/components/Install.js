@@ -1,5 +1,6 @@
 
 import { render } from "../core/DomRenderer.js";
+import Input from "./Input.js"
 import Button from "./Button.js";
 
 export default function Install({ step = 1 }) {
@@ -14,12 +15,13 @@ export default function Install({ step = 1 }) {
 
     let children
 
-    if(step == 1){
+    if (step == 1) {
         children = [
-            Button({
-            title: "-",
-            style: { backgroundColor: "red" },
-          })]
+            Input({
+                name: "siteName",
+                id: "siteName",
+                label: "Test input",
+            })]
     }
 
     return {

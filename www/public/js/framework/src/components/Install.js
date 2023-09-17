@@ -12,17 +12,19 @@ export default function Install({ step = 1, errors }) {
         height: "50vh"
     };
 
+    var feur
     let verifyDatabaseConnetion = (e) => {
         e.preventDefault()
         let inputs = document.querySelectorAll("form .input");
 
         let errors = []
         inputs.forEach(input => {
-            if(!input.querySelector("input").value)
-                errors.push(input.querySelector("label").textContent + "ne peut pas être vide")
+            if (!input.querySelector("input").value)
+                errors.push(input.querySelector("label").textContent + " ne peut pas être vide")
         });
 
-        render(Install({step: 1, errors: errors}), document.getElementById("root2"))
+        console.log("now");
+        render(Install({ step: 1, errors: errors }), document.getElementById("root2"))
     }
 
     let children = []
@@ -34,7 +36,11 @@ export default function Install({ step = 1, errors }) {
                     class: "errors"
                 },
                 children: [
-                    ...errors
+                    ...errors.map(error => {
+                        return { type: "p" , children: [
+                            error
+                        ]};
+                    })
                 ]
             }] : []),
             {

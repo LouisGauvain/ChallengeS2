@@ -9,5 +9,5 @@
     
     render(Compteur({count: 0}), document.getElementById("root"));
 
-    render(Install({step: 1}), document.getElementById("root2"))
+    render(Install({step: 2}), document.getElementById("root2"))
 </script>

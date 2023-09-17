@@ -49,6 +49,10 @@ export default function Install({ step = 1, errors, verified }) {
         return render(Install({ step: 2 }), document.getElementById("root2"))
     }
 
+    let setupSite = (e) => {
+        e.preventDefault()
+    }
+
     let children = []
     if (step == 1) {
         let storedDatabaseFormData = JSON.parse(sessionStorage.getItem('databaseFormData') || '{}');
@@ -136,7 +140,14 @@ export default function Install({ step = 1, errors, verified }) {
             {
                 type: "form",
                 children: [
-                    { Button }
+                    Button({
+                        title: "Setup le site",
+                        style: {
+                            background: "aliceblue"
+                        },
+                        ...(verified ? { disabled: true } : {}),
+                        onClick: setupSite
+                    })
                 ]
             }
         ]

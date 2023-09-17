@@ -14,19 +14,15 @@ export default function Install({ step = 1, errors }) {
 
     let verifyDatabaseConnetion = (e) => {
         e.preventDefault()
-        let inputs = document.querySelectorAll("form .input input")
+        let inputs = document.querySelectorAll("form .input");
 
         let errors = []
         inputs.forEach(input => {
-            if (!input.id || !input.value)
-                errors.push("Id ou value vide")
+            if(!input.querySelector("input").value)
+                errors.push(input.querySelector("label").textContent + "ne peut pas être vide")
         });
 
         render(Install({step: 1, errors: errors}), document.getElementById("root2"))
-    }
-
-    let updateInstaller = () => {
-        render(Install({ step: 2 }), document.getElementById("root2"))
     }
 
     let children = []
@@ -45,24 +41,24 @@ export default function Install({ step = 1, errors }) {
                 type: "form",
                 children: [
                     Input({
-                        name: "Database host",
+                        label: "Database host",
                         id: "dbHost",
-                        label: "dbHost",
+                        name: "dbHost",
                     }),
                     Input({
-                        name: "Database name",
+                        label: "Database name",
                         id: "dbName",
-                        label: "dbName",
+                        name: "dbName",
                     }),
                     Input({
-                        name: "Database user",
+                        label: "Database user",
                         id: "dbUser",
-                        label: "dbUser",
+                        name: "dbUser",
                     }),
                     Input({
-                        name: "Database password",
+                        label: "Database password",
                         id: "dbPassword",
-                        label: "dbPassword",
+                        name: "dbPassword",
                     }),
                     Button({
                         title: "Prochaine étape",

@@ -20,7 +20,7 @@ export default function Input({ label = "", placeholder = "", name, id }) {
                     name: name,
                     id: id
                 }
-            }
+            }   
         ]
     }
 }   

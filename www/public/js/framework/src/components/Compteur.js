@@ -18,7 +18,7 @@ export default function Compteur({ initialValue = 0 }) {
     const newCompteurComponent = Compteur({ initialValue: compteur });
     render(newCompteurComponent, document.getElementById("root"));
   };
-  
+
   return {
     type: "div",
     children: [

@@ -16,14 +16,18 @@ export default function Install({ step = 1, errors, verified }) {
         e.preventDefault()
         let inputs = document.querySelectorAll("form .input");
 
+        let formData = {}
         let errors = []
         inputs.forEach(input => {
+            formData[input.querySelector("input").name] = input.querySelector("input").value
             if (!input.querySelector("input").value)
                 errors.push(input.querySelector("label").textContent + " ne peut pas être vide")
         });
 
         if (errors.length != 0)
             return render(Install({ step: 1, errors: errors }), document.getElementById("root2"))
+
+        sessionStorage.setItem('databaseFormData', JSON.stringify(formData))
 
         fetch('/install/test.php', {
             method: 'post',
@@ -48,6 +52,8 @@ export default function Install({ step = 1, errors, verified }) {
 
     let children = []
     if (step == 1) {
+        let storedDatabaseFormData = JSON.parse(sessionStorage.getItem('databaseFormData') || '{}');
+
         children = [
             ...(errors ? [{
                 type: "div",
@@ -71,22 +77,26 @@ export default function Install({ step = 1, errors, verified }) {
                         label: "Database host",
                         id: "dbHost",
                         name: "dbHost",
+                        ...(storedDatabaseFormData ? {value: storedDatabaseFormData.dbHost} : {})
                     }),
                     Input({
                         label: "Database name",
                         id: "dbName",
                         name: "dbName",
+                        ...(storedDatabaseFormData ? {value: storedDatabaseFormData.dbName} : {})
                     }),
                     Input({
                         label: "Database user",
                         id: "dbUser",
                         name: "dbUser",
+                        ...(storedDatabaseFormData ? {value: storedDatabaseFormData.dbUser} : {})
                     }),
                     Input({
                         label: "Database password",
                         id: "dbPassword",
                         name: "dbPassword",
-                        type: "password"
+                        type: "password",
+                        ...(storedDatabaseFormData ? {value: storedDatabaseFormData.dbPassword} : {})
                     }),
                     Button({
                         title: "Vérifier la configuration",

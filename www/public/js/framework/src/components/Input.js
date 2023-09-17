@@ -1,6 +1,8 @@
-export default function Input({ label = "", placeholder = "", name, id, type }) {
+export default function Input({ label = "", placeholder = "", name, id, type, value}) {
 
-    return {
+    console.log(value);
+
+    let a = {
         type: "div",
         attributes: {
             class: "input"
@@ -9,7 +11,7 @@ export default function Input({ label = "", placeholder = "", name, id, type }) 
             {
                 type: "label",
                 children: [label],
-                attributes:{
+                attributes: {
                     for: id
                 }
             },
@@ -19,9 +21,14 @@ export default function Input({ label = "", placeholder = "", name, id, type }) 
                     type: type,
                     placeholder: placeholder,
                     name: name,
-                    id: id
-                }
-            }   
+                    id: id,
+                    ...(value ? {value: value} : {})
+                },
+            }
         ]
     }
+
+    console.log(a)
+
+    return a
 }       

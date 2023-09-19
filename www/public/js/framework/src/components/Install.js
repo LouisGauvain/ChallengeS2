@@ -2,7 +2,7 @@ import { render } from "../core/DomRenderer.js";
 import Input from "./Input.js"
 import Button from "./Button.js";
 
-export default function Install({ step = 1, errors, verified, install }) {
+export default function Install({ step = 1, errors, verified, install, force }) {
     let verifyDatabaseConnetion = (e) => {
         e.preventDefault()
         let inputs = document.querySelectorAll("form .input");
@@ -83,7 +83,52 @@ export default function Install({ step = 1, errors, verified, install }) {
         let databaseFormData = JSON.parse(sessionStorage.getItem('databaseFormData') || '{}');
         formData = { ...formData, ...databaseFormData }
 
-        return render(Install({ step: 2, install: "true" }), document.getElementById("root2"))
+        let formDataObj = new FormData(document.querySelector('form'))
+        for (let key in formData) {
+            formDataObj.append(key, formData[key])
+        }
+
+        fetch('/install/setup.php', {
+            method: 'post',
+            body: formDataObj
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if (!data.success) {
+                    errors.push(data.message)
+                    return render(Install({ step: 2, force: true, errors: errors }), document.getElementById("root2"))
+                }
+                else {
+                    return render(Install({ step: 3 }), document.getElementById("root2"))
+                }
+            })
+    }
+
+    let forceSetupSite = (e) => {
+        e.preventDefault()
+
+        let formDataObj = new FormData(document.querySelector('form'))
+        let formData = JSON.parse(sessionStorage.getItem('storedSetupFormData') || '{}');
+        for (let key in formData) {
+            formDataObj.append(key, formData[key])
+        }
+        formDataObj.append("force", "true")
+
+        fetch('/install/setup.php', {
+            method: 'post',
+            body: formDataObj
+        }).then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    errors.push(data.message)
+                    return render(Install({ step: 2, force: true, errors: errors }), document.getElementById("root2"))
+                }
+                else {
+                    return render(Install({ step: 3 }), document.getElementById("root2"))
+                }
+            }
+            )
+
     }
 
     let children = []
@@ -132,6 +177,7 @@ export default function Install({ step = 1, errors, verified, install }) {
                         id: "dbPassword",
                         name: "dbPassword",
                         type: "password",
+                        ...(storedDatabaseFormData ? { value: storedDatabaseFormData.dbPassword } : {})
                     }),
                     Button({
                         title: "Vérifier la configuration",
@@ -208,7 +254,6 @@ export default function Install({ step = 1, errors, verified, install }) {
                         ...(storedSetupFormData ? { value: storedSetupFormData.adminPasswordVerif } : {}),
                         ...(install ? { disabled: true } : {})
                     }),
-
                     ...(install ? [{
                         type: "p",
                         children: "Site en cours d'installation, veuillez ne pas quittez la page"
@@ -220,6 +265,13 @@ export default function Install({ step = 1, errors, verified, install }) {
                         ...(verified ? { disabled: true } : {}),
                         onClick: setupSite
                     })]),
+                    ...(force ? [Button({
+                        title: "Forcer l'installation",
+                        style: {
+                            background: "lightblue"
+                        },
+                        onClick: forceSetupSite
+                    })] : [])
                 ]
             }
         ]

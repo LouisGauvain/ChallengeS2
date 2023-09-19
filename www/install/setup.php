@@ -1,14 +1,14 @@
 <?php
 
-$db_host = $_POST['db_host'];
-$db_name = $_POST['db_name'];
-$db_user = $_POST['db_user'];
-$db_pass = $_POST['db_pass'];
+$db_host = $_POST['dbHost'];
+$db_name = $_POST['dbName'];
+$db_user = $_POST['dbUser'];
+$db_pass = $_POST['dbPassword'];
 
-$siteName = $_POST['site_name'];
-$tablePrefix = $_POST['table_prefix'];
-$adminEmail = $_POST['admin_email'];
-$adminPass = $_POST['admin_pass'];
+$siteName = $_POST['siteName'];
+$tablePrefix = $_POST['tablePrefix'];
+$adminEmail = $_POST['adminEmail'];
+$adminPass = $_POST['adminPassword'];
 
 try{
     $pdo = new PDO("pgsql:host=$db_host;dbname=$db_name", $db_user, $db_pass);

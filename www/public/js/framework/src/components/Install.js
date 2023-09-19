@@ -2,7 +2,7 @@ import { render } from "../core/DomRenderer.js";
 import Input from "./Input.js"
 import Button from "./Button.js";
 
-export default function Install({ step = 1, errors, verified }) {
+export default function Install({ step = 1, errors, verified, install }) {
     let verifyDatabaseConnetion = (e) => {
         e.preventDefault()
         let inputs = document.querySelectorAll("form .input");
@@ -72,7 +72,7 @@ export default function Install({ step = 1, errors, verified }) {
 
         if (password !== passwordVerif)
             errors.push("Les mots de passe ne corresponde pas")
-        if(!regexPasssword.test(password))
+        if (!regexPasssword.test(password))
             errors.push("Le mot de passe doit contenir, au moins une minuscule, au moins une majuscule, aumoins, un chiffre, au moins un caractere spécial, et faire au moins 8 caracteres")
 
         if (errors.length != 0)
@@ -80,7 +80,7 @@ export default function Install({ step = 1, errors, verified }) {
 
         sessionStorage.setItem('storedSetupFormData', JSON.stringify(formData))
 
-        console.log(inputs)
+        return render(Install({ step: 2, install: "true" }), document.getElementById("root2"))
     }
 
     let children = []
@@ -175,37 +175,48 @@ export default function Install({ step = 1, errors, verified }) {
                         label: "Nom du site",
                         id: "siteName",
                         name: "siteName",
-                        ...(storedSetupFormData ? { value: storedSetupFormData.siteName } : {})
+                        ...(storedSetupFormData ? { value: storedSetupFormData.siteName } : {}),
+                        ...(install ? { disabled: true } : {})
                     }), Input({
                         label: "Prefix des tables",
                         id: "tablePrefix",
                         name: "tablePrefix",
-                        ...(storedSetupFormData ? { value: storedSetupFormData.tablePrefix } : {})
+                        ...(storedSetupFormData ? { value: storedSetupFormData.tablePrefix } : {}),
+                        ...(install ? { disabled: true } : {})
                     }), Input({
                         label: "Email de l'Admin",
                         id: "adminEmail",
                         name: "adminEmail",
                         type: "email",
                         ...(storedSetupFormData ? { value: storedSetupFormData.adminEmail } : {}),
+                        ...(install ? { disabled: true } : {})
                     }), Input({
                         label: "Mot de passz de l'Admin",
                         id: "adminPassword",
                         name: "adminPassword",
                         type: "password",
+                        ...(storedSetupFormData ? { value: storedSetupFormData.adminPassword } : {}),
+                        ...(install ? { disabled: true } : {})
                     }), Input({
                         label: "Remettre mot de passe",
                         id: "adminPasswordVerif",
                         name: "adminPasswordVerif",
                         type: "password",
+                        ...(storedSetupFormData ? { value: storedSetupFormData.adminPasswordVerif } : {}),
+                        ...(install ? { disabled: true } : {})
                     }),
-                    Button({
+
+                    ...(install ? [{
+                        type: "p",
+                        children: "Site en cours d'installation, veuillez ne pas quittez la page"
+                    }] : [Button({
                         title: "Setup le site",
                         style: {
                             background: "lightblue"
                         },
                         ...(verified ? { disabled: true } : {}),
                         onClick: setupSite
-                    })
+                    })]),
                 ]
             }
         ]

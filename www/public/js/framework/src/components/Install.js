@@ -80,6 +80,9 @@ export default function Install({ step = 1, errors, verified, install }) {
 
         sessionStorage.setItem('storedSetupFormData', JSON.stringify(formData))
 
+        let databaseFormData = JSON.parse(sessionStorage.getItem('databaseFormData') || '{}');
+        formData = { ...formData, ...databaseFormData }
+
         return render(Install({ step: 2, install: "true" }), document.getElementById("root2"))
     }
 

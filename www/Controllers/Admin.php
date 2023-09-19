@@ -11,6 +11,9 @@ use App\Core\Verificator;
 
 class Admin
 {
+    public function install(){
+        Utils::redirect("/install.php");
+    }
 
     public function deleteUser(): void
     {

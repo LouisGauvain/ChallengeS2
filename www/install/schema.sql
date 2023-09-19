@@ -61,6 +61,7 @@ INSERT INTO "esgi_pages" ("id", "title", "content", "user_id", "date_created", "
 (13,	'add_template_page',	NULL,	NULL,	'2023-06-28 14:24:41.937919',	NULL,	'/add_template_page',	'Security',	'addTemplatePage'),
 (14,	'Index',	NULL,	NULL,	'2023-06-29 06:56:39.827372',	NULL,	'/',	'Main',	'index'),
 (15,	'components',	NULL,	NULL,	'2023-06-30 09:45:46.514237',	NULL,	'/components',	'Main',	'components'),
+(96,	'install',	NULL,	NULL,	'2023-09-16 06:17:15.241603',	NULL,	'/install',	'Admin',	'install'),
 (16,	'Create Page',	NULL,	NULL,	'2023-06-30 14:10:21.927364',	NULL,	'/create_page',	'Security',	'createPage');
 
 DROP TABLE IF EXISTS "esgi_roles" CASCADE;

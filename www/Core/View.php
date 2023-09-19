@@ -17,8 +17,6 @@ class View
     {
         $this->setView($view);
 
-        session_start();
-
         if (isset($_SESSION['user'])) {
             $token = new Tokens();
             $token->setUserId($_SESSION['user']['id']);

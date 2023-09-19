@@ -1,14 +1,14 @@
 <?php
 
-$db_host = $_POST['db_host'];
-$db_name = $_POST['db_name'];
-$db_user = $_POST['db_user'];
-$db_pass = $_POST['db_pass'];
+$db_host = $_POST['dbHost'];
+$db_name = $_POST['dbName'];
+$db_user = $_POST['dbUser'];
+$db_pass = $_POST['dbPassword'];
 
-$siteName = $_POST['site_name'];
-$tablePrefix = $_POST['table_prefix'];
-$adminEmail = $_POST['admin_email'];
-$adminPass = $_POST['admin_pass'];
+$siteName = $_POST['siteName'];
+$tablePrefix = $_POST['tablePrefix'];
+$adminEmail = $_POST['adminEmail'];
+$adminPass = $_POST['adminPassword'];
 
 try{
     $pdo = new PDO("pgsql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
@@ -63,9 +63,9 @@ $env = str_replace('DB_NAME=', "DB_NAME=$db_name", $env);
 $env = str_replace('DB_USERNAME=', "DB_USERNAME=$db_user", $env);
 $env = str_replace('DB_PASSWORD=', "DB_PASSWORD=$db_pass", $env);
 $env = str_replace('DB_PREFIX=', "DB_PREFIX=$tablePrefix", $env);
-$env = str_replace('API_URL=', "API_URL={$_POST['api_url']}", $env);
-$env = str_replace('APP_URL=', "APP_URL={$_POST['site_url']}", $env);
-
+/*$env = str_replace('API_URL=', "API_URL={$_POST['apiUrl']}", $env);
+$env = str_replace('APP_URL=', "APP_URL={$_POST['siteUrl']}", $env);
+*/
 $env = str_replace('SITE_NAME=', "SITE_NAME=$siteName", $env);
 
 file_put_contents('../.env', $env);

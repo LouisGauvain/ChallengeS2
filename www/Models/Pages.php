@@ -130,6 +130,18 @@ class Pages extends Sql
         }
     }
 
+    public function getUriPagesByAction()
+    {
+        $db = $this::getInstance();
+        $query = $db->query("SELECT title, url_page FROM " . $this->table . " WHERE action_page = 'index'");
+        $uriq = $query->fetchAll();
+        if (is_null($uriq)) {
+            return false;
+        } else {
+            return $uriq;
+        }
+    }
+
     public function namePage($title): bool
     {
         $db = $this::getInstance();

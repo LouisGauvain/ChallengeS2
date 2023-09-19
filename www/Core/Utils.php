@@ -6,14 +6,16 @@ class Utils
 {
     public static function var_dump($variable): void
     {
-        echo '<pre>';
+        echo '<pre style="background-color: #000; color: #fff; padding: 10px; border-radius: 5px; margin: 10px;">';
+        debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
         var_dump($variable);
         echo '</pre>';
     }
 
     public static function var_dump_die($variable): void
     {
-        echo '<pre>';
+        echo '<pre style="background-color: #000; color: #fff; padding: 10px; border-radius: 5px; margin: 10px;">';
+        debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
         var_dump($variable);
         echo '</pre>';
         die();

@@ -277,6 +277,14 @@ export default function Install({ step = 1, errors, verified, install, force }) 
             }
         ]
     }
+    else if (step == 3) {
+        children = [
+            {
+                type: "p",
+                children: "Site installé avec succès"
+            }
+        ]
+    }
 
     return {
         type: "div",

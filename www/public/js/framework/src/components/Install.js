@@ -109,6 +109,7 @@ export default function Install({ step = 1, errors, verified, install, force }) 
 
         let formDataObj = new FormData(document.querySelector('form'))
         let formData = JSON.parse(sessionStorage.getItem('storedSetupFormData') || '{}');
+        formData = { ...formData, ...JSON.parse(sessionStorage.getItem('databaseFormData') || '{}') }
         for (let key in formData) {
             formDataObj.append(key, formData[key])
         }

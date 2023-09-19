@@ -12,7 +12,7 @@ use App\Core\Verificator;
 class Admin
 {
     public function install(){
-        $view = new View("Admin/install", "front");
+        Utils::redirect("/install.php");
     }
 
     public function deleteUser(): void

@@ -238,10 +238,10 @@ class Security
                         $donnees['imageSite+' . ($key + 1)] = $file;
                     }
                     $template = new Templates();
-                    $description = $template->getByName($_GET['selected_option']);
+                    $description = $template->getByName($_GET['selected_option'])['description'];
                     $order = array();
                     $dom = new \DOMDocument();
-                    $dom->loadHTML($description['description']);
+                    $dom->loadHTML($description);
                     $inputs = $dom->getElementsByTagName('input');
                     foreach ($inputs as $input) {
                         $name = $input->getAttribute('name');
@@ -272,13 +272,16 @@ class Security
                     $Pages->setContent($json);
                     $Pages->setUserId($_SESSION['user']['id']);
                     $Pages->setDateCreated(date('Y-m-d H:i:s'));
+                    $text = str_replace(' ', '-', $text);
+                    $text = preg_replace('/[^A-Za-z0-9\-]/', '', $text);
+                    $text = strtolower($text);
                     $Pages->setUrlPage('/' . $text);
                     $Pages->setControllerPage('Page');
                     $Pages->setActionPage('index');
                     $Pages->createFolderImagePage();
                     $Pages->createFolderUploadImagePage();
                     $Pages->addFolderAndFileImagePage();
-                    $Pages->setUsedTemplate($_GET['selected_option']);
+                    $Pages->setUsedTemplate($template->getByName($_GET['selected_option'])['id']);
                     $Pages->save();
                     Utils::redirect('/' . $text);
                 }

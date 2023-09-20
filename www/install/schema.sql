@@ -161,6 +161,30 @@ CREATE TABLE "public"."esgi_configurations" (
     "updated_at" timestamp
 ) WITH (oids = false);
 
+
+DROP TABLE IF EXISTS "esgi_categories";
+DROP SEQUENCE IF EXISTS esgi_categories_id_seq;
+CREATE SEQUENCE esgi_categories_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
+CREATE TABLE "public"."esgi_categories" (
+    "id" integer DEFAULT nextval('esgi_categories_id_seq') NOT NULL,
+    "name" character varying(255) NOT NULL,
+    CONSTRAINT "esgi_categories_pkey" PRIMARY KEY ("id")
+) WITH (oids = false);
+
+
+DROP TABLE IF EXISTS "esgi_page_categories";
+DROP SEQUENCE IF EXISTS esgi_page_categories_id_seq;
+CREATE SEQUENCE esgi_page_categories_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
+CREATE TABLE "public"."esgi_page_categories" (
+    "page_id" integer,
+    "category_id" integer,
+    PRIMARY KEY ("page_id", "category_id"),
+    FOREIGN KEY ("page_id") REFERENCES esgi_pages(id) ON DELETE CASCADE,
+    FOREIGN KEY ("category_id") REFERENCES esgi_categories(id) ON DELETE CASCADE
+) WITH (oids = false);
+
+
+
 ALTER TABLE ONLY "public"."esgi_comments" ADD CONSTRAINT "esgi_comments_page_id_fkey" FOREIGN KEY (page_id) REFERENCES esgi_pages(id) NOT DEFERRABLE;
 ALTER TABLE ONLY "public"."esgi_comments" ADD CONSTRAINT "esgi_comments_user_id_fkey" FOREIGN KEY (user_id) REFERENCES esgi_users(id) NOT DEFERRABLE;
 

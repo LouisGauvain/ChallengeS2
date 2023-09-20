@@ -17,8 +17,10 @@ $user = $_SESSION['user']; ?>
                 <th>Titre</th>
                 <th>URL</th>
                 <th>Template</th>
-                <?php
-                Utils::isAdmin() == true ? "<th>Actions</th>" : "";
+                <?php 
+                if (Utils::isAdmin() == true) { ?>
+                    <th>Actions</th>
+                <?php }
                 ?>
             </tr>
         </thead>

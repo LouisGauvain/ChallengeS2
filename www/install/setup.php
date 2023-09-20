@@ -69,9 +69,9 @@ $env = str_replace('DB_PREFIX=', "DB_PREFIX=$tablePrefix", $env);
 $env = str_replace('APP_URL=', "APP_URL={$_POST['siteUrl']}", $env);
 */
 if($installType === 'local') {
-    $env = str_replace('APP_ENV=', "APP_ENV=localhost", $env);
+    $env = str_replace('APP_URL=', "APP_URL=localhost", $env);
 } else {
-    $env = str_replace('APP_ENV=', "APP_ENV=" . $_SERVER['HTTP_HOST'], $env);
+    $env = str_replace('APP_URL=', "APP_URL=" . $_SERVER['HTTP_HOST'], $env);
 }
 
 $env = str_replace('SITE_NAME=', "SITE_NAME=$siteName", $env);

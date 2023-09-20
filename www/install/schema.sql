@@ -34,8 +34,8 @@ DROP TABLE IF EXISTS "esgi_pages" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_pages_id_seq;
 CREATE SEQUENCE esgi_pages_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
-CREATE TABLE "public"."esgi_pages" (
-    "id" integer DEFAULT nextval('esgi_pages_id_seq') NOT NULL,
+CREATE TABLE "public"."test_pages" (
+    "id" integer DEFAULT nextval('test_pages_id_seq') NOT NULL,
     "title" character varying(255) NOT NULL,
     "content" text,
     "user_id" integer,
@@ -44,8 +44,10 @@ CREATE TABLE "public"."esgi_pages" (
     "url_page" text,
     "controller_page" character varying(255) NOT NULL,
     "action_page" character varying(255) NOT NULL,
-    CONSTRAINT "esgi_pages_pkey" PRIMARY KEY ("id")
+    "used_template" integer,
+    CONSTRAINT "test_pages_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
+
 
 INSERT INTO "esgi_pages" ("title", "content", "user_id", "date_created", "date_modified", "url_page", "controller_page", "action_page") VALUES
 ('dashboard',	NULL,	NULL,	'2023-06-28 09:35:28.62323',	NULL,	'/dashboard',	'Main',	'dashboard'),

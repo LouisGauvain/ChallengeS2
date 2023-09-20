@@ -61,12 +61,12 @@ class Admin
         $this->verifRole();
 
         if (!isset($_GET['id'])) {
-            Utils::redirect('/dashboard');
+            Utils::redirect('/list_comment');
         }
         
         $page = new Comments();
         $page->delete($_GET['id']);
-        Utils::redirect('/dashboard');
+        Utils::redirect('/list_comment');
     }
 
     public function editUser(): void

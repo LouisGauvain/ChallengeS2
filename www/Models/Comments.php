@@ -40,7 +40,7 @@ class Comments extends Sql
         return $this->user_name;
     }
 
-    public function setUserName(int $user_name): void
+    public function setUserName(string $user_name): void
     {
         $this->user_name = $user_name;
     }
@@ -116,11 +116,11 @@ class Comments extends Sql
     }
 
     
-    public function getCommentNonValidated($id): array
+    public function getCommentNonValidated(): array | bool
     {
         $db = $this::getInstance();
         $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE statut_moderation = false");
-        $query->execute(['id' => $id]);
+        $query->execute();
         $nonValidatedComments = $query->fetchAll();
 
         if (!$nonValidatedComments) {

@@ -17,6 +17,7 @@ use App\Models\Tokens;
 use App\Models\Templates;
 use App\Models\PhpMailor;
 use App\Models\Pages;
+use App\Models\Comments;
 use App\Models\PageCategories;
 
 function extractStructure($element): array
@@ -322,6 +323,8 @@ class Security
     {
         $view = new View("Main/listComment", "back");
 
-        
+        $comments = new Comments();
+        $view->assign("comments", $comments->getCommentNonValidated());
+
     }
 }

@@ -59,6 +59,7 @@ abstract class Sql
         $columnsToDeleted = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToDeleted);
         unset($columns["id"]);
+        unset($columns[""]);
 
         if (is_numeric($this->getId()) && $this->getId() > 0) {
             $columnsUpdate = [];

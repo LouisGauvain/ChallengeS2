@@ -11,6 +11,7 @@ use App\Forms\AddComment;
 
 class Comment
 {
+    /*
     public function addComment(): void
     {
         $comment = new Comments();
@@ -27,5 +28,19 @@ class Comment
 
             }
         }
+    }*/
+
+    public function getCommentNonValidated($id): array
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE statut_moderation = false");
+        $query->execute(['id' => $id]);
+        $nonValidatedComments = $query->fetchAll();
+
+        if (!$nonValidatedComments) {
+            return false;
+        }
+
+        return $nonValidatedComments;
     }
 }

@@ -25,6 +25,11 @@ $user = $_SESSION['user']; ?>
         <tbody>
             <?php
             foreach ($pages as $page) {
+                for($i = 0; $i < count($templates); $i++){
+                    if($page['used_template'] == $templates[$i]['id']){
+                        $page['used_template'] = $templates[$i]['name'];
+                    }
+                }
                 echo "<tr>";
                 echo "<td><a href='" . $page['url_page'] . "'>" . $page['title'] . "</a></td>";
                 echo "<td>" . $page['url_page'] . "</td>";

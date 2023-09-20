@@ -293,10 +293,11 @@ class Security
 
     public function Page(): void
     {
-
         $view = new View("Main/index", "back");
 
         $pages = new Pages();
         $view->assign("pages", $pages->getAllPages());
+        $template = new Templates();
+        $view->assign("templates", $template->findAll());
     }
 }

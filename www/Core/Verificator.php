@@ -87,6 +87,11 @@ class Verificator
         return preg_match("/^[a-zA-Z]{2,45}$/", $lastName);
     }
 
+    public static function checkUsername($username): bool
+    {
+        return preg_match("/^[a-zA-Z0-9\s-]{2,45}+$/", $username);
+    }
+
     public static function checkConfirmEmail($email, $confirmEmail): bool
     {
         return $email == $confirmEmail;
@@ -133,7 +138,7 @@ class Verificator
                 }
             }
 
-            if ($input["type"] == "text" && !self::checkFirstName($data[$name])) {
+            if ($input["type"] == "text" && !self::checkUsername($data[$name])) {
                 $listOfErrors[] = $input["error"];
             }
         }

@@ -27,7 +27,7 @@ class AddComment extends AForm
                     "min" => 2,
                     "max" => 45,
                     "label" => "Votre nom",
-                    "error" => "Votre nom doit faire entre 2 et 45 caractères",
+                    "error" => "Votre nom doit faire entre 2 et 45 caractères, il peut contenir des chiffres et des lettres, des espaces et des tirets",
                     "class" => ""
                 ],
                 "content" => [

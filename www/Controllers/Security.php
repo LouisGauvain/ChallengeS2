@@ -87,8 +87,8 @@ class Security
                     $token->setUserId($userInfos['id']);
                     $token->createToken();
                     if ($userInfos['email_verified']) {
-                        Utils::redirect("dashboard");
                         Utils::setSession($userInfos, $token->getToken());
+                        Utils::redirect("dashboard");
                     } else {
                         $view->assign('errors', ['user_email' => 'Email non vérifié']);
                     }

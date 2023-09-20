@@ -24,6 +24,8 @@ function BrowserLink(title, link) {
     children: [title],
     events: {
       click: function (event) {
+        if ((new URL(event.currentTarget.href)).pathname === "/")
+          return;
         event.preventDefault();
         history.pushState({}, undefined, link);
         window.dispatchEvent(new Event("popstate"));

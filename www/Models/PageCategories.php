@@ -31,4 +31,20 @@ class PageCategories extends Sql
             $query->execute(['page_id' => $idPage, 'category_id' => $categoryId]);
         }
     }
+
+    public function getCategoriesByPageId($id): array | bool
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE page_id = :page_id");
+        $query->execute(['page_id' => $id]);
+        $result = $query->fetchAll();
+
+        $category = new Categories();
+        $categories = [];
+        foreach ($result as $value) {
+            $categories[] = $category->findById($value['category_id']);
+        }
+        return $categories;
+
+    }
 }

@@ -7,6 +7,7 @@ use App\Models\Templates;
 use App\Forms\CreatePage;
 use App\Core\Verificator;
 use App\Core\Utils;
+use App\Models\PageCategories;
 use App\Models\Pages;
 
 //dotenv
@@ -40,6 +41,8 @@ class Page
         $view->assign("url", $_ENV['API_URL']);
         $view->assign("page", $page);
         $view->assign("allUsersPages", $allUsersPages);
+        $PageCategories = new PageCategories();
+        $view->assign("categories", $PageCategories->getCategoriesByPageId($page['id']));
     }
 
     public static function pageCreate(): void

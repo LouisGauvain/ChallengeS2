@@ -24,4 +24,13 @@ class Categories extends Sql
         Utils::var_dump($result);
         return $result['id'];
     }
+    
+    public function findById(int $id): array | bool
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE id = :id");
+        $query->execute(['id' => $id]);
+        $result = $query->fetch();
+        return $result;
+    }
 }

@@ -8,6 +8,26 @@
     ?>
 </div>
 
+
+<?php
+function displayComments($comments) {
+    foreach ($comments as $comment) {
+        echo '<div class="container">';
+        echo '<p>' . htmlentities($comment['content']) . '</p>';
+
+        // Affichez les commentaires enfants de manière récursive
+        if (!empty($comment['children'])) {
+            displayComments($comment['children']);
+        }
+
+        echo '</div>';
+    }
+}
+
+displayComments($commentsTree);
+?>
+
+
 <script type="module">
     import {
         generateStructure,

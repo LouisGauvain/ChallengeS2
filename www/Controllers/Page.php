@@ -7,6 +7,7 @@ use App\Models\Templates;
 use App\Forms\CreatePage;
 use App\Core\Verificator;
 use App\Core\Utils;
+use App\Models\Comments;
 use App\Models\PageCategories;
 use App\Models\Pages;
 
@@ -43,6 +44,11 @@ class Page
         $view->assign("allUsersPages", $allUsersPages);
         $PageCategories = new PageCategories();
         $view->assign("categories", $PageCategories->getCategoriesByPageId($page['id']));
+    
+        $comments = new Comments();
+        $commentsTree = $comments->getCommentsTreeByPageID($page['id']);
+
+        $view->assign("commentsTree", $commentsTree);
     }
 
     public static function pageCreate(): void

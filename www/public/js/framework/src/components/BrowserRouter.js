@@ -34,7 +34,7 @@ function BrowserLink(title, link) {
         fetch(link, { method: "POST" }).then((response) => { return response.text() }).then((data) => { 
           const json = JSON.parse(data);
           div.children.push(json)
-          render(div, document.getElementById("root2"));
+          render(div, document.getElementById("root"));
         });
       },
     },

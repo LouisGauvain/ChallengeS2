@@ -16,7 +16,7 @@ export default function Install({ step = 1, errors, verified, install, force }) 
         });
 
         if (errors.length != 0)
-            return render(Install({ step: 1, errors: errors }), document.getElementById("root2"))
+            return render(Install({ step: 1, errors: errors }), document.getElementById("root"))
 
         sessionStorage.setItem('databaseFormData', JSON.stringify(formData))
 
@@ -27,10 +27,10 @@ export default function Install({ step = 1, errors, verified, install, force }) 
             .then(data => {
                 if (!data.success) {
                     errors.push(data.message)
-                    return render(Install({ step: 1, errors: errors }), document.getElementById("root2"))
+                    return render(Install({ step: 1, errors: errors }), document.getElementById("root"))
                 }
                 else {
-                    return render(Install({ step: 1, verified: "true" }), document.getElementById("root2"))
+                    return render(Install({ step: 1, verified: "true" }), document.getElementById("root"))
                 }
             })
 
@@ -38,7 +38,7 @@ export default function Install({ step = 1, errors, verified, install, force }) 
 
     let goNextStep = (e) => {
         e.preventDefault()
-        return render(Install({ step: 2 }), document.getElementById("root2"))
+        return render(Install({ step: 2 }), document.getElementById("root"))
     }
 
     let setupSite = (e) => {
@@ -56,7 +56,7 @@ export default function Install({ step = 1, errors, verified, install, force }) 
         }
 
         if (errors.length != 0)
-            return render(Install({ step: 2, errors: errors }), document.getElementById("root2"))
+            return render(Install({ step: 2, errors: errors }), document.getElementById("root"))
 
         const prefix = inputs[1].querySelector("input").value
         if (prefix.length <= 2 || prefix.length > 10 || prefix[prefix.length - 1] !== "_")
@@ -88,7 +88,7 @@ export default function Install({ step = 1, errors, verified, install, force }) 
             errors.push("Vous devez selectionner un type d'installation")
 
         if (errors.length != 0)
-            return render(Install({ step: 2, errors: errors }), document.getElementById("root2"))
+            return render(Install({ step: 2, errors: errors }), document.getElementById("root"))
 
         sessionStorage.setItem('storedSetupFormData', JSON.stringify(formData))
 
@@ -108,10 +108,10 @@ export default function Install({ step = 1, errors, verified, install, force }) 
                 console.log(data)
                 if (!data.success) {
                     errors.push(data.message)
-                    return render(Install({ step: 2, force: true, errors: errors }), document.getElementById("root2"))
+                    return render(Install({ step: 2, force: true, errors: errors }), document.getElementById("root"))
                 }
                 else {
-                    return render(Install({ step: 3 }), document.getElementById("root2"))
+                    return render(Install({ step: 3 }), document.getElementById("root"))
                 }
             })
     }
@@ -134,10 +134,10 @@ export default function Install({ step = 1, errors, verified, install, force }) 
             .then(data => {
                 if (!data.success) {
                     errors.push(data.message)
-                    return render(Install({ step: 2, force: true, errors: errors }), document.getElementById("root2"))
+                    return render(Install({ step: 2, force: true, errors: errors }), document.getElementById("root"))
                 }
                 else {
-                    return render(Install({ step: 3 }), document.getElementById("root2"))
+                    return render(Install({ step: 3 }), document.getElementById("root"))
                 }
             }
             )

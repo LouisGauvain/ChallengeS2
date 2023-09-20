@@ -1,9 +1,9 @@
 <?php
 
-if (!file_exists($envFilePath)) {
+/* if (!file_exists($envFilePath)) {
     header("Location: /");
     exit;
-}
+} */
 ?>
 
 <div id="header"></div>
@@ -25,4 +25,4 @@ if (!file_exists($envFilePath)) {
     render(Install({
         step: 1
     }), document.getElementById("root2"))
-</script>
+    </script>

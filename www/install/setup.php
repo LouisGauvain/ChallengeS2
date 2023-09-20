@@ -1,5 +1,7 @@
 <?php
 
+var_dump($_POST);
+
 $db_host = $_POST['dbHost'];
 $db_name = $_POST['dbName'];
 $db_user = $_POST['dbUser'];
@@ -9,6 +11,8 @@ $siteName = $_POST['siteName'];
 $tablePrefix = $_POST['tablePrefix'];
 $adminEmail = $_POST['adminEmail'];
 $adminPass = $_POST['adminPassword'];
+
+$installType = $_POST['installType'];
 
 try{
     $pdo = new PDO("pgsql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
@@ -30,7 +34,7 @@ $sql = file_get_contents('schema.sql');
 $sql = str_replace('esgi_', $tablePrefix, $sql);
 
 $pdo->exec($sql);
-
+/* 
 $sql = "INSERT INTO {$tablePrefix}users (firstname, lastname, email, password, role_id, email_verified) VALUES (:firstname, :lastname, :email, :password, :role_id, :email_verified)";
 $query = $pdo->prepare($sql);
 $query->execute([
@@ -54,7 +58,7 @@ $query = $pdo->prepare($sql);
 $query->execute([
     'configuration_key' => 'table_prefix',
     'configuration_value' => $tablePrefix
-]);
+]); */
 
 //create the .env file
 $env = file_get_contents('../.env.example');
@@ -66,6 +70,12 @@ $env = str_replace('DB_PREFIX=', "DB_PREFIX=$tablePrefix", $env);
 /*$env = str_replace('API_URL=', "API_URL={$_POST['apiUrl']}", $env);
 $env = str_replace('APP_URL=', "APP_URL={$_POST['siteUrl']}", $env);
 */
+if($installType === 'local') {
+    $env = str_replace('APP_ENV=', "APP_ENV=localhost", $env);
+} else {
+    $env = str_replace('APP_ENV=', "APP_ENV=" . $_SERVER['HTTP_HOST'], $env);
+}
+
 $env = str_replace('SITE_NAME=', "SITE_NAME=$siteName", $env);
 
 file_put_contents('../.env', $env);

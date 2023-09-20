@@ -47,12 +47,13 @@ export default function Install({ step = 1, errors, verified, install, force }) 
 
         let formData = {}
         let errors = []
-
-        inputs.forEach(input => {
-            formData[input.querySelector("input").name] = input.querySelector("input").value
-            if (!input.querySelector("input").value)
-                errors.push(input.querySelector("label").textContent + " ne peut pas être vide")
-        });
+        
+        var data = new FormData(document.querySelector('form'));
+        for (const entry of data) {
+            formData[entry[0]] = entry[1]
+            if (!entry[1])
+                errors.push(entry[0] + " ne peut pas être vide")
+        }
 
         if (errors.length != 0)
             return render(Install({ step: 2, errors: errors }), document.getElementById("root2"))
@@ -74,6 +75,17 @@ export default function Install({ step = 1, errors, verified, install, force }) 
             errors.push("Les mots de passe ne corresponde pas")
         if (!regexPasssword.test(password))
             errors.push("Le mot de passe doit contenir, au moins une minuscule, au moins une majuscule, aumoins, un chiffre, au moins un caractere spécial, et faire au moins 8 caracteres")
+
+        //selectionner les input avec le name installType
+        const installType = document.querySelectorAll("input[name=installType]")
+        //verifier si un des input est checked
+        let checked = false
+        installType.forEach(input => {
+            if (input.checked)
+                checked = true
+        })
+        if (!checked)
+            errors.push("Vous devez selectionner un type d'installation")
 
         if (errors.length != 0)
             return render(Install({ step: 2, errors: errors }), document.getElementById("root2"))
@@ -255,6 +267,27 @@ export default function Install({ step = 1, errors, verified, install, force }) 
                         ...(storedSetupFormData ? { value: storedSetupFormData.adminPasswordVerif } : {}),
                         ...(install ? { disabled: true } : {})
                     }),
+                    {
+                        type: "div",
+                        children: [
+                            Input({
+                                label: "En local",
+                                id: "local",
+                                name: "installType",
+                                type: "radio",
+                                value: "local",
+                                checked: "true",
+                                ...(install ? { disabled: true } : {})
+                            }), Input({
+                                label: "Sur un serveur",
+                                id: "server",
+                                name: "installType",
+                                type: "radio",
+                                value: "server",
+                                ...(install ? { disabled: true } : {})
+                            }),
+                        ]
+                    },
                     ...(install ? [{
                         type: "p",
                         children: "Site en cours d'installation, veuillez ne pas quittez la page"

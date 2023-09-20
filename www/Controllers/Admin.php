@@ -69,6 +69,22 @@ class Admin
         Utils::redirect('/list_comment');
     }
 
+    public function verifyComment(): void
+    {
+        $this->verifRole();
+        if (!isset($_GET['id'])) {
+            Utils::redirect('/list_comment');
+        }
+
+        $page = new Comments();
+        $page->setStatutModeration(true);
+        $page->setDateCreated(NULL);
+        $page->setId($_GET['id']);
+        $page->save();
+
+        Utils::redirect('/list_comment');
+    }
+
     public function editUser(): void
     {
         $this->verifRole();

@@ -80,9 +80,9 @@ class Comments extends Sql
         return $this->statut_moderation;
     }
 
-    public function setStatutModeration($statut_moderation): void
+    public function setStatutModeration(Bool $statut_moderation): void
     {
-        $this->$statut_moderation = $statut_moderation;
+        $this->statut_moderation = $statut_moderation;
     }
 
 

@@ -9,20 +9,24 @@
             </tr>
         </thead>
         <tbody>
-        <?php foreach($comments as $comment)
-        {
-            echo "<tr>";
-            echo "<td>" . $comment['user_name'] . "</td>";
-            echo "<td>" . $comment['content'] . "</td>";
+            <?php
+            if (!empty($comments)) {
+                foreach ($comments as $comment) {
+                    echo "<tr>";
+                    echo "<td>" . $comment['user_name'] . "</td>";
+                    echo "<td>" . $comment['content'] . "</td>";
 
-        ?>
-            <td>
-                <a href="admin/delete_comment?id=<?= $comment['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet page ?')">Supprimer</a>
-            </td>
-        <?php
-            echo "</tr>";
-        }
-        ?>
+            ?>
+                    <td>
+                        <a href="admin/verify_comment?id=<?= $comment['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet page ?')">Verifier</a> |
+                        <a href="admin/delete_comment?id=<?= $comment['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet page ?')">Supprimer</a>
+                    </td>
+            <?php
+                    echo "</tr>";
+                }
+            }
+            ?>
+
         </tbody>
     </table>
 </div>

@@ -152,6 +152,9 @@ class Templates extends Sql
 
     public function getDataUrl(): array | bool
     {
+        if(!isset($_GET['selected_option'])) {
+            Utils::redirect("choice_template_page");
+        }
         $SelectOption = str_replace('_', ' ', $_GET['selected_option']);
         $db = $this::getInstance();
         $query = $db->prepare("SELECT * FROM esgi_templates WHERE name = :selectedOption");

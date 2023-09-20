@@ -15,8 +15,28 @@ class Admin
         Utils::redirect("/install.php");
     }
 
+    public function verifRole(): void
+    {
+        if(session_status() == PHP_SESSION_NONE) {
+            Utils::redirect("/login");
+        }
+        if (!empty($_SESSION['user'])) {
+            if ($_SESSION['user']['role_id'] != 1) {
+                Utils::redirect("/");
+            }
+        } else {
+            Utils::redirect("/login");
+        }
+    }
+
     public function deleteUser(): void
     {
+        $this->verifRole();
+
+        if (!isset($_GET['id'])) {
+            Utils::redirect('/dashboard');
+        }
+
         $user = new Users();
         $user->delete($_GET['id']);
         Utils::redirect('/dashboard');
@@ -24,6 +44,12 @@ class Admin
     
     public function deletePage(): void
     {
+        $this->verifRole();
+
+        if (!isset($_GET['id'])) {
+            Utils::redirect('/page');
+        }
+        
         $page = new Pages();
         $page->delete($_GET['id']);
         Utils::redirect('/page');
@@ -31,6 +57,12 @@ class Admin
 
     public function editUser(): void
     {
+        $this->verifRole();
+        
+        if (!isset($_GET['id'])) {
+            Utils::redirect('/dashboard');
+        }
+
         $user = new Users();
         $userInfos = $user->find($_GET['id']);
         $form = new EditUser($userInfos);

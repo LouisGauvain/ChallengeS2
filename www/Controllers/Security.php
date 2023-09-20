@@ -138,11 +138,6 @@ class Security
         }
     }
 
-    public function logout(): void
-    {
-        echo "Logout";
-    }
-
     public function disconnect(): void
     {
         session_start();

@@ -51,7 +51,6 @@ INSERT INTO "esgi_pages" ("title", "content", "user_id", "date_created", "date_m
 ('dashboard',	NULL,	NULL,	'2023-06-28 09:35:28.62323',	NULL,	'/dashboard',	'Main',	'dashboard'),
 ('contact',	NULL,	NULL,	'2023-06-28 09:36:18.308916',	NULL,	'/contact',	'Main',	'contact'),
 ('login',	NULL,	NULL,	'2023-06-28 09:36:52.399549',	NULL,	'/login',	'Security',	'login'),
-('logout',	NULL,	NULL,	'2023-06-28 09:37:34.418299',	NULL,	'/logout',	'Security',	'logout'),
 ('register',	NULL,	NULL,	'2023-06-28 09:38:51.893301',	NULL,	'/register',	'Security',	'register'),
 ('disconnect',	NULL,	NULL,	'2023-06-28 09:39:12.302641',	NULL,	'/disconnect',	'Security',	'disconnect'),
 ('verify',	NULL,	NULL,	'2023-06-28 09:39:30.914361',	NULL,	'/verify',	'Security',	'verify'),

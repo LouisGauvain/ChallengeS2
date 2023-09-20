@@ -118,6 +118,28 @@ class Verificator
         return $listOfErrors;
     }
 
+    static public function formAddComment(array $config, array $data): array
+    {
+        $listOfErrors = [];
+
+        foreach($config['inputs'] as $name => $input)
+        {
+            if(preg_match("/<script>/i", $_POST['content']))
+            {
+                $texteError = "Il est interdit d'insérer du script";
+                if(!in_array($texteError, $listOfErrors))
+                {
+                    $listOfErrors[] = $texteError;
+                }
+            }
+
+            if ($input["type"] == "text" && !self::checkFirstName($data[$name])) {
+                $listOfErrors[] = $input["error"];
+            }
+        }
+        return $listOfErrors;
+    }
+
     public static function addImageTemplate(array $config, array $data): array
     {
         $listOfErrors = [];
@@ -214,4 +236,6 @@ class Verificator
         }
         return $listOfErrors;
     }
+
+
 }

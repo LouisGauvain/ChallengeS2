@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\Utils;
 use App\Models\Users;
 use App\Models\Pages;
+use App\Models\Comments;
 use App\Core\View;
 use App\Forms\EditUser;
 use App\Core\Verificator;
@@ -53,6 +54,19 @@ class Admin
         $page = new Pages();
         $page->delete($_GET['id']);
         Utils::redirect('/page');
+    }
+
+    public function deleteComment(): void
+    {
+        $this->verifRole();
+
+        if (!isset($_GET['id'])) {
+            Utils::redirect('/dashboard');
+        }
+        
+        $page = new Comments();
+        $page->delete($_GET['id']);
+        Utils::redirect('/dashboard');
     }
 
     public function editUser(): void

@@ -317,4 +317,11 @@ class Security
         $template = new Templates();
         $view->assign("templates", $template->findAll());
     }
+
+    public function listComment(): void
+    {
+        $view = new View("Main/listComment", "back");
+
+        
+    }
 }

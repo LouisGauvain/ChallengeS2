@@ -9,10 +9,11 @@ class Comments extends Sql
 {
     protected Int $id = -1;
     protected String $content;
-    protected Int $user_id;
+    protected String $user_name;
     protected Int $page_id;
     protected Int $parent_id;
     protected $date_created;
+    protected Bool $statut_moderation;
 
     public function getId(): int
     {
@@ -34,14 +35,14 @@ class Comments extends Sql
         $this->content = $content;
     }
     
-    public function getUserId(): int
+    public function getUserName(): int
     {
-        return $this->user_id;
+        return $this->user_name;
     }
 
-    public function setUserId(int $user_id): void
+    public function setUserName(int $user_name): void
     {
-        $this->user_id = $user_id;
+        $this->user_name = $user_name;
     }
 
     public function getPageId(): int
@@ -74,8 +75,18 @@ class Comments extends Sql
         $this->date_created = $date_created;
     }
 
+    public function getStatutModeration()
+    {
+        return $this->statut_moderation;
+    }
 
-    public function getCommentsTreeByPageID($id)
+    public function setStatutModeration($statut_moderation): void
+    {
+        $this->$statut_moderation = $statut_moderation;
+    }
+
+
+    public function getCommentsTreeByPageID($id): array
     {
         $db = $this::getInstance();
         $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE page_id = :id AND statut_moderation = true");
@@ -104,10 +115,23 @@ class Comments extends Sql
         return $tree;
     }
 
+    
+    public function getCommentNonValidated($id): array
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE statut_moderation = false");
+        $query->execute(['id' => $id]);
+        $nonValidatedComments = $query->fetchAll();
+
+        if (!$nonValidatedComments) {
+            return false;
+        }
+
+        return $nonValidatedComments;
+    }
 
 
-
-    public function getChildrenByParentId($id)
+    /*public function getChildrenByParentId($id)
     {
         $db = $this::getInstance();
         $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE parent_id = :id AND statut_moderation = true");
@@ -115,5 +139,5 @@ class Comments extends Sql
         $result = $query->fetchAll();
         //Utils::var_dump_die($result);
         return $result;
-    }
+    }*/
 }

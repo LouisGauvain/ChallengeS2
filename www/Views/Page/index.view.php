@@ -14,6 +14,7 @@ function displayComments($comments) {
     foreach ($comments as $comment) {
         echo '<div class="container">';
         echo '<p>' . htmlentities($comment['content']) . '</p>';
+        
 
         // Affichez les commentaires enfants de manière récursive
         if (!empty($comment['children'])) {
@@ -26,6 +27,9 @@ function displayComments($comments) {
 
 displayComments($commentsTree);
 ?>
+
+<?php $this->modal("form", $form); ?>
+
 
 
 <script type="module">

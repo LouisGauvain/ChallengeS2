@@ -1,9 +1,10 @@
 <?php
 
-/* if (!file_exists($envFilePath)) {
+$envFilePath = '.env';
+if (file_exists($envFilePath)) {
     header("Location: /");
     exit;
-} */
+}
 ?>
 
 <div id="header"></div>

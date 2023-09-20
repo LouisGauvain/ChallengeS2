@@ -1,7 +1,5 @@
 <?php
 
-var_dump($_POST);
-
 $db_host = $_POST['dbHost'];
 $db_name = $_POST['dbName'];
 $db_user = $_POST['dbUser'];
@@ -34,7 +32,7 @@ $sql = file_get_contents('schema.sql');
 $sql = str_replace('esgi_', $tablePrefix, $sql);
 
 $pdo->exec($sql);
-/* 
+
 $sql = "INSERT INTO {$tablePrefix}users (firstname, lastname, email, password, role_id, email_verified) VALUES (:firstname, :lastname, :email, :password, :role_id, :email_verified)";
 $query = $pdo->prepare($sql);
 $query->execute([
@@ -58,7 +56,7 @@ $query = $pdo->prepare($sql);
 $query->execute([
     'configuration_key' => 'table_prefix',
     'configuration_value' => $tablePrefix
-]); */
+]);
 
 //create the .env file
 $env = file_get_contents('../.env.example');

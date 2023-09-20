@@ -5,6 +5,11 @@ if (file_exists($envFilePath)) {
     header("Location: /");
     exit;
 }
+
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+    session_destroy();
+}
 ?>
 
 <div id="header"></div>

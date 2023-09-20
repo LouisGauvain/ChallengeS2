@@ -268,7 +268,6 @@ class Security
                     $json = var_export(json_encode($structure), true);
                     $json = substr($json, 1, -1);
 
-
                     $Pages->setTitle($titleSite);
                     $Pages->setContent($json);
                     $Pages->setUserId($_SESSION['user']['id']);
@@ -276,6 +275,15 @@ class Security
                     $text = str_replace(' ', '-', $text);
                     $text = preg_replace('/[^A-Za-z0-9\-]/', '', $text);
                     $text = strtolower($text);
+                    $allPages = $Pages->findAll();
+                    //verify if slug exist
+                    foreach ($allPages as $page) {
+                        if ($page['url_page'] == '/' . $text) {
+                            $errors['titleSite'] = "Ce nom de site existe déjà";
+                            $view->assign('errors', $errors);
+                            return;
+                        }
+                    }
                     $Pages->setUrlPage('/' . $text);
                     $Pages->setControllerPage('Page');
                     $Pages->setActionPage('index');

@@ -47,4 +47,19 @@ class PageCategories extends Sql
         return $categories;
 
     }
+
+    public function getPagesByCategory($id)
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE category_id = :category_id");
+        $query->execute(['category_id' => $id]);
+        $result = $query->fetchAll();
+
+        $page = new Pages();
+        $pages = [];
+        foreach ($result as $value) {
+            $pages[] = $page->findById($value['page_id']);
+        }
+        return $pages;
+    }
 }

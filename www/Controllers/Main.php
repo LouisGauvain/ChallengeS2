@@ -6,6 +6,7 @@ use App\Core\View;
 use App\Core\Utils;
 use App\Controllers\Dashboard;
 use App\Models\Pages;
+use App\Models\Categories;
 
 use Dotenv\Dotenv;
 
@@ -18,8 +19,15 @@ class Main
     {
         $view = new View("Main/page", "front");
 
-        $pages = new Pages();
-        $view->assign("pages", $pages->getAllPages());
+        $categories = new Categories();
+        $view->assign("categories", $categories->findAll());
+        if (isset($_GET['category'])) {
+            $pages = new Pages();
+            $view->assign("pages", $pages->getPagesByCategory($_GET['category']));
+        } else {
+            $pages = new Pages();
+            $view->assign("pages", $pages->getAllPages());
+        }
     }
 
     public function contact(): void

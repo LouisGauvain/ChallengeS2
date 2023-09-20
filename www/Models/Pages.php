@@ -232,5 +232,29 @@ class Pages extends Sql
         return $result;
     }
 
+    public function findByID($id): array | bool
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE id = :id");
+        $query->execute([
+            'id' => $id
+        ]);
+        $result = $query->fetch();
+        if (!$result) {
+            return false;
+        }
+        return $result;
+    }
+
+    public function getPagesByCategory($category)
+    {
+        $Categories = new Categories();
+        $category = $Categories->getByName($category);
+
+        $PageCategories = new PageCategories();
+        $pages = $PageCategories->getPagesByCategory($category);
+
+        return $pages;
+    }
     
 }

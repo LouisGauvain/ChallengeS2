@@ -21,7 +21,6 @@ class Categories extends Sql
         $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE name = :name");
         $query->execute(['name' => $name]);
         $result = $query->fetch();
-        Utils::var_dump($result);
         return $result['id'];
     }
     

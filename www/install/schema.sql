@@ -47,22 +47,24 @@ CREATE TABLE "public"."esgi_pages" (
     CONSTRAINT "esgi_pages_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
-INSERT INTO "esgi_pages" ("id", "title", "content", "user_id", "date_created", "date_modified", "url_page", "controller_page", "action_page") VALUES
-(2,	'dashboard',	NULL,	NULL,	'2023-06-28 09:35:28.62323',	NULL,	'/dashboard',	'Main',	'dashboard'),
-(3,	'contact',	NULL,	NULL,	'2023-06-28 09:36:18.308916',	NULL,	'/contact',	'Main',	'contact'),
-(4,	'login',	NULL,	NULL,	'2023-06-28 09:36:52.399549',	NULL,	'/login',	'Security',	'login'),
-(5,	'logout',	NULL,	NULL,	'2023-06-28 09:37:34.418299',	NULL,	'/logout',	'Security',	'logout'),
-(6,	'register',	NULL,	NULL,	'2023-06-28 09:38:51.893301',	NULL,	'/register',	'Security',	'register'),
-(7,	'disconnect',	NULL,	NULL,	'2023-06-28 09:39:12.302641',	NULL,	'/disconnect',	'Security',	'disconnect'),
-(8,	'verify',	NULL,	NULL,	'2023-06-28 09:39:30.914361',	NULL,	'/verify',	'Security',	'verify'),
-(9,	'Choice Template Page',	NULL,	NULL,	'2023-06-28 12:39:00.307211',	NULL,	'/choice_template_page',	'Security',	'choiceTemplatePage'),
-(11,	'edit_user',	NULL,	NULL,	'2023-06-28 12:44:33.291857',	NULL,	'/admin/edit_user',	'Admin',	'editUser'),
-(12,	'delete_user',	NULL,	NULL,	'2023-06-28 12:45:14.6325',	NULL,	'/admin/delete_user',	'Admin',	'deleteUser'),
-(13,	'add_template_page',	NULL,	NULL,	'2023-06-28 14:24:41.937919',	NULL,	'/add_template_page',	'Security',	'addTemplatePage'),
-(14,	'Index',	NULL,	NULL,	'2023-06-29 06:56:39.827372',	NULL,	'/',	'Main',	'index'),
-(15,	'components',	NULL,	NULL,	'2023-06-30 09:45:46.514237',	NULL,	'/components',	'Main',	'components'),
-(96,	'install',	NULL,	NULL,	'2023-09-16 06:17:15.241603',	NULL,	'/install',	'Admin',	'install'),
-(16,	'Create Page',	NULL,	NULL,	'2023-06-30 14:10:21.927364',	NULL,	'/create_page',	'Security',	'createPage');
+INSERT INTO "esgi_pages" ("title", "content", "user_id", "date_created", "date_modified", "url_page", "controller_page", "action_page") VALUES
+('dashboard',	NULL,	NULL,	'2023-06-28 09:35:28.62323',	NULL,	'/dashboard',	'Main',	'dashboard'),
+('contact',	NULL,	NULL,	'2023-06-28 09:36:18.308916',	NULL,	'/contact',	'Main',	'contact'),
+('login',	NULL,	NULL,	'2023-06-28 09:36:52.399549',	NULL,	'/login',	'Security',	'login'),
+('logout',	NULL,	NULL,	'2023-06-28 09:37:34.418299',	NULL,	'/logout',	'Security',	'logout'),
+('register',	NULL,	NULL,	'2023-06-28 09:38:51.893301',	NULL,	'/register',	'Security',	'register'),
+('disconnect',	NULL,	NULL,	'2023-06-28 09:39:12.302641',	NULL,	'/disconnect',	'Security',	'disconnect'),
+('verify',	NULL,	NULL,	'2023-06-28 09:39:30.914361',	NULL,	'/verify',	'Security',	'verify'),
+('Choice Template Page',	NULL,	NULL,	'2023-06-28 12:39:00.307211',	NULL,	'/choice_template_page',	'Security',	'choiceTemplatePage'),
+('edit_user',	NULL,	NULL,	'2023-06-28 12:44:33.291857',	NULL,	'/admin/edit_user',	'Admin',	'editUser'),
+('delete_user',	NULL,	NULL,	'2023-06-28 12:45:14.6325',	NULL,	'/admin/delete_user',	'Admin',	'deleteUser'),
+('add_template_page',	NULL,	NULL,	'2023-06-28 14:24:41.937919',	NULL,	'/add_template_page',	'Security',	'addTemplatePage'),
+('Index',	NULL,	NULL,	'2023-06-29 06:56:39.827372',	NULL,	'/',	'Main',	'index'),
+('components',	NULL,	NULL,	'2023-06-30 09:45:46.514237',	NULL,	'/components',	'Main',	'components'),
+('install',	NULL,	NULL,	'2023-09-16 06:17:15.241603',	NULL,	'/install',	'Admin',	'install'),
+('Create Page',	NULL,	NULL,	'2023-06-30 14:10:21.927364',	NULL,	'/create_page',	'Security',	'createPage'),
+('page',	NULL,	NULL,	'2023-07-21 01:26:14.765273',	NULL,	'/page',	'Security',	'page'),
+('delete_page',	NULL,	NULL,	'2023-06-28 12:45:14.6325',	NULL,	'/admin/delete_page',	'Admin',	'deletePage');
 
 DROP TABLE IF EXISTS "esgi_roles" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_roles_id_seq;

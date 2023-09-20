@@ -17,6 +17,7 @@ use App\Models\Tokens;
 use App\Models\Templates;
 use App\Models\PhpMailor;
 use App\Models\Pages;
+use App\Models\PageCategories;
 
 function extractStructure($element): array
 {
@@ -282,7 +283,15 @@ class Security
                     $Pages->createFolderUploadImagePage();
                     $Pages->addFolderAndFileImagePage();
                     $Pages->setUsedTemplate($template->getByName($_GET['selected_option'])['id']);
+                    $categories = [];
+                    foreach ($_POST as $key => $value) {
+                        if (preg_match('/^cat_/', $key)) {
+                            $categories[] = $key;
+                        }
+                    }
                     $Pages->save();
+                    $pagesCategories = new PageCategories();
+                    $pagesCategories->setCategories($categories, $Pages->getBySlug('/' . $text)['id']);
                     Utils::redirect('/' . $text);
                 }
             } else {

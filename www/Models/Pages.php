@@ -217,4 +217,18 @@ class Pages extends Sql
             return $pages;
         }
     }
+
+    public function getBySlug($slug): array | bool
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE url_page = :url_page");
+        $query->execute([
+            'url_page' => $slug
+        ]);
+        $result = $query->fetch();
+        if (!$result) {
+            return false;
+        }
+        return $result;
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Forms;
 use App\Core\Utils;
 use App\Forms\Abstract\AForm;
 use App\Models\Templates;
+use App\Models\Categories;
 
 class CreatePage extends AForm
 {
@@ -39,6 +40,18 @@ class CreatePage extends AForm
                 ];
             }
         }
+
+        $categories = new Categories();
+        foreach ($categories->findAll() as $category) {
+            $arrayTemplatePages["cat_".$category['name']] = [
+                "type" => "checkbox",
+                "value" => $category['id'],
+                "placeholder" => $category['name'],
+                "label" => $category['name'],
+                "name" => "categories[]",
+            ];
+        }
+
         return [
             "config" => [
                 "method" => $this->getMethod(),

@@ -14,4 +14,14 @@ class Categories extends Sql
     {
         return $this->id;
     }
+
+    public function getByName(string $name): int
+    {
+        $db = $this::getInstance();
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE name = :name");
+        $query->execute(['name' => $name]);
+        $result = $query->fetch();
+        Utils::var_dump($result);
+        return $result['id'];
+    }
 }

@@ -158,11 +158,20 @@ class Verificator
     {
         $listOfErrors = [];
 
-        if (count($config["inputs"]) != count($data) - 1 + count($_FILES)) {
-            $texteError = "Veuillez remplir tous les champs 1";
-            if (!in_array($texteError, $listOfErrors)) {
-                $listOfErrors[] = $texteError;
+        $checkboxInData = 0;
+        $checkboxInConfig = 0;
+        foreach ($data as $key => $value) {
+            if (preg_match("/^cat_/", $key)) {
+                $checkboxInData++;
             }
+        }
+        foreach ($config["inputs"] as $key => $value) {
+            if (preg_match("/^cat_/", $key)) {
+                $checkboxInConfig++;
+            }
+        }
+        if (count($config["inputs"]) != count($data) - $checkboxInData + $checkboxInConfig) {
+            $texteError = "Veuillez remplir tous les champs";
         }
 
         if (!empty($_FILES)) {
@@ -183,7 +192,7 @@ class Verificator
             $data["imageSite+" . $j] = $_FILES['imageSite+' . $j];
         }
         foreach ($config["inputs"] as $name => $input) {
-            if (empty($data[$name])) {
+            if (empty($data[$name]) && $input["type"] != "checkbox") {
                 $texteError = "Veuillez remplir tous les champs 2";
                 if (!in_array($texteError, $listOfErrors)) {
                     $listOfErrors[] = $texteError;

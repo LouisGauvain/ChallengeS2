@@ -31,6 +31,7 @@ abstract class Sql
         }
         $classExploded = explode("\\", get_called_class());
         $this->table = end($classExploded);
+        $this->table = preg_replace('/(?<!^)[A-Z]/', '_$0', $this->table);
         $this->table = $dbPrefix . strtolower($this->table);
     }
 

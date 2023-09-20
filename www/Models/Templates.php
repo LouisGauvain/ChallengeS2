@@ -172,7 +172,7 @@ class Templates extends Sql
     public function getByName($name): array | bool
     {
         $db = $this::getInstance();
-        $query = $db->prepare("SELECT description FROM " . $this->table . " WHERE name = :name");
+        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE name = :name");
         $query->execute([
             'name' => $name
         ]);

@@ -79,13 +79,6 @@ class EditUser extends AForm
                 "label" => "Email vérifié",
                 "checked" => $this->email_verified
             ],
-            "user_new_password" => [
-                "type" => "password",
-                "min" => 8,
-                "max" => 45,
-                "placeholder" => "Votre mot de passe",
-                "error" => "Format du mot de passe incorect, il doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
-            ],
         ]
     ];
     }

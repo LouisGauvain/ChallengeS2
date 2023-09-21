@@ -113,19 +113,19 @@ class Admin
                     $user->setFirstname($_POST['user_firstname']);
                     $user->setLastname($_POST['user_lastname']);
                     switch ($_POST['user_role_id']) {
-                        case 'admin':
+                        case 'Admin':
                             $user->setRoleId(1);
                             break;
-                        case 'editor':
+                        case 'Editor':
                             $user->setRoleId(2);
                             break;
-                        case 'author':
+                        case 'Author':
                             $user->setRoleId(3);
                             break;
-                        case 'contributor':
+                        case 'Contributor':
                             $user->setRoleId(4);
                             break;
-                        case 'subscriber':
+                        case 'Subscriber':
                             $user->setRoleId(5);
                             break;
                         default:

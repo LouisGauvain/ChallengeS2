@@ -70,6 +70,13 @@ abstract class Sql
         } else {
             $queryPrepared = $this->pdo->prepare("INSERT INTO " . $this->table . " (" . implode(",", array_keys($columns)) . ") 
                             VALUES (:" . implode(",:", array_keys($columns)) . ")");
+            
+            if($this->table == 'esgi_comments')
+            {
+                Utils::var_dump($columns);
+                Utils::var_dump_die($queryPrepared);
+            }
+            
         }
 
         $queryPrepared->execute($columns);

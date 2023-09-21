@@ -9,10 +9,11 @@ CREATE SEQUENCE esgi_comments_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 
 CREATE TABLE "public"."esgi_comments" (
     "id" integer DEFAULT nextval('esgi_comments_id_seq') NOT NULL,
     "content" text,
-    "user_id" integer NOT NULL,
-    "page_id" integer NOT NULL,
+    "page_id" integer,
     "date_created" timestamp DEFAULT CURRENT_TIMESTAMP,
     "statut_moderation" boolean DEFAULT false,
+    "parent_id" integer,
+    "user_name" character varying(255),
     CONSTRAINT "esgi_comments_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
@@ -44,27 +45,30 @@ CREATE TABLE "public"."esgi_pages" (
     "url_page" text,
     "controller_page" character varying(255) NOT NULL,
     "action_page" character varying(255) NOT NULL,
+    "used_template" integer,
     CONSTRAINT "esgi_pages_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
-INSERT INTO "esgi_pages" ("title", "content", "user_id", "date_created", "date_modified", "url_page", "controller_page", "action_page") VALUES
-('dashboard',	NULL,	NULL,	'2023-06-28 09:35:28.62323',	NULL,	'/dashboard',	'Main',	'dashboard'),
-('contact',	NULL,	NULL,	'2023-06-28 09:36:18.308916',	NULL,	'/contact',	'Main',	'contact'),
-('login',	NULL,	NULL,	'2023-06-28 09:36:52.399549',	NULL,	'/login',	'Security',	'login'),
-('register',	NULL,	NULL,	'2023-06-28 09:38:51.893301',	NULL,	'/register',	'Security',	'register'),
-('disconnect',	NULL,	NULL,	'2023-06-28 09:39:12.302641',	NULL,	'/disconnect',	'Security',	'disconnect'),
-('verify',	NULL,	NULL,	'2023-06-28 09:39:30.914361',	NULL,	'/verify',	'Security',	'verify'),
-('Choice Template Page',	NULL,	NULL,	'2023-06-28 12:39:00.307211',	NULL,	'/choice_template_page',	'Security',	'choiceTemplatePage'),
-('edit_user',	NULL,	NULL,	'2023-06-28 12:44:33.291857',	NULL,	'/admin/edit_user',	'Admin',	'editUser'),
-('delete_user',	NULL,	NULL,	'2023-06-28 12:45:14.6325',	NULL,	'/admin/delete_user',	'Admin',	'deleteUser'),
-('add_template_page',	NULL,	NULL,	'2023-06-28 14:24:41.937919',	NULL,	'/add_template_page',	'Security',	'addTemplatePage'),
-('Index',	NULL,	NULL,	'2023-06-29 06:56:39.827372',	NULL,	'/',	'Main',	'index'),
-('components',	NULL,	NULL,	'2023-06-30 09:45:46.514237',	NULL,	'/components',	'Main',	'components'),
-('install',	NULL,	NULL,	'2023-09-16 06:17:15.241603',	NULL,	'/install',	'Admin',	'install'),
-('Create Page',	NULL,	NULL,	'2023-06-30 14:10:21.927364',	NULL,	'/create_page',	'Security',	'createPage'),
-('page',	NULL,	NULL,	'2023-07-21 01:26:14.765273',	NULL,	'/page',	'Security',	'page'),
-('delete_page',	NULL,	NULL,	'2023-06-28 12:45:14.6325',	NULL,	'/admin/delete_page',	'Admin',	'deletePage');
-
+INSERT INTO esgi_pages ("title", "content", "user_id", "date_created", "date_modified", "url_page", "controller_page", "action_page", "used_template") VALUES
+('dashboard',	NULL,	NULL,	'2023-06-28 09:35:28.62323',	NULL,	'/dashboard',	'Main',	'dashboard',	NULL),
+('contact',	NULL,	NULL,	'2023-06-28 09:36:18.308916',	NULL,	'/contact',	'Main',	'contact',	NULL),
+('login',	NULL,	NULL,	'2023-06-28 09:36:52.399549',	NULL,	'/login',	'Security',	'login',	NULL),
+('register',	NULL,	NULL,	'2023-06-28 09:38:51.893301',	NULL,	'/register',	'Security',	'register',	NULL),
+('disconnect',	NULL,	NULL,	'2023-06-28 09:39:12.302641',	NULL,	'/disconnect',	'Security',	'disconnect',	NULL),
+('verify',	NULL,	NULL,	'2023-06-28 09:39:30.914361',	NULL,	'/verify',	'Security',	'verify',	NULL),
+('Choice Template Page',	NULL,	NULL,	'2023-06-28 12:39:00.307211',	NULL,	'/choice_template_page',	'Security',	'choiceTemplatePage',	NULL),
+('edit_user',	NULL,	NULL,	'2023-06-28 12:44:33.291857',	NULL,	'/admin/edit_user',	'Admin',	'editUser',	NULL),
+('delete_user',	NULL,	NULL,	'2023-06-28 12:45:14.6325',	NULL,	'/admin/delete_user',	'Admin',	'deleteUser',	NULL),
+('add_template_page',	NULL,	NULL,	'2023-06-28 14:24:41.937919',	NULL,	'/add_template_page',	'Security',	'addTemplatePage',	NULL),
+('Index',	NULL,	NULL,	'2023-06-29 06:56:39.827372',	NULL,	'/',	'Main',	'index',	NULL),
+('components',	NULL,	NULL,	'2023-06-30 09:45:46.514237',	NULL,	'/components',	'Main',	'components',	NULL),
+('install',	NULL,	NULL,	'2023-09-16 06:17:15.241603',	NULL,	'/install',	'Admin',	'install',	NULL),
+('Create Page',	NULL,	NULL,	'2023-06-30 14:10:21.927364',	NULL,	'/create_page',	'Security',	'createPage',	NULL),
+('page',	NULL,	NULL,	'2023-07-21 01:26:14.765273',	NULL,	'/page',	'Security',	'page',	NULL),
+('delete_page',	NULL,	NULL,	'2023-06-28 12:45:14.6325',	NULL,	'/admin/delete_page',	'Admin',	'deletePage',	NULL),
+('list_comment',	NULL,	NULL,	'2023-09-20 21:15:31.996981',	NULL,	'/list_comment',	'Security',	'listComment',	NULL),
+('delete_comment',	NULL,	NULL,	'2023-09-20 23:00:11.619969',	NULL,	'/admin/delete_comment',	'Admin',	'deleteComment',	NULL),
+('verify_comment',	NULL,	NULL,	'2023-09-20 23:05:54.698081',	NULL,	'/admin/verify_comment',	'Admin',	'verifyComment',	NULL);
 DROP TABLE IF EXISTS "esgi_roles" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_roles_id_seq;
 CREATE SEQUENCE esgi_roles_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
@@ -117,6 +121,10 @@ CREATE TABLE "public"."esgi_templates" (
     CONSTRAINT "esgi_templates_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
+INSERT INTO "esgi_templates" ("name", "description", "color", "police", "image") VALUES
+('Article',	'<input id="41" type="file" name="imageSite+1" placeholder="Image de votre article">
+<label for="41"><img src="public/image/image_en_attente.svg" alt="image_en_attente"></label> 
+<input type="text" name="titleSite" placeholder="Titre de l''article"> <input type="text" name="texteSite" placeholder="Description de l''article"> <input type="text" name="texteSite" placeholder="Contenu de l''article">',	NULL,	NULL,	'Templates/Uploads/2023/07/Article+pageArticle.png');
 
 DROP TABLE IF EXISTS "esgi_tokens" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_tokens_id_seq;
@@ -186,7 +194,6 @@ CREATE TABLE "public"."esgi_page_categories" (
 
 
 ALTER TABLE ONLY "public"."esgi_comments" ADD CONSTRAINT "esgi_comments_page_id_fkey" FOREIGN KEY (page_id) REFERENCES esgi_pages(id) NOT DEFERRABLE;
-ALTER TABLE ONLY "public"."esgi_comments" ADD CONSTRAINT "esgi_comments_user_id_fkey" FOREIGN KEY (user_id) REFERENCES esgi_users(id) NOT DEFERRABLE;
 
 ALTER TABLE ONLY "public"."esgi_menus" ADD CONSTRAINT "esgi_menus_page_id_fkey" FOREIGN KEY (page_id) REFERENCES esgi_pages(id) NOT DEFERRABLE;
 

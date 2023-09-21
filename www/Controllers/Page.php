@@ -54,9 +54,24 @@ class Page
                 Utils::redirect($_SERVER["REQUEST_URI"]);
             } else {
                 $view = new View("Page/index", "front");
-                Utils::var_dump_die($errors);
 
                 $view->assign('errors', $errors);
+
+                $view->assign('form', $form->getConfig());
+    
+                $view->assign("categories", $PageCategories->getCategoriesByPageId($page['id']));
+    
+                $allUsersPages = $pages->getUriPagesByAction();
+                //remove all html tags
+                $allUsersPages = array_map(function ($page) {
+                    $page['title'] = strip_tags($page['title']);
+                    return $page;
+                }, $allUsersPages);
+    
+                $view->assign("url", $_ENV['API_URL']);
+                $view->assign("page", $page);
+                $view->assign("commentsTree", $commentsTree);
+                $view->assign("allUsersPages", $allUsersPages);
             }
         } else {
             $view = new View("Page/index", "front");
@@ -76,6 +91,17 @@ class Page
             $view->assign("page", $page);
             $view->assign("commentsTree", $commentsTree);
             $view->assign("allUsersPages", $allUsersPages);
+        }
+    }
+    public static function redirect(): void
+    {
+        $pages = new Pages();
+        $page = $pages->findByUri($_SERVER["REQUEST_URI"]);
+
+        if ($page) {
+            Utils::redirect($page['url_page']);
+        } else {
+            Utils::redirect('/');
         }
     }
 }

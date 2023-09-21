@@ -45,6 +45,12 @@ export default function Comments(comments) {
     }
     return {
         type: "div",
+        attributes: {
+            style: {
+                width: "80%",
+                margin: "40px auto",
+            },
+        },
         children: [
             {
                 type: "h2",

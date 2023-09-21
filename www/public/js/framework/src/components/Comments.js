@@ -6,7 +6,7 @@ export default function Comments(comments) {
         comments = comments.children[0]
     }
 
-    if (comments.length === 0 || comments.children.length === 0) {
+    if (comments.length === 0) {
         return {
             type: "div",
             children: [

@@ -21,7 +21,6 @@ class PageCategories extends Sql
     public function setCategories($categoriesName, int $idPage)
     {
         $category = new Categories();
-        Utils::var_dump($category->findAll());
         foreach ($categoriesName as $categoryName) {
             $categoryName = substr($categoryName, 4);
             $categoryName = str_replace("_", " ", $categoryName);
@@ -45,7 +44,6 @@ class PageCategories extends Sql
             $categories[] = $category->findById($value['category_id']);
         }
         return $categories;
-
     }
 
     public function getPagesByCategory($id)

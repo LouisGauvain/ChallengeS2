@@ -2,4 +2,10 @@ ul.list-group{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-around;
+    //3 max items per row
+    button{
+        width: 30%;
+        margin-bottom: 10px;
+    }
 }

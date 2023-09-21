@@ -31,7 +31,7 @@
         ?>
             <header>
                 <?php
-                if ($uri != '/') {
+                if ($uri != '/' && strpos($uri, '/?') !== 0) {
                 ?>
                     <a href="/" class="btn btn-primary left">Voir le site</a>
                 <?php

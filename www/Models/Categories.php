@@ -15,13 +15,15 @@ class Categories extends Sql
         return $this->id;
     }
 
-    public function getByName(string $name): int
+    public function getByName(string $name)
     {
         $db = $this::getInstance();
         $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE name = :name");
         $query->execute(['name' => $name]);
         $result = $query->fetch();
-        return $result['id'];
+        if ($result) {
+            return $result['id'];
+        }
     }
     
     public function findById(int $id): array | bool

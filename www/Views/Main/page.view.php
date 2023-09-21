@@ -3,7 +3,7 @@
     <ul class="list-group">
         <?php
         foreach ($categories as $category) {
-            echo "<button class='list-group-item'><a href='/?category=" . $category["name"] . "'>" . $category["name"] . "</a></button>";
+            echo "<button class='list-group-item' onclick=window.location.href='/?category=" . $category["name"] . "'>" . $category["name"] . "</button>";
         }
         ?>
     </ul>

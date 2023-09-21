@@ -7,7 +7,7 @@
         }
         ?>
     </ul>
-    <h2>Vos Pages</h2>
+    <h2>Les Pages</h2>
     <ul class="list-group">
         <?php
         foreach ($pages as $page) {

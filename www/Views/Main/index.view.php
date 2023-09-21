@@ -4,7 +4,11 @@ use App\Core\Utils;
 
 $user = $_SESSION['user']; ?>
 <div class="container">
-    <h2>Vos Pages</h2>
+    <?php if ($user['role_id'] == 1) { ?>
+        <h2>Les Pages</h2>
+        <?php } else { ?>
+            <h2>Vos Pages</h2>
+    <?php } ?>
     <div>
         <a href="choice_template_page" class="btn btn-primary">Ajouter une page</a>
         <?php if ($user['role_id'] == 1) { ?>
@@ -17,7 +21,7 @@ $user = $_SESSION['user']; ?>
                 <th>Titre</th>
                 <th>URL</th>
                 <th>Template</th>
-                <?php 
+                <?php
                 if (Utils::isAdmin() == true) { ?>
                     <th>Actions</th>
                 <?php }
@@ -27,8 +31,8 @@ $user = $_SESSION['user']; ?>
         <tbody>
             <?php
             foreach ($pages as $page) {
-                for($i = 0; $i < count($templates); $i++){
-                    if($page['used_template'] == $templates[$i]['id']){
+                for ($i = 0; $i < count($templates); $i++) {
+                    if ($page['used_template'] == $templates[$i]['id']) {
                         $page['used_template'] = $templates[$i]['name'];
                     }
                 }

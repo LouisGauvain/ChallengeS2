@@ -36,9 +36,12 @@ function BrowserLink(title, link) {
           type: "div",
           children: [],
         }
-        fetch(link, { method: "POST" }).then((response) => { return response.text() }).then((data) => {
+        fetch(link , { method: "POST",
+        headers: {
+          "Browser-Router": "true",
+        },
+       }).then((response) => { return response.text() }).then((data) => {
           const json = JSON.parse(data);
-          console.log("data", json)
 
           div.children.push(JSON.parse(json.content))
           render(div, document.getElementById("root"));

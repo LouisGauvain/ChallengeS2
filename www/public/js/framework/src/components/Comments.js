@@ -1,16 +1,11 @@
 export default function Comments(comments) {
 
-    console.log("typeof comments", typeof comments)
-    console.log("comments", comments)
     if (typeof comments === "string")
         comments = JSON.parse(comments);
     else{
         comments = comments.children[0]
 
     }
-    console.log("typeof comments", typeof comments)
-    console.log("comments", comments)
-
     return {
         type: "div",
         children: [

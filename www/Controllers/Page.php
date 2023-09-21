@@ -14,6 +14,7 @@ use App\Models\Pages;
 
 //dotenv
 use Dotenv\Dotenv;
+
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
@@ -29,7 +30,7 @@ class Page
         $comments = new Comments();
         $commentsTree = $comments->getCommentsTreeByPageID($page['id']);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['HTTP_BROWSER_ROUTER']) && $_SERVER['HTTP_BROWSER_ROUTER'] === 'true') {
             $content = [];
             $content['content'] = $page['content'];
             $content['comments'] = $commentsTree;
@@ -53,6 +54,7 @@ class Page
                 Utils::redirect($_SERVER["REQUEST_URI"]);
             } else {
                 $view = new View("Page/index", "front");
+                Utils::var_dump_die($errors);
 
                 $view->assign('errors', $errors);
             }
@@ -74,7 +76,6 @@ class Page
             $view->assign("page", $page);
             $view->assign("commentsTree", $commentsTree);
             $view->assign("allUsersPages", $allUsersPages);
-
         }
     }
 }

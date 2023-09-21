@@ -179,6 +179,13 @@ CREATE TABLE "public"."esgi_categories" (
     CONSTRAINT "esgi_categories_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
+INSERT INTO "esgi_categories" ("name") VALUES
+('Actualités '),
+('Technologie '),
+('Santé '),
+('Voyage '),
+('Mode'),
+('Culture ');
 
 DROP TABLE IF EXISTS "esgi_page_categories";
 DROP SEQUENCE IF EXISTS esgi_page_categories_id_seq;

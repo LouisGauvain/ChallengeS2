@@ -31,6 +31,11 @@
         ?>
             <header>
                 <?php
+                if ($uri != '/') {
+                ?>
+                    <a href="/" class="btn btn-primary left">Voir le site</a>
+                <?php
+                }
                 if ($uri != '/login') {
                 ?>
                     <a href="/login" class="btn btn-primary">Connexion</a>

@@ -610,6 +610,10 @@ header a.btn-primary:hover {
   background-color: #0056b3; /* Bleu un peu plus foncé au survol */
 }
 
+header a.left {
+  margin-right: auto;
+}
+
 .sidebar {
   background-color: rgb(24, 182, 143);
   width: 250px;

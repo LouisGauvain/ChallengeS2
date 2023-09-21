@@ -12,11 +12,30 @@
 <?php
 function displayComments($comments) {
     foreach ($comments as $comment) {
-        echo '<div class="container">';
-        echo '<p>' . htmlentities($comment['content']) . '</p>';
+        if($comment!=NULL){
+?>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Commentaire</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?= $comment['user_name'] ?></td>
+                        <td><?= $comment['content'] ?></td>
+                    </tr>
+                </tbody>
+            </table>
         
-
-        // Affichez les commentaires enfants de manière récursive
+        
+        <!--echo '<p>' . htmlentities($comment['content']) . '</p>'; -->
+  
+<?php
+        }
+// Affichez les commentaires enfants de manière récursive
         if (!empty($comment['children'])) {
             displayComments($comment['children']);
         }
@@ -28,7 +47,14 @@ function displayComments($comments) {
 displayComments($commentsTree);
 ?>
 
-<?php $this->modal("form", $form); ?>
+<div class="div_input">
+    <div class="container">
+        <?php $this->modal("form", $form); ?>
+    </div>
+</div>
+
+
+
 
 
 

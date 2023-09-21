@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .m-0 {
   margin: 0rem;
 }
@@ -347,6 +348,16 @@ body.backend.large {
   margin-bottom: 10px;
 }
 
+form {
+  min-width: 50%;
+}
+form > div {
+  width: 100%;
+}
+form > div input[type=text], form > div input[type=password], form > div input[type=email], form > div textarea[type=text], form > div textarea[type=password], form > div textarea[type=email] {
+  width: 80%;
+}
+
 a.disabled {
   pointer-events: none;
   cursor: default;
@@ -567,18 +578,36 @@ textarea {
   color: white;
 }
 
+/* Style général pour l'en-tête */
 header {
-  background-color: rgb(24, 182, 143);
-  padding: 10px;
-  margin-bottom: 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  -webkit-box-shadow: 5px 5px 24px 2px #000000;
-  box-shadow: 5px 5px 24px 2px #000000;
+  justify-content: flex-end; /* Aligner les éléments à droite */
+  padding: 10px 20px; /* Espacement intérieur */
+  background-color: rgb(32, 167, 185); /* Couleur d'arrière-plan gris foncé */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère en bas */
 }
-header.a {
-  margin-left: 10px;
+
+/* Style pour les liens/boutons dans l'en-tête */
+header a.btn {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  padding: 8px 16px; /* Espacement intérieur */
+  margin-left: 10px; /* Espacement entre les boutons */
+  text-decoration: none; /* Supprimer le soulignement */
+  border: none;
+  border-radius: 4px; /* Coins légèrement arrondis */
+  transition: background-color 0.3s; /* Transition douce pour le changement de couleur d'arrière-plan */
+}
+
+/* Style pour le bouton "Connexion" */
+header a.btn-primary {
+  background-color: #007BFF; /* Bleu */
+  color: #FFF; /* Texte blanc */
+}
+
+/* Effet au survol des boutons */
+header a.btn-primary:hover {
+  background-color: #0056b3; /* Bleu un peu plus foncé au survol */
 }
 
 .sidebar {

@@ -34,7 +34,6 @@ function generateStructure(structure) {
 function render(structure, root) {
   const oldElement = root
   const newElement = generateStructure(structure);
-  console.log("render", oldElement, newElement)
 
   //wait for everything to be rendered
   if (oldElement.firstChild && oldElement.firstChild.nodeType === 3) {

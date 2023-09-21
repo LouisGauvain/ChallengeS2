@@ -51,7 +51,6 @@ const urlObject = new URL(pageURL);
 // Récupérez le chemin (path) à partir de l'objet URL.
 const uri = urlObject.pathname;
 
-console.log(uri); // Cela affichera "/some-page" dans la console.
 if (uri === "/create_page") {
     const fileTextes = document.querySelectorAll('input[type="text"]');
     fileTextes.forEach((texte) => {

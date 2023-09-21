@@ -105,7 +105,6 @@ export default function Install({ step = 1, errors, verified, install, force }) 
             body: formDataObj
         }).then(response => response.json())
             .then(data => {
-                console.log(data)
                 if (!data.success) {
                     errors.push(data.message)
                     return render(Install({ step: 2, force: true, errors: errors }), document.getElementById("root"))

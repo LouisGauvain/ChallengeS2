@@ -124,7 +124,7 @@ CREATE TABLE "public"."esgi_templates" (
 INSERT INTO "esgi_templates" ("name", "description", "color", "police", "image") VALUES
 ('Article',	'<input id="41" type="file" name="imageSite+1" placeholder="Image de votre article">
 <label for="41"><img src="public/image/image_en_attente.svg" alt="image_en_attente"></label> 
-<input type="text" name="titleSite" placeholder="Titre de l''article"> <input type="text" name="texteSite" placeholder="Description de l''article"> <input type="text" name="texteSite" placeholder="Contenu de l''article">',	NULL,	NULL,	'Templates/Uploads/2023/07/Article+pageArticle.png');
+<input type="text" name="titleSite" placeholder="Titre de l''article"> <input type="text" name="texteSite" placeholder="Description de l''article"> <input type="text" name="texteSite" placeholder="Contenu de l''article">',	NULL,	NULL,	'public/image/templates/Article+pageArticle.png');
 
 DROP TABLE IF EXISTS "esgi_tokens" CASCADE;
 DROP SEQUENCE IF EXISTS esgi_tokens_id_seq;

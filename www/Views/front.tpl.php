@@ -15,17 +15,42 @@
 <body class="frontend">
     <div>
         <?php
+
+        use App\Core\Utils;
+
         if (!empty($_SESSION['user'])) {
-        ?><header>
+        ?>
+            <header>
                 <a href="/dashboard" class="btn btn-primary">Dashboard</a>
                 <a href="/disconnect" class="btn btn-danger">Déconnexion</a>
             </header>
         <?php
         }
+        if (empty($_SESSION['user'])) {
+            $uri = $_SERVER['REQUEST_URI'];
         ?>
-
+            <header>
+                <?php
+                if ($uri != '/login') {
+                ?>
+                    <a href="/login" class="btn btn-primary">Connexion</a>
+                <?php
+                }
+                ?>
+                <?php
+                if ($uri != '/register') {
+                ?>
+                    <a href="/register" class="btn btn-primary">Inscription</a>
+                <?php
+                }
+                ?>
+            </header>
+        <?php
+        }
+        ?>
         <?php include $this->view; ?>
     </div>
 </body>
+
 
 </html>

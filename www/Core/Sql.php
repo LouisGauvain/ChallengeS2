@@ -59,6 +59,13 @@ abstract class Sql
         $columnsToDeleted = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToDeleted);
         unset($columns["id"]);
+        unset($columns[""]);
+
+        foreach ($columns as $key => $value) {
+            if (empty($value)) {
+                unset($columns[$key]);
+            }
+        }
 
         if (is_numeric($this->getId()) && $this->getId() > 0) {
             $columnsUpdate = [];
@@ -69,6 +76,9 @@ abstract class Sql
         } else {
             $queryPrepared = $this->pdo->prepare("INSERT INTO " . $this->table . " (" . implode(",", array_keys($columns)) . ") 
                             VALUES (:" . implode(",:", array_keys($columns)) . ")");
+            
+            
+            
         }
 
         $queryPrepared->execute($columns);

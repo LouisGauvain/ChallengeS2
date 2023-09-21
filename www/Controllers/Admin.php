@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\Utils;
 use App\Models\Users;
 use App\Models\Pages;
+use App\Models\Comments;
 use App\Core\View;
 use App\Forms\EditUser;
 use App\Core\Verificator;
@@ -55,6 +56,35 @@ class Admin
         Utils::redirect('/page');
     }
 
+    public function deleteComment(): void
+    {
+        $this->verifRole();
+
+        if (!isset($_GET['id'])) {
+            Utils::redirect('/list_comment');
+        }
+        
+        $page = new Comments();
+        $page->delete($_GET['id']);
+        Utils::redirect('/list_comment');
+    }
+
+    public function verifyComment(): void
+    {
+        $this->verifRole();
+        if (!isset($_GET['id'])) {
+            Utils::redirect('/list_comment');
+        }
+
+        $page = new Comments();
+        $page->setStatutModeration(true);
+        $page->setDateCreated(NULL);
+        $page->setId($_GET['id']);
+        $page->save();
+
+        Utils::redirect('/list_comment');
+    }
+
     public function editUser(): void
     {
         $this->verifRole();
@@ -83,19 +113,19 @@ class Admin
                     $user->setFirstname($_POST['user_firstname']);
                     $user->setLastname($_POST['user_lastname']);
                     switch ($_POST['user_role_id']) {
-                        case 'admin':
+                        case 'Admin':
                             $user->setRoleId(1);
                             break;
-                        case 'editor':
+                        case 'Editor':
                             $user->setRoleId(2);
                             break;
-                        case 'author':
+                        case 'Author':
                             $user->setRoleId(3);
                             break;
-                        case 'contributor':
+                        case 'Contributor':
                             $user->setRoleId(4);
                             break;
-                        case 'subscriber':
+                        case 'Subscriber':
                             $user->setRoleId(5);
                             break;
                         default:

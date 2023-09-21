@@ -17,6 +17,7 @@ use App\Models\Tokens;
 use App\Models\Templates;
 use App\Models\PhpMailor;
 use App\Models\Pages;
+use App\Models\Comments;
 use App\Models\PageCategories;
 
 function extractStructure($element): array
@@ -73,6 +74,10 @@ class Security
 
     public function login(): void
     {
+        if(isset($_SESSION['user']))
+        {
+            Utils::redirect('dashboard');
+        }
         $form = new ConnectionUser();
         $view = new View("Auth/connection", "front");
         $view->assign('form', $form->getConfig());
@@ -104,6 +109,10 @@ class Security
 
     public function register(): void
     {
+        if(isset($_SESSION['user']))
+        {
+            Utils::redirect('dashboard');
+        }
         $form = new AddUser();
         $view = new View("Auth/register", "front");
         if (isset($_SESSION['user']['id'])) {
@@ -316,5 +325,14 @@ class Security
         $view->assign("pages", $pages->getAllPages());
         $template = new Templates();
         $view->assign("templates", $template->findAll());
+    }
+
+    public function listComment(): void
+    {
+        $view = new View("Main/listComment", "back");
+
+        $comments = new Comments();
+        $view->assign("comments", $comments->getCommentNonValidated());
+
     }
 }

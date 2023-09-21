@@ -35,6 +35,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/add_template_page">Templates</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/list_comment">Commentaires</a>
+                        </li>
                     <?php
                     }
                     ?>

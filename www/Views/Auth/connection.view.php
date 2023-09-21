@@ -4,8 +4,4 @@
 
     <?php print_r($errors ?? null); ?>
     <?php $this->modal("form", $form); ?>
-
-    <form class="padding-button-redirection" action="register" method="get">
-        <input class="center" type="submit" value="S'inscrire">
-    </form>
 </div>

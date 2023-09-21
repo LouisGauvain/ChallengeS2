@@ -8,6 +8,53 @@
     ?>
 </div>
 
+
+<?php
+function displayComments($comments) {
+    
+
+?>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Commentaire</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($comments as $comment) {?>
+                    <tr>
+                        <td><?= $comment['user_name'] ?></td>
+                        <td><?= $comment['content'] ?></td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>
+  
+<?php
+
+        
+
+    }
+
+
+
+displayComments($commentsTree);
+?>
+
+<div class="div_input">
+    <div class="container">
+        <?php $this->modal("form", $form); ?>
+    </div>
+</div>
+
+
+
+
+
+
 <script type="module">
     import {
         generateStructure,

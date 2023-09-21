@@ -47,7 +47,7 @@ export default function Install({ step = 1, errors, verified, install, force }) 
 
         let formData = {}
         let errors = []
-        
+
         var data = new FormData(document.querySelector('form'));
         for (const entry of data) {
             formData[entry[0]] = entry[1]
@@ -322,7 +322,7 @@ export default function Install({ step = 1, errors, verified, install, force }) 
                 }
             })
         ]
-    }
+    } 
 
     return {
         type: "div",
@@ -333,15 +333,43 @@ export default function Install({ step = 1, errors, verified, install, force }) 
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                height: "90vh"
+                height: "100vh",
+                background: "#FFD9D9",
+                fontFamily: "Montserrat, sans-serif",
+                color: "#303030"
             }
         },
         children: [
             {
-                type: "h1",
-                children: "Installation du site"
-            },
-            ...children
+                type: "div",
+                attributes: {
+                    style: {
+                        width: "700px",
+                        border: "1px solid",
+                        borderRadius: "8px",
+                        padding: "0 50px 0 50px",
+                        background: "white"
+                    }
+                },
+                children: [
+                    {
+                        type: "h1",
+                        attributes: {
+                            style: {
+                                fontWeight: "500"
+                            }
+                        },
+                        children: ["Installation du site"]
+                    },
+                    ...children
+                ]
+            }
         ]
     }
+
+    
 }
+
+document.body.style.margin = "0px"
+document.body.style.padding = "0px"
+document.body.style.boxSizing = "border-box"

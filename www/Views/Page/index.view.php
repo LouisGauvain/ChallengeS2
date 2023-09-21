@@ -11,8 +11,8 @@
 
 <?php
 function displayComments($comments) {
-    foreach ($comments as $comment) {
-        if($comment!=NULL){
+    
+
 ?>
         <div class="container">
             <table class="table">
@@ -23,25 +23,22 @@ function displayComments($comments) {
                     </tr>
                 </thead>
                 <tbody>
+                <?php foreach ($comments as $comment) {?>
                     <tr>
                         <td><?= $comment['user_name'] ?></td>
                         <td><?= $comment['content'] ?></td>
                     </tr>
+                <? } ?>
                 </tbody>
             </table>
-        
-        
-        <!--echo '<p>' . htmlentities($comment['content']) . '</p>'; -->
+        </div>
   
 <?php
-        }
-// Affichez les commentaires enfants de manière récursive
-        if (!empty($comment['children'])) {
-            displayComments($comment['children']);
-        }
 
-        echo '</div>';
+        
+
     }
+
 }
 
 displayComments($commentsTree);

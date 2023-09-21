@@ -53,8 +53,25 @@ export default function Comments(comments) {
         },
         children: [
             {
+                type: "div",
+                attributes: {
+                    style: {
+                        height: "5px",
+                        width: "80%",
+                        backgroundColor: "black",
+                        margin: "40px auto",
+                        borderRadius: "5px",
+                    },
+                },
+            },
+            {
                 type: "h2",
                 children: ["Commentaires"],
+                attributes: {
+                    style: {
+                        textAlign: "center"
+                    }
+                }
             },
             {
                 type: "table",

@@ -5,6 +5,7 @@
             <tr>
                 <th>Name</th>
                 <th>Content</th>
+                <th>Id de la page</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -15,6 +16,7 @@
                     echo "<tr>";
                     echo "<td>" . $comment['user_name'] . "</td>";
                     echo "<td>" . $comment['content'] . "</td>";
+                    echo "<td>" . $comment['page_id'] . "</td>";
 
             ?>
                     <td>

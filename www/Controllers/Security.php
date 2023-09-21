@@ -74,6 +74,10 @@ class Security
 
     public function login(): void
     {
+        if(isset($_SESSION['user']))
+        {
+            Utils::redirect('dashboard');
+        }
         $form = new ConnectionUser();
         $view = new View("Auth/connection", "front");
         $view->assign('form', $form->getConfig());
@@ -105,6 +109,10 @@ class Security
 
     public function register(): void
     {
+        if(isset($_SESSION['user']))
+        {
+            Utils::redirect('dashboard');
+        }
         $form = new AddUser();
         $view = new View("Auth/register", "front");
         if (isset($_SESSION['user']['id'])) {

@@ -3,8 +3,4 @@
 
     <?php print_r($errors ?? null); ?>
     <?php $this->modal("form", $form); ?>
-
-    <form class="padding-button-redirection" action="login" method="get">
-        <input type="submit" value="Se connecter">
-    </form>
 </div>

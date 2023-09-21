@@ -28,7 +28,7 @@ function displayComments($comments) {
                         <td><?= $comment['user_name'] ?></td>
                         <td><?= $comment['content'] ?></td>
                     </tr>
-                <? } ?>
+                <?php } ?>
                 </tbody>
             </table>
         </div>
@@ -39,7 +39,7 @@ function displayComments($comments) {
 
     }
 
-}
+
 
 displayComments($commentsTree);
 ?>

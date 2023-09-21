@@ -6,7 +6,7 @@
             echo "<button class='list-group-item'><a href='/?category=" . $category["name"] . "'>" . $category["name"] . "</a></button>";
         }
         ?>
-    </ul>>
+    </ul>
     <h2>Vos Pages</h2>
     <ul class="list-group">
         <?php

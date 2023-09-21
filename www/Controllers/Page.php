@@ -26,6 +26,11 @@ class Page
         $pages = new Pages();
         $page = $pages->findByUri($_SERVER["REQUEST_URI"]);
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            echo $page['content'];
+            return;
+        }
+
         $PageCategories = new PageCategories();
 
         if ($form->isSubmit()) {

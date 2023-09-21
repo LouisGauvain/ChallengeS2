@@ -10,7 +10,8 @@ export default function Input({ label = "", placeholder = "", name, id, type, va
                 type: "label",
                 children: [label],
                 attributes: {
-                    for: id
+                    for: id,
+                    class: type
                 }
             },
             {

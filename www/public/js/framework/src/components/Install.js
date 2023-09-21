@@ -2,8 +2,13 @@ import { render } from "../core/DomRenderer.js";
 import Input from "./Input.js"
 import Button from "./Button.js";
 
+let linkElement = document.createElement("link");
+linkElement.rel = "stylesheet";
+linkElement.href = "/public/css/style.css"; 
+document.head.appendChild(linkElement);
+
 export default function Install({ step = 1, errors, verified, install, force }) {
-    let verifyDatabaseConnetion = (e) => {
+    let verifyDatabaseConnetion = (e) => { 
         e.preventDefault()
         let inputs = document.querySelectorAll("form .input");
 
@@ -193,17 +198,11 @@ export default function Install({ step = 1, errors, verified, install, force }) 
                     }),
                     Button({
                         title: "Vérifier la configuration",
-                        style: {
-                            background: "aliceblue"
-                        },
                         ...(verified ? { disabled: true } : {}),
                         onClick: verifyDatabaseConnetion
                     }),
                     Button({
                         title: "Prochaine étape",
-                        style: {
-                            background: "aliceblue"
-                        },
                         ...(verified ? {} : { disabled: true }),
                         onClick: goNextStep
                     })
@@ -292,17 +291,11 @@ export default function Install({ step = 1, errors, verified, install, force }) 
                         children: "Site en cours d'installation, veuillez ne pas quittez la page"
                     }] : [Button({
                         title: "Setup le site",
-                        style: {
-                            background: "lightblue"
-                        },
                         ...(verified ? { disabled: true } : {}),
                         onClick: setupSite
                     })]),
                     ...(force ? [Button({
                         title: "Forcer l'installation",
-                        style: {
-                            background: "lightblue"
-                        },
                         onClick: forceSetupSite
                     })] : [])
                 ]
@@ -328,37 +321,13 @@ export default function Install({ step = 1, errors, verified, install, force }) 
         type: "div",
         attributes: {
             class: "Installer",
-            style: {
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "100vh",
-                background: "#FFD9D9",
-                fontFamily: "Montserrat, sans-serif",
-                color: "#303030"
-            }
         },
         children: [
             {
                 type: "div",
-                attributes: {
-                    style: {
-                        width: "700px",
-                        border: "1px solid",
-                        borderRadius: "8px",
-                        padding: "0 50px 0 50px",
-                        background: "white"
-                    }
-                },
                 children: [
                     {
                         type: "h1",
-                        attributes: {
-                            style: {
-                                fontWeight: "500"
-                            }
-                        },
                         children: ["Installation du site"]
                     },
                     ...children
@@ -367,9 +336,4 @@ export default function Install({ step = 1, errors, verified, install, force }) 
         ]
     }
 
-    
 }
-
-document.body.style.margin = "0px"
-document.body.style.padding = "0px"
-document.body.style.boxSizing = "border-box"

@@ -354,7 +354,7 @@ form {
 form > div {
   width: 100%;
 }
-form > div input[type=text], form > div input[type=password], form > div input[type=email], form > div textarea[type=text], form > div textarea[type=password], form > div textarea[type=email] {
+form > div input[type=text], form > div input[type=password], form > div input[type=email], form > div textarea[type=text], form > div textarea[type=password], form > div textarea[type=email], form > div input[type=textarea] {
   width: 80%;
 }
 

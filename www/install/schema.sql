@@ -182,12 +182,12 @@ CREATE TABLE "public"."esgi_categories" (
 ) WITH (oids = false);
 
 INSERT INTO "esgi_categories" ("name") VALUES
-('Actualités '),
-('Technologie '),
-('Santé '),
-('Voyage '),
+('Actualités'),
+('Technologie'),
+('Santé'),
+('Voyage'),
 ('Mode'),
-('Culture ');
+('Culture');
 
 DROP TABLE IF EXISTS "esgi_page_categories";
 DROP SEQUENCE IF EXISTS esgi_page_categories_id_seq;

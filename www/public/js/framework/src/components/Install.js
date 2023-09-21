@@ -314,7 +314,13 @@ export default function Install({ step = 1, errors, verified, install, force }) 
             {
                 type: "p",
                 children: "Site installé avec succès"
-            }
+            },
+            Button({
+                title: "Aller sur le site",
+                onClick: () => {
+                    window.location.href = "/"
+                }
+            })
         ]
     }
 
@@ -322,8 +328,19 @@ export default function Install({ step = 1, errors, verified, install, force }) 
         type: "div",
         attributes: {
             class: "Installer",
+            style: {
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "90vh"
+            }
         },
         children: [
+            {
+                type: "h1",
+                children: "Installation du site"
+            },
             ...children
         ]
     }

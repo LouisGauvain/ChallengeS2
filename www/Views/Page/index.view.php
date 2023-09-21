@@ -1,13 +1,16 @@
 <div id="header"></div>
 <div id="root"></div>
+<div id="categories" style="margin: 40px auto 0; width: 80%; border-radius: 20px; padding: 20px; background: #f2f2f2;">
+    <p style="text-align: center;">Liste des tags de la page</p>
+    <ul class="list-group">
+        <?php
+        foreach ($categories as $category) {
+            echo "<button class='list-group-item' onclick=\"window.location.href='/?category=" . $category["name"] . "'\">" . $category["name"] . "</button>";
+        }
+        ?>
+    </ul>
+</div>
 <div id="comment"></div>
-<div id="categories">
-    <?php
-    foreach ($categories as $category) {
-        echo "<div class='category';'><a href='/?category=" . $category["name"] . "'>" . $category["name"] . "</a></div>";
-    }
-    ?>
-    </div>
 
 <div class="div_input">
     <div class="container">

@@ -2,8 +2,13 @@ import { render } from "../core/DomRenderer.js";
 import Input from "./Input.js"
 import Button from "./Button.js";
 
+let linkElement = document.createElement("link");
+linkElement.rel = "stylesheet";
+linkElement.href = "/public/css/style.css"; 
+document.head.appendChild(linkElement);
+
 export default function Install({ step = 1, errors, verified, install, force }) {
-    let verifyDatabaseConnetion = (e) => {
+    let verifyDatabaseConnetion = (e) => { 
         e.preventDefault()
         let inputs = document.querySelectorAll("form .input");
 
@@ -47,7 +52,7 @@ export default function Install({ step = 1, errors, verified, install, force }) 
 
         let formData = {}
         let errors = []
-        
+
         var data = new FormData(document.querySelector('form'));
         for (const entry of data) {
             formData[entry[0]] = entry[1]
@@ -105,7 +110,6 @@ export default function Install({ step = 1, errors, verified, install, force }) 
             body: formDataObj
         }).then(response => response.json())
             .then(data => {
-                console.log(data)
                 if (!data.success) {
                     errors.push(data.message)
                     return render(Install({ step: 2, force: true, errors: errors }), document.getElementById("root"))
@@ -194,17 +198,11 @@ export default function Install({ step = 1, errors, verified, install, force }) 
                     }),
                     Button({
                         title: "Vérifier la configuration",
-                        style: {
-                            background: "aliceblue"
-                        },
                         ...(verified ? { disabled: true } : {}),
                         onClick: verifyDatabaseConnetion
                     }),
                     Button({
                         title: "Prochaine étape",
-                        style: {
-                            background: "aliceblue"
-                        },
                         ...(verified ? {} : { disabled: true }),
                         onClick: goNextStep
                     })
@@ -293,17 +291,11 @@ export default function Install({ step = 1, errors, verified, install, force }) 
                         children: "Site en cours d'installation, veuillez ne pas quittez la page"
                     }] : [Button({
                         title: "Setup le site",
-                        style: {
-                            background: "lightblue"
-                        },
                         ...(verified ? { disabled: true } : {}),
                         onClick: setupSite
                     })]),
                     ...(force ? [Button({
                         title: "Forcer l'installation",
-                        style: {
-                            background: "lightblue"
-                        },
                         onClick: forceSetupSite
                     })] : [])
                 ]
@@ -315,9 +307,15 @@ export default function Install({ step = 1, errors, verified, install, force }) 
             {
                 type: "p",
                 children: "Site installé avec succès"
-            }
+            },
+            Button({
+                title: "Aller sur le site",
+                onClick: () => {
+                    window.location.href = "/"
+                }
+            })
         ]
-    }
+    } 
 
     return {
         type: "div",
@@ -325,7 +323,17 @@ export default function Install({ step = 1, errors, verified, install, force }) 
             class: "Installer",
         },
         children: [
-            ...children
+            {
+                type: "div",
+                children: [
+                    {
+                        type: "h1",
+                        children: ["Installation du site"]
+                    },
+                    ...children
+                ]
+            }
         ]
     }
+
 }

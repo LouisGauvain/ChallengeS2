@@ -1,0 +1,11 @@
+form{
+    min-width: 50%;
+
+    &>div{
+        width: 100%;
+
+        input[type=text], input[type=password], input[type=email], textarea[type=text], textarea[type=password], textarea[type=email], input[type=textarea]{
+            width: 80%;
+        }
+    }
+}

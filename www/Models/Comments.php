@@ -92,7 +92,6 @@ class Comments extends Sql
         $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE page_id = :id AND statut_moderation = true");
         $query->execute(['id' => $id]);
         $result = $query->fetchAll();
-        //Utils::var_dump_die($result);
         $commentsTree = $this->buildCommentTree($result);
 
         return $commentsTree;
@@ -130,14 +129,4 @@ class Comments extends Sql
         return $nonValidatedComments;
     }
 
-
-    /*public function getChildrenByParentId($id)
-    {
-        $db = $this::getInstance();
-        $query = $db->prepare("SELECT * FROM " . $this->table . " WHERE parent_id = :id AND statut_moderation = true");
-        $query->execute(['id' => $id]);
-        $result = $query->fetchAll();
-        //Utils::var_dump_die($result);
-        return $result;
-    }*/
 }

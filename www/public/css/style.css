@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .m-0 {
   margin: 0rem;
 }
@@ -236,6 +237,11 @@ body {
   background: #f8f9fa !important;
 }
 
+#root body {
+  width: 80%;
+  margin: 0 auto;
+}
+
 html {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -345,6 +351,16 @@ body.backend.large {
 }
 .info_user form {
   margin-bottom: 10px;
+}
+
+form {
+  min-width: 50%;
+}
+form > div {
+  width: 100%;
+}
+form > div input[type=text], form > div input[type=password], form > div input[type=email], form > div textarea[type=text], form > div textarea[type=password], form > div textarea[type=email], form > div input[type=textarea] {
+  width: 80%;
 }
 
 a.disabled {
@@ -567,22 +583,79 @@ textarea {
   color: white;
 }
 
+/* Style général pour l'en-tête */
 header {
-  background-color: rgb(24, 182, 143);
-  padding: 10px;
-  margin-bottom: 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  -webkit-box-shadow: 5px 5px 24px 2px #000000;
-  box-shadow: 5px 5px 24px 2px #000000;
+  justify-content: flex-end;
+  /* Aligner les éléments à droite */
+  padding: 10px 20px;
+  /* Espacement intérieur */
+  background-color: rgb(32, 167, 185);
+  /* Couleur d'arrière-plan gris foncé */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  /* Ombre légère en bas */
 }
-header.a {
+
+/* Style pour les liens/boutons dans l'en-tête */
+header a.btn {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  padding: 8px 16px;
+  /* Espacement intérieur */
   margin-left: 10px;
+  /* Espacement entre les boutons */
+  text-decoration: none;
+  /* Supprimer le soulignement */
+  border: none;
+  border-radius: 4px;
+  /* Coins légèrement arrondis */
+  transition: background-color 0.3s;
+  /* Transition douce pour le changement de couleur d'arrière-plan */
+}
+
+/* Style pour le bouton "Connexion" */
+header a.btn-primary {
+  background-color: #007BFF;
+  /* Bleu */
+  color: #FFF;
+  /* Texte blanc */
+}
+
+/* Effet au survol des boutons */
+header a.btn-primary:hover {
+  background-color: #0056b3;
+  /* Bleu un peu plus foncé au survol */
+}
+
+header a.left {
+  margin-right: auto;
+}
+
+#header {
+  margin: 2em;
+}
+#header a {
+  background-color: red;
+  color: white;
+  padding: 1em 1.5em;
+  margin: 1em;
+  height: 4em;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-block;
+}
+#header a:hover {
+  background-color: #555;
+}
+#header a:active {
+  background-color: black;
+}
+#header a:visited {
+  background-color: #ccc;
 }
 
 .sidebar {
-  background-color: rgb(24, 182, 143);
+  background-color: rgb(32, 167, 185);
   width: 250px;
   height: 100vh;
   position: fixed;
@@ -637,6 +710,79 @@ ul.list-group {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-around;
+}
+ul.list-group button {
+  width: 30%;
+  margin-bottom: 10px;
+}
+
+.installer {
+  background: #FFD9D9;
+  font-family: Montserrat, "sans-serif";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #303030;
+  height: 100vh;
+  width: 100vw;
+}
+.installer form {
+  width: 100%;
+}
+.installer > div {
+  background: #fff3f3;
+  border-radius: 20px;
+  padding: 20px;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.installer > div label {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+.installer > div input {
+  font-size: 18px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 80%;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+.installer > div input:hover {
+  border-color: #999;
+}
+.installer > div input:focus {
+  border-color: #666;
+  outline: none;
+}
+.installer button {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  padding: 20px 40px;
+  margin: 20px;
+  background-color: #D9FFFF;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+  width: fit-content;
+  height: fit-content;
+}
+.installer button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+.installer button:disabled {
+  background-color: #CCCCCC;
+  color: #888888;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 /*# sourceMappingURL=style.css.map */

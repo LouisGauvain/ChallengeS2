@@ -12,7 +12,6 @@
     const body = htmlDocument.querySelector("body")
 
     const json = extractStructure(body)
-    console.log(json);
 
     fetch("<?= $url ?>", {
             method: 'POST',

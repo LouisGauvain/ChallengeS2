@@ -18,8 +18,8 @@
 
             ?>
                     <td>
-                        <a href="admin/verify_comment?id=<?= $comment['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet page ?')">Verifier</a> |
-                        <a href="admin/delete_comment?id=<?= $comment['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet page ?')">Supprimer</a>
+                        <a href="admin/verify_comment?id=<?= $comment['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir vérifier ce commentaire ?')">Verifier</a> |
+                        <a href="admin/delete_comment?id=<?= $comment['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">Supprimer</a>
                     </td>
             <?php
                     echo "</tr>";

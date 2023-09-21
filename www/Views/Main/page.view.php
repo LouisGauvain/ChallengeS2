@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Les catagories</h2>
+    <h2>Les catégories</h2>
     <ul class="list-group">
         <?php
         foreach ($categories as $category) {

@@ -1,7 +1,7 @@
 import { generateStructure, render } from "../core/DomRenderer.js";
+import Comments from "./Comments.js";
 
 function BrowserRouter(routes, rootElement, pathname) {
-  console.log("BrowserRouter", routes, rootElement, pathname);
   //create a div and add the browser links
   let div = {
     type: "div",
@@ -15,7 +15,6 @@ function BrowserRouter(routes, rootElement, pathname) {
 }
 
 function BrowserLink(title, link) {
-  console.log("BrowserLink", title, link);
   return {
     type: "a",
     attributes: {
@@ -33,10 +32,24 @@ function BrowserLink(title, link) {
           type: "div",
           children: [],
         }
-        fetch(link, { method: "POST" }).then((response) => { return response.text() }).then((data) => { 
+        let div2 = {
+          type: "div",
+          children: [],
+        }
+        fetch(link, { method: "POST" }).then((response) => { return response.text() }).then((data) => {
           const json = JSON.parse(data);
-          div.children.push(json)
+          console.log("data", json)
+
+          div.children.push(JSON.parse(json.content))
           render(div, document.getElementById("root"));
+
+          if (json.comments.length > 0) {
+            div2.children.push(json.comments)
+            render(Comments(div2), document.getElementById("comment"));
+          }
+          else {
+            render({ type: "div", children: [] }, document.getElementById("comment"));
+          }
         });
       },
     },

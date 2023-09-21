@@ -26,8 +26,14 @@ class Page
         $pages = new Pages();
         $page = $pages->findByUri($_SERVER["REQUEST_URI"]);
 
+        $comments = new Comments();
+        $commentsTree = $comments->getCommentsTreeByPageID($page['id']);
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            echo $page['content'];
+            $content = [];
+            $content['content'] = $page['content'];
+            $content['comments'] = $commentsTree;
+            echo json_encode($content);
             return;
         }
 
@@ -56,9 +62,6 @@ class Page
             $view->assign('form', $form->getConfig());
 
             $view->assign("categories", $PageCategories->getCategoriesByPageId($page['id']));
-
-            $comments = new Comments();
-            $commentsTree = $comments->getCommentsTreeByPageID($page['id']);
 
             $allUsersPages = $pages->getUriPagesByAction();
             //remove all html tags
